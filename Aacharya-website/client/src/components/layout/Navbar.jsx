@@ -201,6 +201,25 @@ export default function Navbar() {
             </div>
         </header>
 
+        {/* Mobile/Tablet bottom navigation */}
+        <nav className="mobile-bottom-nav" aria-label="Mobile quick navigation">
+            <NavLink to="/" end className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+                Home
+            </NavLink>
+            <NavLink to="/learning" className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+                Digital Learning
+            </NavLink>
+            <NavLink to="/mandir" className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+                Digital Mandir
+            </NavLink>
+            <NavLink to="/mart" className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+                Digital Mart
+            </NavLink>
+            <NavLink to="/book-puja" className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+                Book Puja
+            </NavLink>
+        </nav>
+
         <ComingSoonModal isOpen={showComingSoon} onClose={() => setShowComingSoon(false)} />
         </>
     )

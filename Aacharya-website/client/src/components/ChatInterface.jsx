@@ -208,49 +208,30 @@ const ChatInterface = ({ isWidget = false, onClose }) => {
                         borderRadius: '8px',
                         letterSpacing: '0.02em',
                         boxShadow: '0 2px 8px rgba(93,25,22,0.35)',
-                    }}>AI Vedic Astrologer</span>
+                    }}>AI Harshit</span>
 
-                    {/* New conversation + close */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <button
-                            onClick={startNewConversation}
-                            type="button"
-                            style={{
-                                background: brownGradient,
-                                border: 'none',
-                                color: '#fff',
-                                cursor: 'pointer',
-                                borderRadius: '999px',
-                                padding: '6px 12px',
-                                fontWeight: 800,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                boxShadow: '0 3px 10px rgba(93,58,26,0.35)',
-                            }}
-                            aria-label="Start new conversation"
-                        >
-                            <FiRefreshCw size={16} />
-                            <span style={{ fontSize: '0.9rem' }}>New</span>
-                        </button>
-
-                    <button onClick={onClose} style={{
-                        background: brownGradient,
-                        border: 'none',
-                        color: '#fff',
-                        cursor: 'pointer',
-                        borderRadius: '50%',
-                        width: '28px',
-                        height: '28px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 2px 6px rgba(93,58,26,0.45)',
-                        flexShrink: 0,
-                    }}>
-                        <FiX size={15} />
+                    {/* New conversation (aligned to the right) */}
+                    <button
+                        onClick={startNewConversation}
+                        type="button"
+                        style={{
+                            background: brownGradient,
+                            border: 'none',
+                            color: '#fff',
+                            cursor: 'pointer',
+                            borderRadius: '999px',
+                            padding: '6px 12px',
+                            fontWeight: 800,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            boxShadow: '0 3px 10px rgba(93,58,26,0.35)',
+                        }}
+                        aria-label="Start new conversation"
+                    >
+                        <FiRefreshCw size={16} />
+                        <span style={{ fontSize: '0.9rem' }}>New</span>
                     </button>
-                    </div>
                 </div>
             )}
 

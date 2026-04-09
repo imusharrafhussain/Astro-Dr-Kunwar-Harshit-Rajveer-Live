@@ -3,6 +3,7 @@ import { FiArrowRight, FiShield, FiTrendingUp, FiCheck, FiStar, FiUser, FiGlobe 
 import { RiStarSFill, RiDoubleQuotesL } from 'react-icons/ri'
 import ParticleTextEffect from '../components/ui/ParticleTextEffect'
 import CobeGlobe from '../components/ui/CobeGlobe'
+import harshitHeroImg from '../assets/harshit_hero.png'
 import './HomePage.css'
 
 export default function HomePage() {
@@ -63,6 +64,14 @@ export default function HomePage() {
                         </p>
                     </div>
 
+                    <div className="hero-right-visual animate-in" style={{ animationDelay: '0.5s' }}>
+                        <img
+                            src={harshitHeroImg}
+                            alt="Harshit Rajveer"
+                            className="hero-right-image"
+                            draggable={false}
+                        />
+                    </div>
                 </div>
             </section>
 

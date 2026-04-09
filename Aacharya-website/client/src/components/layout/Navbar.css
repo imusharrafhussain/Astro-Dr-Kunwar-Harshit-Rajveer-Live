@@ -251,6 +251,11 @@
     cursor: pointer;
 }
 
+/* Hidden by default (desktop) */
+.mobile-bottom-nav {
+    display: none;
+}
+
 /* Custom Alignment Grid for Headers */
 @media (min-width: 1200px) {
     .header-layout-grid {
@@ -347,6 +352,41 @@
         margin-left: 0;
         margin-top: 1rem;
         width: 100%;
+    }
+
+    .mobile-bottom-nav {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        z-index: 1001;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        padding: 10px 8px;
+        border-radius: 18px;
+        background: rgba(18, 18, 28, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .mobile-tab-link {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.2;
+        padding: 6px 4px;
+        border-radius: 10px;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-tab-link.active {
+        color: #F5E6C8;
+        background: rgba(212, 175, 55, 0.18);
     }
 }
 

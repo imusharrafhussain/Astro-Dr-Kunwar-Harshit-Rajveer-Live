@@ -167,6 +167,62 @@ const FloatingChatbot = () => {
                     }
                 }
 
+                /* From Uiverse.io by satyamchaudharydev — compacted under launcher */
+                .loading {
+                    --speed-of-animation: 0.9s;
+                    --gap: 6px;
+                    --first-color: #4c86f9;
+                    --second-color: #49a84c;
+                    --third-color: #f6bb02;
+                    --fourth-color: #f6bb02;
+                    --fifth-color: #2196f3;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    gap: 4px;
+                    height: 14px;
+                    margin-top: 4px;
+                }
+
+                .loading span {
+                    width: 3px;
+                    height: 10px;
+                    background: var(--first-color);
+                    animation: scale var(--speed-of-animation) ease-in-out infinite;
+                    border-radius: 999px;
+                }
+
+                .loading span:nth-child(2) {
+                    background: var(--second-color);
+                    animation-delay: -0.8s;
+                }
+
+                .loading span:nth-child(3) {
+                    background: var(--third-color);
+                    animation-delay: -0.7s;
+                }
+
+                .loading span:nth-child(4) {
+                    background: var(--fourth-color);
+                    animation-delay: -0.6s;
+                }
+
+                .loading span:nth-child(5) {
+                    background: var(--fifth-color);
+                    animation-delay: -0.5s;
+                }
+
+                @keyframes scale {
+                    0%, 40%, 100% {
+                        transform: scaleY(0.2);
+                    }
+
+                    20% {
+                        transform: scaleY(1);
+                    }
+                }
+
                 @keyframes chatSlideUp {
                     from { opacity: 0; transform: translateY(24px); }
                     to   { opacity: 1; transform: translateY(0); }
@@ -266,20 +322,13 @@ const FloatingChatbot = () => {
                         alt="Chat with AI Baba"
                         draggable={false}
                     />
-                    <span style={{
-                        display: 'inline-block',
-                        background: 'rgba(255,255,255,0.9)',
-                        color: '#800000',
-                        padding: '2px 8px',
-                        borderRadius: '12px',
-                        fontSize: '0.85rem',
-                        fontWeight: 'bold',
-                        boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-                        whiteSpace: 'nowrap',
-                        pointerEvents: 'none',
-                    }}>
-                        AI Baba
-                    </span>
+                    <div className="loading" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </button>
 
             </div>

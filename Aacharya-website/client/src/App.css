@@ -319,6 +319,13 @@ section {
   }
 }
 
+@media (max-width: 1199px) {
+  /* Keep content visible above fixed bottom mobile nav */
+  .page-wrapper {
+    padding-bottom: 88px;
+  }
+}
+
 /* ── Animations ── */
 @keyframes fadeInUp {
   from {
