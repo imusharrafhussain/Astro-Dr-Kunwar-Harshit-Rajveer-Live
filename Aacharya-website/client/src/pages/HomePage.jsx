@@ -1,7 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiShield, FiCheck, FiStar } from 'react-icons/fi'
-import { RiStarSFill } from 'react-icons/ri'
-import ParticleTextEffect from '../components/ui/ParticleTextEffect'
 import CobeGlobe from '../components/ui/CobeGlobe'
 import harshitHeroImg from '../assets/harshit_hero.png'
 import ajaiBhambiImg from '../assets/ajai_bhambi.png'
@@ -32,6 +31,110 @@ export default function HomePage() {
         { image: sohiniShastriImg, caption: 'High-Profile Consultation Panel Appearance' },
     ]
 
+    const popularServices = [
+        {
+            title: 'Career & Business',
+            subtitle: 'Growth, promotions & major decisions',
+            image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+            badge: '🔥 Most Booked',
+        },
+        {
+            title: 'Love & Relationships',
+            subtitle: 'Marriage, compatibility & conflicts',
+            image: 'https://images.unsplash.com/photo-1516589091380-5d8e87df6999?auto=format&fit=crop&w=1200&q=80',
+            badge: '❤️ High Demand',
+        },
+        {
+            title: 'Wealth & Finance',
+            subtitle: 'Investments, income & financial stability',
+            image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80',
+            badge: '💰 Top Choice',
+        },
+        {
+            title: 'Kundli Analysis',
+            subtitle: 'Detailed life predictions & guidance',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
+        },
+        {
+            title: 'Kundli Matching',
+            subtitle: 'Compatibility & marriage timing',
+            image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+        },
+        {
+            title: 'Problems & Remedies',
+            subtitle: 'Dosha, delays & life obstacles',
+            image: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80',
+        },
+        {
+            title: 'Foreign Opportunities',
+            subtitle: 'Travel, job & settlement abroad',
+            image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
+        },
+        {
+            title: 'Spiritual Guidance',
+            subtitle: 'Inner peace & life direction',
+            image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+        },
+    ]
+
+    const videoProofItems = [
+        {
+            image: ajaiBhambiImg,
+            title: 'Event Stage Highlights',
+            subtitle: 'SPIRITUAL GROWTH SERIES',
+        },
+        {
+            image: premSharmaImg,
+            title: 'VIP Strategy Discussion',
+            subtitle: 'EXCLUSIVE INTERVIEW',
+        },
+        {
+            image: sohiniShastriImg,
+            title: 'Panel Session Insights',
+            subtitle: 'SPECIAL EPISODE',
+        },
+        {
+            image: deepakKapoorImg,
+            title: 'Leadership Forum Clip',
+            subtitle: 'PUBLIC TALK FEATURE',
+        },
+        {
+            image: sandeepKocharImg,
+            title: 'Investor Roundtable',
+            subtitle: 'PODCAST MOMENTS',
+        },
+    ]
+
+    const focusFeatures = [
+        'Career & Business',
+        'LOVE & RELATIONSHIPS',
+        'MARRIAGE & KUNDLI MATCHING',
+        'WEALTH & FINANCE',
+        'KUNDLI / BIRTH CHART ANALYSIS',
+        'PROBLEMS & REMEDIES',
+        'FOREIGN TRAVEL & Opportunities',
+        'SPIRITUAL & LIFE GUIDANCE',
+        'CHILD & FAMILY',
+        'PROPERTY & ASSETS',
+        'MUHURAT (TIMING SERVICES)',
+        'NUMEROLOGY & NAME CORRECTION',
+        'HEALTH & WELL-BEING',
+    ]
+
+    const [focusStartIndex, setFocusStartIndex] = useState(0)
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setFocusStartIndex((prev) => (prev + 2) % focusFeatures.length)
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [focusFeatures.length])
+
+    const visibleFocusFeatures = Array.from({ length: 2 }, (_, i) =>
+        focusFeatures[(focusStartIndex + i) % focusFeatures.length]
+    )
+
     return (
         <div className="home-page">
             {/* ── 1. Hero Section ── */}
@@ -39,38 +142,20 @@ export default function HomePage() {
                 <div className="hero-container hero-container--full">
                     <div className="hero-content">
                         <div className="hero-badge animate-in">
-                            <RiStarSFill /> AI-Powered Vedic Astrology
+                            <span aria-hidden="true">🔱</span> India&apos;s Most Trusted Vedic Astrologers
                         </div>
-                        <div className="hero-particle-wrapper animate-in" style={{ animationDelay: '0.1s' }}>
-                            <ParticleTextEffect
-                                words={["Unlock Your", "Cosmic Path"]}
-                                canvasWidth={600}
-                                canvasHeight={120}
-                                fontSize={65}
-                                fontFamily="Cinzel"
-                                pixelSteps={4}
-                                drawAsPoints={true}
-                                bgColor="transparent"
-                            />
-                            <h1 className="sr-only">
-                                Unlock Your <span className="text-gradient">Cosmic Path</span>
-                            </h1>
-                        </div>
-                        <div className="hero-particle-subtitle animate-in" style={{ animationDelay: '0.15s' }}>
-                            <ParticleTextEffect
-                                words={[
-                                    "Career • Relationships",
-                                    "Destiny • Clarity",
-                                    "AI-Powered Vedic",
-                                ]}
-                                canvasWidth={550}
-                                canvasHeight={60}
-                                fontSize={22}
-                                fontFamily="Inter"
-                                pixelSteps={3}
-                                drawAsPoints={true}
-                                bgColor="transparent"
-                            />
+                        <h1 className="hero-solid-title animate-in" style={{ animationDelay: '0.1s' }}>
+                            Unlock Your <span className="text-gradient">Cosmic Path</span>
+                        </h1>
+                        <div className="hero-focus-block animate-in" style={{ animationDelay: '0.15s' }}>
+                            <span className="hero-focus-label">Focus:</span>
+                            <div className="hero-focus-line" aria-label="Key focus areas">
+                                {visibleFocusFeatures.map((feature) => (
+                                    <span key={`${focusStartIndex}-${feature}`} className="hero-focus-item">
+                                        {feature}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                         <div className="hero-message animate-in" style={{ animationDelay: '0.2s' }}>
                             <p className="hero-message-lead">
@@ -202,17 +287,25 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ── 5. Exclusivity Psychology ── */}
+            {/* ── 5. Popular Astrology Services ── */}
             <section className="exclusivity-section">
                 <div className="container">
-                    <h2 className="section-title">Exclusive Access</h2>
-                    <div className="exclusivity-box">
-                        <p><FiStar className="text-gold" /> Limited daily consultations to maintain premium quality</p>
-                        <p><FiStar className="text-gold" /> Works with high-profile clients and decision-makers</p>
-                        <p><FiStar className="text-gold" /> Appointment slots fill quickly — early booking recommended</p>
-                        <Link to="/book" className="btn btn-primary">
-                            Reserve Priority Slot <FiArrowRight />
-                        </Link>
+                    <h2 className="section-title">Popular Astrology Services</h2>
+                    <div className="services-grid">
+                        {popularServices.map((service) => (
+                            <article
+                                key={service.title}
+                                className="service-card"
+                                style={{ backgroundImage: `url(${service.image})` }}
+                            >
+                                {service.badge && <span className="service-badge">{service.badge}</span>}
+                                <div className="service-overlay" />
+                                <div className="service-content">
+                                    <h3>{service.title}</h3>
+                                    <p>{service.subtitle}</p>
+                                </div>
+                            </article>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -220,20 +313,21 @@ export default function HomePage() {
             {/* ── 6. Video Proof ── */}
             <section className="video-proof-section">
                 <div className="container">
-                    <h2 className="section-title">Video Proof</h2>
+                    <h2 className="section-title video-proof-title">
+                        Explore our <span>podcast</span>
+                    </h2>
                     <div className="video-proof-grid">
-                        <div className="video-proof-card">
-                            <img src={ajaiBhambiImg} alt="Event clip thumbnail" className="video-proof-thumb" />
-                            <div className="video-proof-overlay">▶ Event Stage Clip</div>
-                        </div>
-                        <div className="video-proof-card">
-                            <img src={premSharmaImg} alt="Consultation clip thumbnail" className="video-proof-thumb" />
-                            <div className="video-proof-overlay">▶ VIP Meeting Clip</div>
-                        </div>
-                        <div className="video-proof-card">
-                            <img src={sohiniShastriImg} alt="Panel clip thumbnail" className="video-proof-thumb" />
-                            <div className="video-proof-overlay">▶ Panel Session Clip</div>
-                        </div>
+                        {videoProofItems.map((item, idx) => (
+                            <div className="video-proof-card" key={`${item.title}-${idx}`}>
+                                <img src={item.image} alt={`${item.title} thumbnail`} className="video-proof-thumb" />
+                                <div className="video-proof-watch">◉ WATCH NOW</div>
+                                <div className="video-proof-content">
+                                    <h3>{item.title}</h3>
+                                    <p>{item.subtitle}</p>
+                                    <button type="button" className="video-proof-btn">Watch Episode</button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
