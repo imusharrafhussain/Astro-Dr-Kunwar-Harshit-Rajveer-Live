@@ -3,50 +3,43 @@
    ════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Colors: Traditional Divine Palette ── */
-  --bg-deep: #FAFAFA;
-  /* Cream/White Background */
-  --bg-cosmic: #FFF5E1;
-  /* Light Saffron/Peach for sections */
-  --bg-maroon: #5D1916;
-  /* Deep Maroon for Header/Footer */
-  --bg-card: #FFFFFF;
-  /* White cards */
-  --bg-glass: rgba(255, 255, 255, 0.9);
+  /* ── Colors: warm cream + deep maroon + copper gold (site-wide, ref. design v1) ── */
+  --bg-deep: #fff8f0;
+  --bg-cream: #fffbf2;
+  --bg-cosmic: #fff0dc;
+  --bg-maroon: #4a0e0e;
+  --bg-card: #fffcf7;
+  --bg-glass: rgba(255, 252, 247, 0.92);
 
-  /* ── Accents: Divine Gold ── */
-  --gold-primary: #D4AF37;
-  --gold-light: #F2C94C;
-  --gold-dark: #AA8C2C;
-  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F2C94C 100%);
-  --maroon-gradient: linear-gradient(135deg, #5D1916 0%, #3E0E0C 100%);
+  /* ── Accents: copper / metallic gold ── */
+  --gold-primary: #c07f4e;
+  --gold-light: #e8b86a;
+  --gold-dark: #8b5a2b;
+  --gold-gradient: linear-gradient(165deg, #c07f4e 0%, #e4c06a 45%, #f9e27d 100%);
+  --maroon-gradient: linear-gradient(135deg, #4a0e0e 0%, #2f0909 100%);
 
   /* ── Text ── */
-  --text-main: #333333;
-  /* Dark text for readability */
-  --text-muted: #666666;
-  --text-heading: #5D1916;
-  /* Maroon headings */
-  --text-light: #FFFFFF;
-  /* For text on maroon backgrounds */
+  --text-main: #4a3f3a;
+  --text-muted: #7a6b62;
+  --text-heading: #4a0e0e;
+  --text-light: #ffffff;
 
   /* ── Typography ── */
   --font-heading: 'Cinzel', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-body: 'Poppins', 'Inter', sans-serif;
 
   /* ── Borders & Shadows ── */
-  --border-subtle: rgba(93, 25, 22, 0.1);
-  /* Maroon tint */
-  --border-glow: rgba(212, 175, 55, 0.5);
-  --shadow-sm: 0 4px 12px rgba(93, 25, 22, 0.05);
-  --shadow-lg: 0 10px 30px rgba(93, 25, 22, 0.1);
-  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.15);
+  --border-subtle: rgba(74, 14, 14, 0.12);
+  --border-glow: rgba(192, 127, 78, 0.45);
+  --shadow-sm: 0 4px 12px rgba(74, 14, 14, 0.06);
+  --shadow-lg: 0 10px 30px rgba(74, 14, 14, 0.1);
+  --shadow-glow: 0 0 20px rgba(192, 127, 78, 0.18);
 
   /* ── Spacing & Layout ── */
   --container-width: 1200px;
   /* Total height of fixed two-row header (top + bottom) */
   --header-height: 120px;
-  --radius-sm: 8px;
+  --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
 }
@@ -69,12 +62,11 @@ body {
   background-color: var(--bg-deep);
   color: var(--text-main);
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
-  /* Subtle Divine Pattern */
   background-image:
-    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(192, 127, 78, 0.09) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-cream) 100%);
   background-attachment: fixed;
 }
 
@@ -87,9 +79,9 @@ h5,
 h6 {
   font-family: var(--font-heading);
   color: var(--text-heading);
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  line-height: 1.22;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 h1 {
@@ -188,27 +180,27 @@ a {
 }
 
 .btn-primary {
-  background: var(--gold-gradient);
-  color: #0F0C29;
-  /* Dark text for contrast against gold */
-  border: none;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  background: var(--bg-maroon);
+  color: var(--text-light);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 14px rgba(74, 14, 14, 0.28);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  background: #5c1212;
+  box-shadow: 0 6px 20px rgba(74, 14, 14, 0.35);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--gold-primary);
-  border: 1px solid var(--gold-primary);
+  background: var(--bg-card);
+  color: var(--text-heading);
+  border: 2px solid var(--text-heading);
 }
 
 .btn-secondary:hover {
-  background: rgba(212, 175, 55, 0.1);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  background: rgba(74, 14, 14, 0.06);
+  box-shadow: 0 4px 14px rgba(74, 14, 14, 0.12);
 }
 
 /* ── Form Elements ── */
@@ -266,7 +258,8 @@ section {
   margin-bottom: 3rem;
   position: relative;
   display: inline-block;
-  /* Removed left/transform to rely on parent text-align */
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .section-title::after {

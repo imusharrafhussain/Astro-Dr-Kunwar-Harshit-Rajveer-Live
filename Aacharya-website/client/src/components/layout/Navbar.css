@@ -53,7 +53,7 @@
     font-size: clamp(1.1rem, 1.6vw, 1.6rem);
     /* More compact & fluid */
     font-weight: 800;
-    color: #5D1916;
+    color: var(--text-heading);
     line-height: 1;
     letter-spacing: -0.02em;
     white-space: nowrap;
@@ -61,7 +61,7 @@
 }
 
 .text-maroon {
-    color: #5D1916;
+    color: var(--text-heading);
 }
 
 .brand-tagline {
@@ -95,7 +95,7 @@
 .nav-item {
     font-family: var(--font-body);
     font-weight: 600;
-    color: #333;
+    color: var(--text-main);
     font-size: clamp(0.75rem, 0.9vw, 0.95rem);
     /* Fluid size */
     cursor: pointer;
@@ -130,9 +130,9 @@
     align-items: center;
     gap: 0.4rem;
     cursor: pointer;
-    border: 1.5px solid #5D1916;
-    background: #5D1916;
-    color: #FFF;
+    border: 1.5px solid var(--bg-maroon);
+    background: var(--bg-maroon);
+    color: #fff;
     transition: all 0.3s ease;
     line-height: 1;
     white-space: nowrap;
@@ -140,8 +140,8 @@
 
 .btn-pill.outline {
     background: transparent;
-    color: #333;
-    border: 1.5px solid #E0E0E0;
+    color: var(--text-main);
+    border: 1.5px solid var(--border-subtle);
 }
 
 .btn-pill:hover {
@@ -151,8 +151,7 @@
 
 /* ── Bottom Bar: Maroon ── */
 .header-bottom {
-    background: #5D1916;
-    /* Maroon */
+    background: var(--bg-maroon);
     padding: 0.8rem 0;
 }
 
@@ -196,7 +195,7 @@
     border: 2px solid #FFFDD0;
     overflow: hidden;
     border-radius: 30px;
-    color: #5D1916 !important;
+    color: var(--text-heading) !important;
     transition: all 0.5s ease-in-out;
     display: flex;
     align-items: center;
@@ -231,7 +230,7 @@
 
 .book-puja-btn:hover {
     box-shadow: 1px 1px 200px var(--gold-primary, #D4AF37);
-    color: #5D1916 !important;
+    color: var(--text-heading) !important;
     border-color: var(--gold-primary, #D4AF37);
 }
 
@@ -247,7 +246,7 @@
 .navbar-toggle {
     display: none;
     font-size: 1.8rem;
-    color: #5D1916;
+    color: var(--text-heading);
     cursor: pointer;
 }
 
@@ -321,7 +320,7 @@
         left: -100%;
         width: 80%;
         height: 100vh;
-        background: #5D1916;
+        background: var(--bg-maroon);
         padding: 2rem;
         transition: left 0.3s ease;
         z-index: 999;
@@ -493,14 +492,14 @@
 
 .nav-mega-title {
     font-weight: 800;
-    color: #5D1916;
+    color: var(--text-heading);
     font-size: 1rem;
     margin-bottom: 0.25rem;
 }
 
 .nav-mega-desc {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 3;

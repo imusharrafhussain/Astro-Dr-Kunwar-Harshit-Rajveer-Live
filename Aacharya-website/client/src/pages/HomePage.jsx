@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiShield, FiCheck, FiStar } from 'react-icons/fi'
 import CobeGlobe from '../components/ui/CobeGlobe'
+import ScaleLetterHeading from '../components/ui/ScaleLetterHeading'
+import LinearCardGallery from '../components/ui/LinearCardGallery'
 import harshitHeroImg from '../assets/harshit_hero.png'
+import authorityFeaturedImg from '../assets/authority_reading_nakshatras.png'
 import ajaiBhambiImg from '../assets/ajai_bhambi.png'
 import deepakKapoorImg from '../assets/deepak_kapoor.png'
 import gdVashistImg from '../assets/gd_vashist.png'
@@ -13,10 +16,31 @@ import premSharmaImg from '../assets/prem_sharma.png'
 import sandeepKocharImg from '../assets/sandeep_kochar.png'
 import sanjayJumaaniImg from '../assets/sanjay_jumaani.png'
 import sohiniShastriImg from '../assets/sohini_shastri.png'
+import marqueeEshaDeol from '../assets/marquee_esha_deol.png'
+import marqueeMannara from '../assets/marquee_mannara.png'
+import marqueeManojTiwari from '../assets/marquee_manoj_tiwari.png'
+import marqueeAkhilendraMishra from '../assets/marquee_akhilendra_mishra.png'
+import marqueeRajeevVerma from '../assets/marquee_rajeev_verma.png'
+import marqueeGuest from '../assets/marquee_guest.png'
+import marqueeTusharKapoor from '../assets/marquee_tushar_kapoor.png'
+import marqueeDaisyShah from '../assets/marquee_daisy_shah.png'
+import marqueeBhagyashree from '../assets/marquee_bhagyashree.png'
+import marqueeAnchalMunjal from '../assets/marquee_anchal_munjal.png'
 import './HomePage.css'
 
 export default function HomePage() {
-    const heroProofFaces = [ajaiBhambiImg, deepakKapoorImg, gdVashistImg, hemantBaruaImg, induPrakashImg]
+    const heroMarqueeFaces = [
+        { src: marqueeEshaDeol, alt: 'Esha Deol' },
+        { src: marqueeMannara, alt: 'Mannara Chopra' },
+        { src: marqueeManojTiwari, alt: 'Manoj Tiwari' },
+        { src: marqueeAkhilendraMishra, alt: 'Akhilendra Mishra' },
+        { src: marqueeRajeevVerma, alt: 'Rajeev Verma' },
+        { src: marqueeGuest, alt: 'Guest' },
+        { src: marqueeTusharKapoor, alt: 'Tushar Kapoor' },
+        { src: marqueeDaisyShah, alt: 'Daisy Shah' },
+        { src: marqueeBhagyashree, alt: 'Bhagyashree' },
+        { src: marqueeAnchalMunjal, alt: 'Anchal Munjal' },
+    ]
 
     const proofItems = [
         { image: ajaiBhambiImg, caption: 'With Industry CEOs at Global Leadership Summit' },
@@ -107,18 +131,18 @@ export default function HomePage() {
 
     const focusFeatures = [
         'Career & Business',
-        'LOVE & RELATIONSHIPS',
-        'MARRIAGE & KUNDLI MATCHING',
-        'WEALTH & FINANCE',
-        'KUNDLI / BIRTH CHART ANALYSIS',
-        'PROBLEMS & REMEDIES',
-        'FOREIGN TRAVEL & Opportunities',
-        'SPIRITUAL & LIFE GUIDANCE',
-        'CHILD & FAMILY',
-        'PROPERTY & ASSETS',
-        'MUHURAT (TIMING SERVICES)',
-        'NUMEROLOGY & NAME CORRECTION',
-        'HEALTH & WELL-BEING',
+        'Love & Relationships',
+        'Marriage & Kundli Matching',
+        'Wealth & Finance',
+        'Kundli / Birth Chart Analysis',
+        'Problems & Remedies',
+        'Foreign Travel & Opportunities',
+        'Spiritual & Life Guidance',
+        'Child & Family',
+        'Property & Assets',
+        'Muhurat (Timing Services)',
+        'Numerology & Name Correction',
+        'Health & Well-Being',
     ]
 
     const [focusStartIndex, setFocusStartIndex] = useState(0)
@@ -135,6 +159,49 @@ export default function HomePage() {
         focusFeatures[(focusStartIndex + i) % focusFeatures.length]
     )
 
+    const authorityLinearGalleryItems = [
+        {
+            id: 1,
+            url: {
+                src: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            },
+            title: 'Accordion',
+            description:
+                'Immerse yourself in our cutting-edge interactive gallery, designed to showcase a diverse array of visual content with unparalleled clarity and style. This feature allows users to effortlessly navigate through high-resolution images, from awe-inspiring landscapes to intimate portraits and abstract art. With smooth transitions, intuitive controls, and responsive design, our gallery adapts to any device, ensuring a seamless browsing experience. Dive deeper into each piece with expandable information panels, offering insights into the artist, technique, and story behind each image.',
+            tags: ['Sunrise', 'Mountains', 'Golden', 'Scenic', 'Inspiring'],
+        },
+        {
+            id: 2,
+            url: {
+                src: 'https://images.unsplash.com/photo-1632395627760-72e6eca7f9c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWNobm9sb2d5JTIwcGxhbmV0fGVufDB8fDB8fHww',
+            },
+            title: 'Globe Section',
+            description:
+                'Embark on a virtual journey around the world with our state-of-the-art 3D globe feature. This interactive marvel allows users to explore geographical data, global trends, and worldwide connections with unprecedented ease and detail. Spin the globe with a flick of your mouse, zoom into street-level views, or soar high for a continental perspective. Our globe section integrates real-time data feeds, showcasing everything from climate patterns and population densities to economic indicators and cultural hotspots. Customizable layers let you focus on specific data sets, while intuitive tooltips provide in-depth information at every turn.',
+            tags: ['Misty', 'Path', 'Mysterious', 'Serene', 'Rugged'],
+        },
+        {
+            id: 3,
+            url: {
+                src: 'https://images.unsplash.com/photo-1749680776469-77aae06bc299?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            },
+            title: 'Image Mouse Trail',
+            description:
+                'Transform your browsing experience with our mesmerizing Image Mouse Trail feature. As you move your cursor across the screen, watch in wonder as a trail of carefully curated images follows in its wake, creating a dynamic and engaging visual spectacle. This innovative feature goes beyond mere aesthetics; it is an interactive showcase of your content, products, or artwork. Each image in the trail can be clickable, leading to detailed views or related content, turning casual mouse movements into opportunities for discovery.',
+            tags: ['Pathway', 'Adventure', 'Peaks', 'Challenging', 'Breathtaking'],
+        },
+        {
+            id: 4,
+            url: {
+                src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop',
+            },
+            title: 'Summit Horizons',
+            description:
+                'Rise above everyday noise with a clear vantage point on what matters next. This space is crafted for leaders who want perspective without fluff—sharp visuals, calm composition, and room to think. Use it to frame milestones, seasonal campaigns, or premium offers that deserve a hero moment.',
+            tags: ['Altitude', 'Vision', 'Calm', 'Premium', 'Focus'],
+        },
+    ]
+
     return (
         <div className="home-page">
             {/* ── 1. Hero Section ── */}
@@ -142,11 +209,17 @@ export default function HomePage() {
                 <div className="hero-container hero-container--full">
                     <div className="hero-content">
                         <div className="hero-badge animate-in">
-                            <span aria-hidden="true">🔱</span> India&apos;s Most Trusted Vedic Astrologers
+                            <span aria-hidden="true">🔱</span> India&apos;s Most Trusted Vedic Astrologer
                         </div>
-                        <h1 className="hero-solid-title animate-in" style={{ animationDelay: '0.1s' }}>
-                            Unlock Your <span className="text-gradient">Cosmic Path</span>
-                        </h1>
+                        <ScaleLetterHeading
+                            as="h1"
+                            className="hero-solid-title animate-in"
+                            style={{ animationDelay: '0.1s' }}
+                            parts={[
+                                { text: 'Unlock Your ' },
+                                { text: 'Cosmic Path', className: 'text-gradient' },
+                            ]}
+                        />
                         <div className="hero-focus-block animate-in" style={{ animationDelay: '0.15s' }}>
                             <span className="hero-focus-label">Focus:</span>
                             <div className="hero-focus-line" aria-label="Key focus areas">
@@ -169,10 +242,25 @@ export default function HomePage() {
                         <p className="hero-authority animate-in" style={{ animationDelay: '0.24s' }}>
                             Trusted by 500+ Business Leaders, Celebrities & Government Officials
                         </p>
-                        <div className="hero-proof-faces animate-in" style={{ animationDelay: '0.28s' }}>
-                            {heroProofFaces.map((face, idx) => (
-                                <img key={idx} src={face} alt="" className="hero-proof-face" />
-                            ))}
+                        <div
+                            className="hero-proof-marquee animate-in"
+                            style={{ animationDelay: '0.28s' }}
+                            aria-hidden="true"
+                        >
+                            <div className="hero-proof-marquee-viewport">
+                                <div className="hero-proof-marquee-track">
+                                    <div className="hero-proof-marquee-set">
+                                        {heroMarqueeFaces.map((face, idx) => (
+                                            <img key={`a-${idx}`} src={face.src} alt="" className="hero-proof-face" />
+                                        ))}
+                                    </div>
+                                    <div className="hero-proof-marquee-set" aria-hidden="true">
+                                        {heroMarqueeFaces.map((face, idx) => (
+                                            <img key={`b-${idx}`} src={face.src} alt="" className="hero-proof-face" />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="hero-actions animate-in" style={{ animationDelay: '0.3s' }}>
                             <Link to="/book" className="btn btn-primary">
@@ -202,23 +290,97 @@ export default function HomePage() {
             <section className="authority-wall-section">
                 <div className="container">
                     <div className="authority-top-row">
-                        <h2 className="section-title authority-title">Authority & Social Proof</h2>
+                        <ScaleLetterHeading
+                            as="h2"
+                            className="section-title authority-title"
+                            text="Chosen by Leaders. Trusted by Decision Makers."
+                        />
                     </div>
                     <div className="authority-featured">
-                        <div className="authority-featured-image-wrap">
-                            <img src={harshitHeroImg} alt="Featured authority moment" className="authority-featured-image" />
-                        </div>
-                        <div className="authority-featured-content">
-                            <h3>A Trusted Advisor to High-Impact Decision Makers</h3>
-                            <p>
-                                From boardrooms to public stages, Dr. Harshit provides strategic Vedic guidance
-                                to leaders handling high-stakes decisions in business, governance, and personal growth.
-                            </p>
-                            <ul className="authority-checklist">
-                                <li><FiCheck className="text-gold" /> Strategic consultations for entrepreneurs and CXOs</li>
-                                <li><FiCheck className="text-gold" /> Invited speaker at premium leadership events</li>
-                                <li><FiCheck className="text-gold" /> Recognized for practical, action-focused guidance</li>
-                            </ul>
+                        <div className="authority-featured-top">
+
+                            {/* LEFT+MIDDLE PANEL: gets the cream background */}
+                            <div className="authority-main-panel">
+                                {/* Col 1 Row 1: image */}
+                                <div className="authority-featured-image-wrap">
+                                    <img
+                                        src={authorityFeaturedImg}
+                                        alt="Dr. Kunwar Harshit Rajveer reading Nakshatras in Astrology"
+                                        className="authority-featured-image"
+                                    />
+                                </div>
+                                {/* Col 2 Row 1: trust copy */}
+                                <div className="authority-featured-content authority-featured-content--beside">
+                                    <h3 className="authority-subhead">
+                                        Trusted Where{' '}
+                                        <span className="authority-subhead-accent">Decisions</span>{' '}
+                                        Matter Most
+                                    </h3>
+                                    <p className="authority-lead">
+                                        <strong className="authority-strong">One wrong decision</strong> can cost{' '}
+                                        <span className="authority-stat">years</span>.
+                                    </p>
+                                    <p>
+                                        That&apos;s why those operating at{' '}
+                                        <strong className="authority-strong">higher levels</strong> rely on{' '}
+                                        <em className="authority-serif-pull">structured, precise guidance</em>
+                                        {' '}
+                                        <span className="authority-deemph">— not assumptions —</span>{' '}
+                                        when it comes to{' '}
+                                        <strong className="authority-strong">career, wealth, and life direction</strong>.
+                                    </p>
+                                </div>
+                                {/* Row 2: Clarity text spans full panel width */}
+                                <div className="authority-featured-bottom">
+                                    <p className="authority-callout">
+                                        <span className="authority-callout-keyword">Clarity</span> becomes critical when{' '}
+                                        <strong className="authority-strong">the stakes are high</strong>. The higher you go,
+                                        the fewer mistakes you can afford.
+                                    </p>
+                                    <p>
+                                        <span className="authority-name">Dr. Harshit</span> provides{' '}
+                                        <em className="authority-serif-pull">structured Vedic insights</em> to individuals who
+                                        value{' '}
+                                        <span className="authority-inline-gold">precision</span>,{' '}
+                                        <span className="authority-inline-gold">timing</span>, and{' '}
+                                        <strong className="authority-strong">informed decision-making</strong> in every aspect
+                                        of life.
+                                    </p>
+                                    <ul className="authority-checklist">
+                                        <li>
+                                            <FiCheck className="authority-check-icon" aria-hidden />
+                                            <span>
+                                                <strong className="authority-check-lead">Strategic consultations</strong>
+                                                {' '}for entrepreneurs and CXOs
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <FiCheck className="authority-check-icon" aria-hidden />
+                                            <span>
+                                                <strong className="authority-check-lead">Invited speaker</strong>
+                                                {' '}at premium leadership events
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <FiCheck className="authority-check-icon" aria-hidden />
+                                            <span>
+                                                <strong className="authority-check-lead">Recognized</strong>
+                                                {' '}for practical, <span className="authority-inline-gold">action-focused</span>{' '}
+                                                guidance
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* RIGHT PANEL: card gallery */}
+                            <div className="authority-featured-gallery">
+                                <h3 className="authority-gallery-heading">
+                                    Explore our astrology services
+                                </h3>
+                                <LinearCardGallery items={authorityLinearGalleryItems} />
+                            </div>
+
                         </div>
                     </div>
 
@@ -236,12 +398,12 @@ export default function HomePage() {
             {/* ── 3. Featured Moments ── */}
             <section className="featured-moments-section">
                 <div className="container">
-                    <h2 className="section-title">Featured Moments</h2>
+                    <ScaleLetterHeading as="h2" className="section-title" text="Featured Moments" />
 
                     <div className="featured-story-row">
                         <img src={deepakKapoorImg} alt="Trusted by top entrepreneurs" className="featured-story-image" />
                         <div className="featured-story-content">
-                            <h3>Trusted by India’s Top Entrepreneurs</h3>
+                            <h3>Trusted by India&apos;s Top Entrepreneurs</h3>
                             <p>
                                 Guided founders and investors on expansion timing, partnerships, and key financial decisions
                                 through practical Vedic intelligence.
@@ -276,7 +438,7 @@ export default function HomePage() {
             {/* ── 4. Media & Awards ── */}
             <section className="media-awards-section">
                 <div className="container">
-                    <h2 className="section-title">Media & Awards</h2>
+                    <ScaleLetterHeading as="h2" className="section-title" text="Media & Awards" />
                     <div className="media-logo-row">
                         <div className="media-logo">Business Times</div>
                         <div className="media-logo">National TV</div>
@@ -290,7 +452,7 @@ export default function HomePage() {
             {/* ── 5. Popular Astrology Services ── */}
             <section className="exclusivity-section">
                 <div className="container">
-                    <h2 className="section-title">Popular Astrology Services</h2>
+                    <ScaleLetterHeading as="h2" className="section-title" text="Popular Astrology Services" />
                     <div className="services-grid">
                         {popularServices.map((service) => (
                             <article
@@ -313,9 +475,14 @@ export default function HomePage() {
             {/* ── 6. Video Proof ── */}
             <section className="video-proof-section">
                 <div className="container">
-                    <h2 className="section-title video-proof-title">
-                        Explore our <span>podcast</span>
-                    </h2>
+                    <ScaleLetterHeading
+                        as="h2"
+                        className="section-title video-proof-title"
+                        parts={[
+                            { text: 'Explore our ' },
+                            { text: 'podcast', className: 'text-gold' },
+                        ]}
+                    />
                     <div className="video-proof-grid">
                         {videoProofItems.map((item, idx) => (
                             <div className="video-proof-card" key={`${item.title}-${idx}`}>
@@ -337,7 +504,7 @@ export default function HomePage() {
                 <div className="container">
                     <div className="preview-layout">
                         <div className="preview-content">
-                            <h2 className="text-left">Crystal Clear Insights</h2>
+                            <ScaleLetterHeading as="h2" className="text-left" text="Crystal Clear Insights" />
                             <p>Most astrology reports are confusing. Ours are designed for clarity.</p>
                             <ul className="benefits-list">
                                 <li><FiCheck className="text-gold" /> <strong>Plain English:</strong> No complex jargon without explanation.</li>
@@ -358,7 +525,11 @@ export default function HomePage() {
             {/* ── 7. Pricing ── */}
             <section className="pricing-section">
                 <div className="container">
-                    <h2 className="pricing-title-top section-title section-title--pricing">Simple Pricing</h2>
+                    <ScaleLetterHeading
+                        as="h2"
+                        className="pricing-title-top section-title section-title--pricing"
+                        text="Simple Pricing"
+                    />
                     <div className="pricing-grid">
                         <div className="pricing-card glass-panel">
                             <h3>Basic Report</h3>
@@ -390,7 +561,7 @@ export default function HomePage() {
             {/* ── 8. Final CTA ── */}
             <section className="final-cta-section">
                 <div className="container text-center">
-                    <h2 className="cta-title">Start Your Cosmic Journey</h2>
+                    <ScaleLetterHeading as="h2" className="cta-title" text="Start Your Cosmic Journey" />
                     <p className="cta-subtitle">
                         Don't leave your destiny to chance. Get the guidance you need today.
                     </p>

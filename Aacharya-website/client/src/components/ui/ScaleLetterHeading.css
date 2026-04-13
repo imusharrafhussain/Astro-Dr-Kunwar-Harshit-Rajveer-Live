@@ -1,0 +1,24 @@
+.scale-letter-heading {
+    overflow: visible;
+    margin: 0;
+}
+
+.scale-letter-heading__track {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.scale-letter-heading__char {
+    font-weight: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+.scale-letter-heading--light .scale-letter-heading__char:not(.text-gradient):not(.text-gold) {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
