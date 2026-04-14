@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FiMenu, FiX, FiChevronDown, FiPhone, FiVideo, FiUser } from 'react-icons/fi'
 import logo from '../../assets/logo.svg'
 import './Navbar.css'
@@ -11,6 +11,9 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
     const [showComingSoon, setShowComingSoon] = useState(false)
+    const [isServicesOpen, setIsServicesOpen] = useState(false)
+    const servicesButtonRef = useRef(null)
+    const location = useLocation()
     const { user, logout } = useAuth() || {}; // Handle potential null context if used outside provider (though unlikely here)
 
     useEffect(() => {
@@ -20,6 +23,20 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    useEffect(() => {
+        const openServicesDropdown = () => {
+            setIsServicesOpen(true)
+            requestAnimationFrame(() => servicesButtonRef.current?.focus())
+        }
+
+        window.addEventListener('open-services-dropdown', openServicesDropdown)
+        return () => window.removeEventListener('open-services-dropdown', openServicesDropdown)
+    }, [])
+
+    useEffect(() => {
+        setIsServicesOpen(false)
+    }, [location.pathname, location.search])
 
     const servicesMegaItems = [
         {
@@ -101,8 +118,18 @@ export default function Navbar() {
 
                     {/* Center Navigation Items */}
                     <nav className="top-nav-items grid-center" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 1vw, 1.5rem)' }}>
-                        <div className="nav-dropdown-container">
-                            <button type="button" className="nav-item nav-mega-trigger">
+                        <div
+                            className={`nav-dropdown-container ${isServicesOpen ? 'is-open' : ''}`}
+                            onMouseLeave={() => setIsServicesOpen(false)}
+                        >
+                            <button
+                                ref={servicesButtonRef}
+                                type="button"
+                                className="nav-item nav-mega-trigger"
+                                aria-expanded={isServicesOpen}
+                                onMouseEnter={() => setIsServicesOpen(true)}
+                                onClick={() => setIsServicesOpen((prev) => !prev)}
+                            >
                                 Services <FiChevronDown />
                             </button>
                             <div className="nav-dropdown-menu">

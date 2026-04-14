@@ -4,7 +4,7 @@
     /* Maroon Background */
     border-top: 4px solid var(--gold-primary);
     padding: 3rem 0 2rem;
-    margin-top: 4rem;
+    margin-top: 0;
     color: #FFFFFF;
     /* White text */
 }
