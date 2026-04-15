@@ -1,0 +1,126 @@
+import heroKundliM from '../assets/heroKundliM.png'
+import ServiceShowcasePage from './ServiceShowcasePage'
+
+const config = {
+  variant: 'palmistry',
+  heroBadge: '✋ Ancient Hand Analysis',
+  heroTitleLine1: 'Reveal Your Future',
+  heroTitleHighlight: 'Palmistry',
+  heroTitleLine2: 'through Hand Lines',
+  heroDesc: 'Understand your personality, career potential, relationships, and life events through a detailed palm reading session.',
+  heroImage: heroKundliM,
+  heroStats: [
+    { value: '9,000+', label: 'Hand Readings' },
+    { value: '95%', label: 'Accuracy Rated' },
+    { value: '15+ Yrs', label: 'Palmistry Expertise' },
+  ],
+  servicesTitle: 'Explore Our Palmistry Services',
+  formDefaultService: 'Complete Palm Reading',
+  highlightTitle: 'What Palmistry Reveals',
+  highlightDesc: 'Palmistry interprets major and minor lines, mounts, and hand shape to decode tendencies and timing patterns in life.',
+  highlightPoints: [
+    'Life, head, and heart line interpretation',
+    'Career and wealth tendency indicators',
+    'Relationship and marriage patterns',
+    'Timing windows for major life shifts',
+  ],
+  services: [
+    {
+      id: 1,
+      icon: '✋',
+      title: 'Complete Palm Reading',
+      desc: 'Detailed reading of all major hand lines and mounts.',
+      longDesc: 'A full session covering hand shape, dominant lines, mount strength, and practical interpretation for personality and life direction.',
+      benefits: ['All major lines analyzed', 'Mount and finger interpretation', 'Strength/weakness personality profile', 'Guided practical recommendations'],
+      duration: '45 minutes',
+      price: '₹999',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Dominant Hand', name: 'hand', type: 'select', options: ['Right', 'Left', 'Both'] },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+        { label: 'Primary Focus', name: 'focus', type: 'text', placeholder: 'Career/Marriage/Health/etc.' },
+      ],
+    },
+    {
+      id: 2,
+      icon: '💍',
+      title: 'Love & Marriage Palm Reading',
+      desc: 'Relationship compatibility and marriage timing through palm signs.',
+      longDesc: 'Focused reading on relationship tendencies, emotional patterns, commitment signs, and possible marriage timelines.',
+      benefits: ['Heart line relationship analysis', 'Marriage line interpretation', 'Compatibility tendencies', 'Advice for better relationship outcomes'],
+      duration: '40 minutes',
+      price: '₹899',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Relationship Status', name: 'status', type: 'select', options: ['Single', 'Committed', 'Married'] },
+        { label: 'Dominant Hand', name: 'hand', type: 'select', options: ['Right', 'Left', 'Both'] },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 3,
+      icon: '📈',
+      title: 'Career Palm Analysis',
+      desc: 'Career path, growth signs, and stability patterns from your palm.',
+      longDesc: 'Analyze profession suitability, success potential, role strengths, and turning points using career-related line signatures.',
+      benefits: ['Career line strength review', 'Job-business suitability', 'Growth and setback indicators', 'Action roadmap for progression'],
+      duration: '35 minutes',
+      price: '₹799',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Current Role', name: 'role', type: 'text', placeholder: 'Profession/Role' },
+        { label: 'Dominant Hand', name: 'hand', type: 'select', options: ['Right', 'Left', 'Both'] },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 4,
+      icon: '🧿',
+      title: 'Palm Remedies Session',
+      desc: 'Correction guidance based on weak lines and stress markers.',
+      longDesc: 'Get practical lifestyle and spiritual remedies to address recurring stress patterns indicated through your palm markers.',
+      benefits: ['Stress and imbalance markers', 'Corrective routine suggestions', 'Energy and mindset balancing', 'Simple daily action plan'],
+      duration: '30 minutes',
+      price: '₹699',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Main Concern', name: 'concern', type: 'text', placeholder: 'What do you want to fix?' },
+        { label: 'Dominant Hand', name: 'hand', type: 'select', options: ['Right', 'Left', 'Both'] },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+  ],
+  processSteps: [
+    { title: 'Profile Intake', desc: 'You share basic details and consultation focus such as career, marriage, or health.' },
+    { title: 'Line & Mount Reading', desc: 'We assess major/minor lines, mounts, and hand shape characteristics.' },
+    { title: 'Interpretation Session', desc: 'You receive a practical explanation of personality patterns and timing trends.' },
+    { title: 'Improvement Guidance', desc: 'Actionable suggestions are shared for better decisions and life balance.' },
+  ],
+  faqs: [
+    { q: 'Is one hand enough for palm reading?', a: 'Both hands give better context. Dominant hand shows present tendencies while non-dominant reflects core patterns.' },
+    { q: 'Can palm lines change with time?', a: 'Yes, minor line changes are possible with lifestyle, mindset, and life events.' },
+    { q: 'How accurate is palmistry for career and marriage?', a: 'Palmistry offers strong behavioral and timing indicators, especially when interpreted with experience.' },
+  ],
+  testimonials: [
+    { name: 'Nikita S', rating: 5, text: 'My palm reading session was very clear and deeply insightful.', avatar: 'https://i.pravatar.cc/80?img=26' },
+    { name: 'Prakash M', rating: 5, text: 'Career reading gave exact direction and confidence.', avatar: 'https://i.pravatar.cc/80?img=51' },
+    { name: 'Aarti N', rating: 5, text: 'Very practical interpretation, no confusion, straight guidance.', avatar: 'https://i.pravatar.cc/80?img=37' },
+  ],
+  trustPoints: [
+    { icon: '✍️', title: 'Line-by-Line Clarity', desc: 'Every major palm line explained with practical context.' },
+    { icon: '🎯', title: 'Focused Guidance', desc: 'Sessions tailored to your top concern and life stage.' },
+    { icon: '🔐', title: 'Private Consultation', desc: 'Your personal reading details remain confidential.' },
+  ],
+}
+
+export default function PalmistryPage() {
+  return <ServiceShowcasePage config={config} />
+}

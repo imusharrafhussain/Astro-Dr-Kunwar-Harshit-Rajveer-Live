@@ -1,0 +1,126 @@
+import heroKundliM from '../assets/heroKundliM.png'
+import ServiceShowcasePage from './ServiceShowcasePage'
+
+const config = {
+  variant: 'janam',
+  heroBadge: '🕉️ Authentic Birth Chart Guidance',
+  heroTitleLine1: 'Discover Your',
+  heroTitleHighlight: 'Janam Kundli',
+  heroTitleLine2: 'with Vedic Precision',
+  heroDesc: 'Decode your birth chart to understand personality, life path, career trends, relationships, and key planetary periods.',
+  heroImage: heroKundliM,
+  heroStats: [
+    { value: '12,000+', label: 'Charts Analyzed' },
+    { value: '97%', label: 'Client Satisfaction' },
+    { value: '20+ Yrs', label: 'Astro Experience' },
+  ],
+  servicesTitle: 'Explore Our Janam Kundli Services',
+  formDefaultService: 'Basic Janam Kundli Reading',
+  highlightTitle: 'Why Janam Kundli Matters',
+  highlightDesc: 'Your birth chart is a complete map of karmic patterns, strengths, and opportunities. Accurate interpretation helps with better decisions in every major life area.',
+  highlightPoints: [
+    'Detailed Lagna and planetary house analysis',
+    'Mahadasha and Antardasha timeline guidance',
+    'Career, marriage, finance, and health indicators',
+    'Practical Vedic remedies for weak planets',
+  ],
+  services: [
+    {
+      id: 1,
+      icon: '📜',
+      title: 'Basic Janam Kundli Reading',
+      desc: 'Core birth chart analysis with personality and life direction insights.',
+      longDesc: 'A complete foundational reading of your birth chart including Lagna, house strengths, planetary nature, and key life themes.',
+      benefits: ['Lagna profile and house meanings', 'Planet-by-planet analysis', 'Strengths and challenges summary', 'Easy-to-understand recommendations'],
+      duration: '45 minutes',
+      price: '₹999',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Time of Birth', name: 'birthTime', type: 'time' },
+        { label: 'Place of Birth', name: 'birthPlace', type: 'text', placeholder: 'City, State, Country' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 2,
+      icon: '🪐',
+      title: 'Dasha Timeline Analysis',
+      desc: 'Understand your upcoming planetary periods and major timing windows.',
+      longDesc: 'Detailed analysis of Mahadasha and Antardasha effects for career, relationships, and finance to plan important decisions smartly.',
+      benefits: ['Current and upcoming dasha effects', 'Favorable time windows', 'Risk periods and precautions', 'Timing-based planning suggestions'],
+      duration: '50 minutes',
+      price: '₹1,299',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Time of Birth', name: 'birthTime', type: 'time' },
+        { label: 'Place of Birth', name: 'birthPlace', type: 'text', placeholder: 'City, State, Country' },
+        { label: 'Focus Area', name: 'focus', type: 'select', options: ['Career', 'Marriage', 'Finance', 'Health', 'All'] },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+      ],
+    },
+    {
+      id: 3,
+      icon: '💼',
+      title: 'Career & Finance Kundli',
+      desc: 'Career direction, growth periods, and income potential from your chart.',
+      longDesc: 'Focused Janam Kundli consultation for profession, business, role suitability, and wealth development based on planetary signatures.',
+      benefits: ['Career role alignment', 'Growth and switch timing', 'Business suitability', 'Income and savings tendencies'],
+      duration: '45 minutes',
+      price: '₹1,199',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Time of Birth', name: 'birthTime', type: 'time' },
+        { label: 'Place of Birth', name: 'birthPlace', type: 'text', placeholder: 'City, State, Country' },
+        { label: 'Current Profession', name: 'profession', type: 'text', placeholder: 'Job/Business/Student' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 4,
+      icon: '🧿',
+      title: 'Remedies & Correction Plan',
+      desc: 'Personalized Vedic remedies for weak planets and repeated obstacles.',
+      longDesc: 'Receive a practical remedy roadmap with mantra, donation, fasting, and daily correction practices based on your kundli.',
+      benefits: ['Planet-specific remedies', 'Priority action plan', 'Simple daily routines', 'Monthly progress checkpoints'],
+      duration: '40 minutes',
+      price: '₹899',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Date of Birth', name: 'dob', type: 'date' },
+        { label: 'Time of Birth', name: 'birthTime', type: 'time' },
+        { label: 'Place of Birth', name: 'birthPlace', type: 'text', placeholder: 'City, State, Country' },
+        { label: 'Primary Concern', name: 'concern', type: 'text', placeholder: 'Health/Career/Marriage/etc.' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+      ],
+    },
+  ],
+  processSteps: [
+    { title: 'Share Birth Details', desc: 'Provide accurate date, time, and place of birth for precise chart generation.' },
+    { title: 'Chart Preparation', desc: 'We prepare your Janam Kundli with planetary placements and house analysis.' },
+    { title: 'Expert Consultation', desc: 'Astrologer explains life themes, strengths, and key caution periods.' },
+    { title: 'Remedy Roadmap', desc: 'You receive personalized remedies and actionable next steps.' },
+  ],
+  faqs: [
+    { q: 'Do I need exact birth time for Janam Kundli?', a: 'Yes, exact birth time improves chart precision significantly. If unavailable, we can still provide a general reading with limited accuracy.' },
+    { q: 'How is this different from a normal horoscope?', a: 'Janam Kundli is a full natal chart interpretation, while a normal horoscope is usually sign-based and generic.' },
+    { q: 'Will I get remedies with the report?', a: 'Yes, practical remedies are included based on your weak planetary combinations and current dasha period.' },
+  ],
+  testimonials: [
+    { name: 'Ritu Verma', rating: 5, text: 'My Janam Kundli session was detailed and practical. Every point felt accurate.', avatar: 'https://i.pravatar.cc/80?img=32' },
+    { name: 'Aman Singh', rating: 5, text: 'The dasha timeline helped me plan my career switch perfectly.', avatar: 'https://i.pravatar.cc/80?img=17' },
+    { name: 'Sneha Rao', rating: 5, text: 'Simple remedies with clear explanation. Very helpful consultation.', avatar: 'https://i.pravatar.cc/80?img=45' },
+  ],
+  trustPoints: [
+    { icon: '🧘', title: 'Expert Astrologers', desc: 'Experienced Vedic astrologers with deep chart interpretation expertise.' },
+    { icon: '📈', title: 'Practical Guidance', desc: 'Action-oriented insights that help in real life decisions and planning.' },
+    { icon: '🔒', title: 'Private & Secure', desc: 'Your birth details and consultation data remain fully confidential.' },
+  ],
+}
+
+export default function JanamKundliPage() {
+  return <ServiceShowcasePage config={config} />
+}

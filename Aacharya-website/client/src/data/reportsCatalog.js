@@ -1,76 +1,88 @@
+import loveReportImg from '../assets/lovereport.png'
+import lifeJourneyImg from '../assets/lifejourney.png'
+import numberAnalysisImg from '../assets/numberanalysis.png'
+import govtJobImg from '../assets/govtjob.png'
+import lifeChangingReportImg from '../assets/lifechangingreport.png'
+import wealthReportImg from '../assets/wealth&report.png'
+import kundaliMatchingImg from '../assets/kundlimatching report.png'
+import mahaComboImg from '../assets/maha combo.png'
+
 export const REPORTS_CATALOG = [
     {
         id: 'love-relationship',
         shortTitle: 'Love Report',
-        title: 'Love & Relationship Report',
-        desc: 'Compatibility, timing, and relationship clarity based on Vedic principles.',
+        title: 'Love Report',
+        desc: 'Detailed insight into relationship compatibility, emotional bonding, and future love potential.',
         price: '₹499',
-        image: 'https://images.unsplash.com/photo-1516589091380-5d8e87df6999?auto=format&fit=crop&w=900&q=80',
+        image: loveReportImg,
         iconKey: 'heart',
     },
     {
-        id: 'career-growth',
-        shortTitle: 'Career Report',
-        title: 'Career Growth Report',
-        desc: 'Career direction, opportunities, and favorable decision windows.',
+        id: 'life-journey',
+        shortTitle: 'Life Journey',
+        title: 'Life Journey Report',
+        desc: 'A complete roadmap of important life phases, karmic patterns, and personal growth cycles.',
         price: '₹799',
-        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
+        image: lifeJourneyImg,
         iconKey: 'briefcase',
     },
     {
-        id: 'finance-wealth',
-        shortTitle: 'Finance Report',
-        title: 'Finance & Wealth Report',
-        desc: 'Income cycles, investment timing, and financial stability insights.',
+        id: 'name-number-analysis',
+        shortTitle: 'Name Number',
+        title: 'Name Number Analysis Report',
+        desc: 'Numerology-based analysis of your name and numbers to improve luck, success, and balance.',
         price: '₹999',
-        image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=900&q=80',
+        image: numberAnalysisImg,
         iconKey: 'dollar',
     },
     {
-        id: 'yearly-prediction',
-        shortTitle: 'Yearly Report',
-        title: 'Yearly Prediction Report',
-        desc: 'A complete yearly map of major planetary influences in your life.',
+        id: 'government-job',
+        shortTitle: 'Govt Job',
+        title: 'Government Job Report',
+        desc: 'Focused report for competitive exam timing, job opportunity periods, and career stability factors.',
         price: '₹1199',
-        image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=80',
+        image: govtJobImg,
         iconKey: 'sun',
     },
     {
-        id: 'life-journey',
-        shortTitle: 'Life Path Report',
-        title: 'Life Journey Report',
-        desc: 'A deeper roadmap of life phases, strengths, and karmic themes.',
+        id: 'life-changing',
+        shortTitle: 'Life Change',
+        title: 'Life Changing Report',
+        desc: 'Transformative guidance for major life decisions, obstacles, and breakthrough opportunities.',
         price: '₹1399',
-        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80',
+        image: lifeChangingReportImg,
         iconKey: 'compass',
     },
     {
-        id: 'kundli-analysis',
-        title: 'Kundli Analysis Report',
-        desc: 'Detailed birth chart interpretation with practical remedies.',
+        id: 'wealth-report',
+        shortTitle: 'Wealth',
+        title: 'Wealth Report',
+        desc: 'Comprehensive wealth forecast including income growth, savings potential, and prosperity remedies.',
         price: '₹899',
-        image: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80',
+        image: wealthReportImg,
         iconKey: 'moon',
     },
     {
-        id: 'marriage-compatibility',
-        title: 'Marriage Compatibility Report',
-        desc: 'Comprehensive kundli matching for harmony and long-term balance.',
+        id: 'kundali-matching',
+        shortTitle: 'Kundali Match',
+        title: 'Kundali Matching Report',
+        desc: 'Vedic compatibility analysis with guna score, dosha checks, and relationship harmony insights.',
         price: '₹1499',
-        image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80',
+        image: kundaliMatchingImg,
         iconKey: 'users',
     },
     {
-        id: 'business-success',
-        title: 'Business Success Report',
-        desc: 'Business potential, expansion timing, and strategic guidance.',
+        id: 'maha-combo',
+        shortTitle: 'Maha Combo',
+        title: 'Maha Combo Report',
+        desc: 'All-in-one premium report combining love, career, wealth, and life guidance in one detailed package.',
         price: '₹1799',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80',
+        image: mahaComboImg,
         iconKey: 'trending',
     },
 ]
 
-export const HERO_FLOATING_IDS = ['love-relationship', 'career-growth', 'finance-wealth', 'life-journey']
+export const HERO_FLOATING_IDS = ['love-relationship', 'life-journey', 'name-number-analysis', 'government-job']
 
 export function getReportById(id) {
     return REPORTS_CATALOG.find((r) => r.id === id)

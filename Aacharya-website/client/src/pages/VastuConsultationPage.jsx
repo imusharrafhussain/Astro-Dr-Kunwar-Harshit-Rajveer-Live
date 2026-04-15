@@ -1,0 +1,127 @@
+import heroKundliM from '../assets/heroKundliM.png'
+import ServiceShowcasePage from './ServiceShowcasePage'
+import vastuBg from '../assets/vastuB.png'
+
+const config = {
+  variant: 'vastu',
+  heroBadge: '🏠 Energy Balanced Spaces',
+  heroTitleLine1: 'Transform Your',
+  heroTitleHighlight: 'Vastu Consultation',
+  heroTitleLine2: 'for Home & Office',
+  heroDesc: 'Align your property with Vastu principles to improve peace, prosperity, relationships, and overall growth.',
+  heroImage: vastuBg,
+  heroStats: [
+    { value: '8,500+', label: 'Spaces Guided' },
+    { value: '96%', label: 'Positive Results' },
+    { value: '18+ Yrs', label: 'Vastu Expertise' },
+  ],
+  servicesTitle: 'Explore Our Vastu Consultation Services',
+  formDefaultService: 'Residential Vastu Audit',
+  highlightTitle: 'Why Vastu Works',
+  highlightDesc: 'Vastu focuses on directional energy and elemental balance. Small structural and placement changes can significantly improve outcomes.',
+  highlightPoints: [
+    'Main door and room orientation review',
+    'Kitchen, bedroom, and puja zone correction',
+    'Business and office growth-focused Vastu',
+    'Practical low-cost remedies when changes are limited',
+  ],
+  services: [
+    {
+      id: 1,
+      icon: '🏡',
+      title: 'Residential Vastu Audit',
+      desc: 'Complete home layout analysis for harmony, health, and prosperity.',
+      longDesc: 'Detailed Vastu mapping for entrance, rooms, sleeping direction, kitchen position, and energy flow across your residence.',
+      benefits: ['Room-wise Vastu review', 'Directional correction guide', 'Family harmony recommendations', 'Remedy list with priority order'],
+      duration: '60 minutes',
+      price: '₹1,499',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Property Type', name: 'propertyType', type: 'select', options: ['Apartment', 'Independent House', 'Villa', 'Other'] },
+        { label: 'City', name: 'city', type: 'text', placeholder: 'City' },
+        { label: 'Built-up Area', name: 'area', type: 'text', placeholder: 'e.g. 1800 sq.ft' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 2,
+      icon: '🏢',
+      title: 'Office & Business Vastu',
+      desc: 'Optimize workplace setup for growth, cash flow, and team productivity.',
+      longDesc: 'Business-oriented Vastu consultation for reception, cabin placement, cash counters, and departmental zoning to support expansion.',
+      benefits: ['Owner desk and cabin direction', 'Cash and accounting zone optimization', 'Team productivity layout', 'Growth and sales energy plan'],
+      duration: '55 minutes',
+      price: '₹1,799',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Business Type', name: 'businessType', type: 'text', placeholder: 'Industry/business category' },
+        { label: 'Office Size', name: 'officeSize', type: 'text', placeholder: 'Approx area' },
+        { label: 'City', name: 'city', type: 'text', placeholder: 'City' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 3,
+      icon: '🧭',
+      title: 'Plot Selection Vastu',
+      desc: 'Choose the right plot direction and shape before construction.',
+      longDesc: 'Pre-purchase Vastu screening for plot shape, slope, road direction, and surrounding environment to avoid future imbalance.',
+      benefits: ['Plot suitability score', 'Direction and road analysis', 'Do’s and don’ts before purchase', 'Construction placement suggestions'],
+      duration: '40 minutes',
+      price: '₹1,099',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Plot Location', name: 'location', type: 'text', placeholder: 'Area/City' },
+        { label: 'Plot Direction', name: 'direction', type: 'select', options: ['North', 'South', 'East', 'West', 'Unknown'] },
+        { label: 'Plot Size', name: 'plotSize', type: 'text', placeholder: 'Length x Width' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+    {
+      id: 4,
+      icon: '🔧',
+      title: 'Vastu Remedies Plan',
+      desc: 'Correction roadmap when structural changes are not possible.',
+      longDesc: 'A practical remedy plan with symbolic corrections, placement shifts, and elemental balancing when reconstruction is not feasible.',
+      benefits: ['No-demolition remedy options', 'Room-wise correction checklist', 'Element balancing recommendations', 'Prioritized implementation plan'],
+      duration: '35 minutes',
+      price: '₹899',
+      formFields: [
+        { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
+        { label: 'Property Type', name: 'propertyType', type: 'select', options: ['Home', 'Office', 'Shop', 'Other'] },
+        { label: 'Main Concern', name: 'concern', type: 'text', placeholder: 'Health/Finance/Relations/etc.' },
+        { label: 'City', name: 'city', type: 'text', placeholder: 'City' },
+        { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+91XXXXXXXXXX' },
+        { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+      ],
+    },
+  ],
+  processSteps: [
+    { title: 'Property Briefing', desc: 'You share property type, layout basics, and key concerns like finance, health, or growth.' },
+    { title: 'Directional Audit', desc: 'We evaluate entrance, room placement, and elemental imbalance points.' },
+    { title: 'Correction Strategy', desc: 'You receive structural and non-structural Vastu corrections prioritized by impact.' },
+    { title: 'Implementation Support', desc: 'Follow-up guidance helps you apply the recommendations effectively.' },
+  ],
+  faqs: [
+    { q: 'Do I need to break walls for Vastu corrections?', a: 'Not always. We first suggest practical non-demolition remedies and placement corrections wherever possible.' },
+    { q: 'Can Vastu help in rented homes?', a: 'Yes, many effective adjustments are possible even in rented spaces through layout and energy balancing.' },
+    { q: 'Do you also cover office and shop Vastu?', a: 'Yes, we provide separate consultations for office, commercial, and retail spaces.' },
+  ],
+  testimonials: [
+    { name: 'Kunal Bansal', rating: 5, text: 'Office Vastu suggestions improved workflow and decision clarity.', avatar: 'https://i.pravatar.cc/80?img=14' },
+    { name: 'Megha Jain', rating: 5, text: 'Simple changes at home gave surprisingly positive results.', avatar: 'https://i.pravatar.cc/80?img=29' },
+    { name: 'Rohit Arora', rating: 5, text: 'Very practical consultation with step-by-step correction advice.', avatar: 'https://i.pravatar.cc/80?img=22' },
+  ],
+  trustPoints: [
+    { icon: '📐', title: 'Scientific Mapping', desc: 'Systematic directional and elemental analysis for each space.' },
+    { icon: '🛠️', title: 'Practical Remedies', desc: 'Actionable Vastu solutions suitable for real-world constraints.' },
+    { icon: '🔒', title: 'Confidential Process', desc: 'Property details and consultation records stay fully secure.' },
+  ],
+}
+
+export default function VastuConsultationPage() {
+  return <ServiceShowcasePage config={config} />
+}

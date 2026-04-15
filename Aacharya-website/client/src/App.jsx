@@ -6,6 +6,10 @@ import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
 import ServiceDetailPage from './pages/ServiceDetailPage'
 import KundliMatchingPage from './pages/KundliMatchingPage'
+import JanamKundliPage from './pages/JanamKundliPage'
+import VastuConsultationPage from './pages/VastuConsultationPage'
+import PalmistryPage from './pages/PalmistryPage'
+import FaceReadingPage from './pages/FaceReadingPage'
 import BookingPage from './pages/BookingPage'
 import ReportsPage from './pages/ReportsPage'
 import ReportOrderPage from './pages/ReportOrderPage'
@@ -40,6 +44,10 @@ function App() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/services" element={<ServicesPage />} />
                     <Route path="/services/kundli-matching" element={<KundliMatchingPage />} />
+                    <Route path="/services/janam-kundli" element={<JanamKundliPage />} />
+                    <Route path="/services/vastu-consultation" element={<VastuConsultationPage />} />
+                    <Route path="/services/palmistry" element={<PalmistryPage />} />
+                    <Route path="/services/face-reading" element={<FaceReadingPage />} />
                     <Route path="/services/:slug" element={<ServiceDetailPage />} />
                     <Route path="/horoscope/:type" element={<HoroscopePage />} />
                     <Route path="/panchang" element={<PanchangPage />} />

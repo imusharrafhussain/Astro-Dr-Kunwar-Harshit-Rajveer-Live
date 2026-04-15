@@ -222,11 +222,12 @@
 
 .ro-preview-card__media {
     border-radius: 16px;
-    aspect-ratio: 2 / 3;
     position: relative;
     overflow: hidden;
     margin-bottom: 0.85rem;
     z-index: 1;
+    background: transparent;
+    min-height: 320px;
 }
 
 .ro-preview-card__img {
@@ -237,10 +238,7 @@
 }
 
 .ro-preview-card__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 48%, rgba(0, 0, 0, 0.28) 100%);
+    content: none;
     pointer-events: none;
 }
 
