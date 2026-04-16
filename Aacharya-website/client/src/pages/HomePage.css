@@ -1954,17 +1954,17 @@
     padding: 2.5rem 2rem;
     text-align: center;
     position: relative;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    background: #FFFFFF;
+    border: 1px solid rgba(93, 25, 22, 0.15);
     border-radius: var(--radius-sm);
-    box-shadow: 0 4px 20px rgba(74, 14, 14, 0.05);
+    box-shadow: 0 4px 20px rgba(93, 25, 22, 0.05);
 }
 
 .step-number {
     font-family: var(--font-heading);
     font-size: 3.5rem;
     font-weight: 700;
-    color: rgba(74, 14, 14, 0.12);
+    color: rgba(93, 25, 22, 0.15);
     /* Clearer Maroon Number */
     position: absolute;
     top: 0.5rem;

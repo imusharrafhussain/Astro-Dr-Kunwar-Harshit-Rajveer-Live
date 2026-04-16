@@ -5,7 +5,7 @@ import nakshatraImg from '../assets/nakshatras_course.webp';
 import tarotImg from '../assets/tarot_course.webp';
 import palmistryImg from '../assets/palmistry_course.webp';
 import vastuImg from '../assets/vastu_course.webp';
-import numerologyImg from '../assets/numerology_course.webp';
+import numerologyImg from '../assets/numerology_course.jpg';
 import ComingSoonModal from '../components/ui/ComingSoonModal';
 
 const LearningPage = () => {
