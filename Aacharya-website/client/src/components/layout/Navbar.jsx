@@ -2,6 +2,16 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FiMenu, FiX, FiChevronDown, FiPhone, FiVideo, FiUser } from 'react-icons/fi'
 import logo from '../../assets/logo.svg'
+import megaKundliMatching from '../../assets/mega_kundli_matching.png'
+import megaJanamKundli from '../../assets/mega_janam_kundli.png'
+import megaVastuConsultation from '../../assets/mega_vastu_consultation.png'
+import megaPalmistry from '../../assets/mega_palmistry.png'
+import megaFaceReading from '../../assets/mega_face_reading.png'
+import megaHoroscopeDaily from '../../assets/mega_horoscope_daily.png'
+import megaHoroscopeWeekly from '../../assets/mega_horoscope_weekly.png'
+import megaHoroscopeMonthly from '../../assets/mega_horoscope_monthly.png'
+import megaHoroscopeYearly from '../../assets/mega_horoscope_yearly.png'
+import megaHoroscopeZodiac from '../../assets/mega_horoscope_zodiac.png'
 import './Navbar.css'
 
 import { useAuth } from '../../context/AuthContext'
@@ -43,31 +53,31 @@ export default function Navbar() {
             to: '/services/kundli-matching',
             title: 'Kundli Matching',
             description: 'Detailed horoscope matching for marriage to ensure harmony and compatibility between partners.',
-            image: 'https://loremflickr.com/800/400/couple,wedding',
+            image: megaKundliMatching,
         },
         {
             to: '/services/janam-kundli',
             title: 'Janam Kundli',
             description: 'Complete birth chart analysis to understand your personality, life path, and future possibilities.',
-            image: 'https://loremflickr.com/800/400/astrology,chart',
+            image: megaJanamKundli,
         },
         {
             to: '/services/vastu-consultation',
             title: 'Vastu Consultation',
             description: 'Optimize your living and workspace with ancient science of architecture for health, wealth, and prosperity.',
-            image: 'https://loremflickr.com/800/400/home,architecture',
+            image: megaVastuConsultation,
         },
         {
             to: '/services/palmistry',
             title: 'Palmistry',
             description: 'Uncover your destiny through the lines of your hands. A unique insight into your character and future.',
-            image: 'https://loremflickr.com/800/400/hand,palm',
+            image: megaPalmistry,
         },
         {
             to: '/services/face-reading',
             title: 'Face Reading',
             description: 'Analyze facial features to determine character, fate, and potential life outcomes.',
-            image: 'https://loremflickr.com/800/400/face,portrait',
+            image: megaFaceReading,
         },
     ]
 
@@ -76,31 +86,31 @@ export default function Navbar() {
             to: '/horoscope/daily',
             title: 'Daily Horoscope',
             description: 'Your celestial guidance for today—plan your day with the help of the stars.',
-            image: 'https://loremflickr.com/800/400/constellation,stars',
+            image: megaHoroscopeDaily,
         },
         {
             to: '/horoscope/weekly',
             title: 'Weekly Horoscope',
             description: 'Insights for the week ahead—know when to act and when to pause.',
-            image: 'https://loremflickr.com/800/400/weekly,calendar,stars',
+            image: megaHoroscopeWeekly,
         },
         {
             to: '/horoscope/monthly',
             title: 'Monthly Horoscope',
             description: 'Your month at a glance—key dates and planetary movements affecting your sign.',
-            image: 'https://loremflickr.com/800/400/moon,night,sky',
+            image: megaHoroscopeMonthly,
         },
         {
             to: '/horoscope/yearly',
             title: 'Yearly Horoscope',
             description: 'A transformation-focused overview covering career, finance, health, and relationships.',
-            image: 'https://loremflickr.com/800/400/year,sky,stars',
+            image: megaHoroscopeYearly,
         },
         {
             to: '/horoscope/zodiac-signs',
             title: 'Zodiac Signs',
             description: 'Unlock the mysteries of the 12 signs—traits, compatibility, and secrets.',
-            image: 'https://loremflickr.com/800/400/zodiac,astrology,signs',
+            image: megaHoroscopeZodiac,
         },
     ]
 
@@ -137,7 +147,7 @@ export default function Navbar() {
                                     {servicesMegaItems.map((item) => (
                                         <Link key={item.to} to={item.to} className="nav-mega-item">
                                             <div className="nav-mega-img-wrap">
-                                                <img src={item.image} alt={item.title} className="nav-mega-img" />
+                                                <img src={item.image} alt={item.title} className="nav-mega-img" loading="lazy" decoding="async" />
                                             </div>
                                             <div className="nav-mega-text">
                                                 <div className="nav-mega-title">{item.title}</div>
@@ -158,7 +168,7 @@ export default function Navbar() {
                                     {horoscopeMegaItems.map((item) => (
                                         <Link key={item.to} to={item.to} className="nav-mega-item">
                                             <div className="nav-mega-img-wrap">
-                                                <img src={item.image} alt={item.title} className="nav-mega-img" />
+                                                <img src={item.image} alt={item.title} className="nav-mega-img" loading="lazy" decoding="async" />
                                             </div>
                                             <div className="nav-mega-text">
                                                 <div className="nav-mega-title">{item.title}</div>

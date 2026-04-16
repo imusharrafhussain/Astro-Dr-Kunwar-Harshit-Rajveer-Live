@@ -18,8 +18,18 @@ app.use(helmet({
     },
     crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
+const allowedOrigins = [
+    process.env.CLIENT_URL || 'http://localhost:5173',
+    process.env.ADMIN_URL || 'http://localhost:5174',
+].filter(Boolean);
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, cb) => {
+        // Allow same-origin, curl, and server-to-server requests
+        if (!origin) return cb(null, true);
+        if (allowedOrigins.includes(origin)) return cb(null, true);
+        return cb(new Error('Not allowed by CORS'));
+    },
     credentials: true,
 }));
 
@@ -37,6 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // ── Routes ──
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/services', require('./routes/serviceRoutes'));
 app.use('/api/guna-milan', require('./routes/gunaMilanRoutes'));
 app.use('/api/appointments', require('./routes/appointmentRoutes'));
