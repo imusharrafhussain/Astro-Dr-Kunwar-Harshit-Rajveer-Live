@@ -21,7 +21,7 @@
     --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f2c94c 100%);
     --border-subtle: rgba(93, 25, 22, 0.1);
 
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 130px;
@@ -1676,20 +1676,76 @@
     margin-bottom: 1.6rem;
 }
 
-.services-grid {
+.services-marquee-wrapper {
+    width: 100%;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.9rem;
+    position: relative;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.services-row {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+}
+
+.services-row-track {
+    animation: marquee-slide 20s linear infinite;
+}
+
+.services-row .service-card,
+.services-row .service-card-empty {
+    flex: 0 0 280px;
+    width: 280px;
+}
+
+/* Marquee Rows with static empty slot on left */
+.services-marquee-row-container {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+}
+
+.services-marquee-row-container > .service-card-empty {
+    flex: 0 0 280px;
+    width: 280px;
+    min-height: 228px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.services-marquee-track-wrapper {
+    flex: 1;
+    overflow: hidden;
+    /* This mask ensures cards fade out smoothly as they approach the empty area from the right */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 1rem, black 95%, transparent);
+}
+
+.service-card-no-image {
+    background: linear-gradient(135deg, #1f100c 0%, #0c0604 100%);
+    border: 1px solid rgba(192, 127, 78, 0.42);
+}
+
+@keyframes marquee-slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 0.5rem)); }
 }
 
 .service-card {
     position: relative;
-    min-height: 228px;
+    min-height: 190px;
+    aspect-ratio: 16 / 9;
     border-radius: 18px;
     overflow: hidden;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: #120a08;
     box-shadow:
         0 10px 24px rgba(74, 14, 14, 0.18),
         inset 0 0 0 1px rgba(192, 127, 78, 0.35);
@@ -2184,11 +2240,7 @@
         gap: 2.5rem;
     }
 
-    /* Services: keep 4-column grid */
-    .services-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
+    /* Services: horizontal scrolling handles this */
     /* Pricing: keep 2-column */
     .pricing-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2216,7 +2268,7 @@
     filter: drop-shadow(0 22px 55px rgba(212, 175, 55, 0.22));
     -webkit-mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
     mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
-}
+    }
 
     .hero-actions {
         justify-content: center;
@@ -2292,9 +2344,6 @@
         scroll-snap-align: start;
     }
 
-    .services-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 
     .video-proof-grid {
         justify-content: flex-start;
@@ -2316,8 +2365,30 @@
     }
 }
 
-@media (max-width: 640px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
+
+.exclusivity-section .section-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto 2.5rem;
+}
+
+.exclusivity-section .section-title .scale-letter-heading__track {
+    justify-content: center;
+    width: 100%;
+}
+
+.text-explore-brown {
+    color: #8B4513; /* SaddleBrown */
+    font-weight: 900 !important;
+}
+
+.text-podcast-red {
+    color: #D32F2F; /* Deep rich red */
+    font-weight: 900 !important;
+}
+
+.service-card-empty {
+    visibility: hidden;
 }

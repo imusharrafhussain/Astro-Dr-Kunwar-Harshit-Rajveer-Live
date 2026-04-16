@@ -5,6 +5,7 @@ import ScaleLetterHeading from '../components/ui/ScaleLetterHeading'
 import LinearCardGallery from '../components/ui/LinearCardGallery'
 import BrillianceAwardsShowcase from '../components/awards/BrillianceAwardsShowcase'
 import { SlideTabs } from '../components/ui/slide-tabs'
+import CircularGallerySection from '../components/ui/CircularGallerySection'
 import harshitHeroImg from '../assets/harshit_hero.png'
 import authorityFeaturedImg from '../assets/authority_reading_nakshatras.png'
 import ajaiBhambiImg from '../assets/ajai_bhambi.png'
@@ -37,6 +38,18 @@ import cardFaceReading from '../assets/card_face_reading.jpeg'
 import cardPalmistry from '../assets/card_palmistry.jpeg'
 import cardNumerology from '../assets/card_numerology.jpeg'
 import bestAwardGlobalImg from '../assets/best_award_global.png'
+import podcastRussianAnchor from '../assets/podcast_russian_anchor.jpg'
+import podcastMukeshAmbani from '../assets/podcast_mukesh_ambani.jpg'
+import podcastEktaKapoor from '../assets/podcast_ekta_kapoor.jpg'
+import podcastKanganaRanaut from '../assets/podcast_kangana_ranaut.jpg'
+import podcastViratKohli from '../assets/podcast_virat_kohli.jpg'
+import podcastPalmistry from '../assets/podcast_palmistry.png'
+import podcastAmitShah from '../assets/podcast_amit_shah.png'
+import podcastAmitabh from '../assets/podcast_amitabh.jpg'
+import podcastJyotirling from '../assets/podcast_jyotirling.jpg'
+import podcastJyotirling2 from '../assets/podcast_jyotirling_2.jpg'
+import podcastSamudraManthan from '../assets/podcast_samudra_manthan.jpg'
+import podcastGangaChandrama from '../assets/podcast_ganga_chandrama.jpg'
 import bestAwardAnchalImg from '../assets/best_award_anchal_munjal.png'
 import bestAwardHariRawatImg from '../assets/best_award_hari_singh_rawat.png'
 import bestAwardAtalImg from '../assets/best_award_atal.png'
@@ -70,51 +83,77 @@ export default function HomePage() {
         { image: sohiniShastriImg, caption: 'High-Profile Consultation Panel Appearance' },
     ]
 
-    const popularServices = [
+    const servicesRow1 = [
         {
-            title: 'Career & Business',
-            subtitle: 'Growth, promotions & major decisions',
-            image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-            badge: '🔥 Most Booked',
+            title: 'Russian Anchor',
+            subtitle: 'Astrology with International Media',
+            image: podcastRussianAnchor,
+            badge: '🌍 International',
         },
         {
-            title: 'Love & Relationships',
-            subtitle: 'Marriage, compatibility & conflicts',
-            image: 'https://images.unsplash.com/photo-1516589091380-5d8e87df6999?auto=format&fit=crop&w=1200&q=80',
-            badge: '❤️ High Demand',
+            title: 'Mukesh Ambani',
+            subtitle: 'कुंडली का रहस्य',
+            image: podcastMukeshAmbani,
         },
         {
-            title: 'Wealth & Finance',
-            subtitle: 'Investments, income & financial stability',
-            image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80',
-            badge: '💰 Top Choice',
+            title: 'Ekta Kapoor',
+            subtitle: 'कुंडली का राज',
+            image: podcastEktaKapoor,
         },
         {
-            title: 'Kundli Analysis',
-            subtitle: 'Detailed life predictions & guidance',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
+            title: 'Kangana Ranaut',
+            subtitle: 'Beauty Queen के साथ Rowdy?',
+            image: podcastKanganaRanaut,
         },
         {
-            title: 'Kundli Matching',
-            subtitle: 'Compatibility & marriage timing',
-            image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+            title: 'Virat Kohli',
+            subtitle: 'राजनीति में जाएंगे King Kohli?',
+            image: podcastViratKohli,
         },
         {
-            title: 'Problems & Remedies',
-            subtitle: 'Dosha, delays & life obstacles',
-            image: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80',
-        },
-        {
-            title: 'Foreign Opportunities',
-            subtitle: 'Travel, job & settlement abroad',
-            image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
-        },
-        {
-            title: 'Spiritual Guidance',
-            subtitle: 'Inner peace & life direction',
-            image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+            title: 'Samudra Manthan',
+            subtitle: 'Mystery of Life',
+            image: podcastSamudraManthan,
         },
     ]
+
+    const servicesRow2 = [
+        null, // Empty left slot
+        {
+            title: 'Palmistry & Destiny',
+            subtitle: 'Know your future from your palms',
+            image: podcastPalmistry,
+        },
+        {
+            title: 'Political Stars',
+            subtitle: 'Kalyug ke Raja: Amit Shah',
+            image: podcastAmitShah,
+        },
+        {
+            title: 'Bollywood Legend',
+            subtitle: 'Amitabh: Which planet made him a King?',
+            image: podcastAmitabh,
+        },
+        {
+            title: 'Jyotirlinga Secrets (Part 1)',
+            subtitle: 'Darshan for Planetary Peace',
+            image: podcastJyotirling,
+        },
+        {
+            title: 'Jyotirlinga Secrets (Part 2)',
+            subtitle: 'Darshan for Planetary Peace',
+            image: podcastJyotirling2,
+        },
+        {
+            title: 'Ganga aur Chandrama',
+            subtitle: 'Jyotish Rahasya',
+            image: podcastGangaChandrama,
+        },
+    ]
+
+    useEffect(() => {
+        console.log('Podcast Gallery Version: 1.0.4 (Full Imagery Ready)');
+    }, []);
 
     const videoProofItems = [
         {
@@ -377,6 +416,9 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
+
+            {/* ── 1.5 Circular Gallery Section ── */}
+            <CircularGallerySection />
 
             {/* ── 2. Social Proof Wall ── */}
             <section className="authority-wall-section">
@@ -681,22 +723,58 @@ export default function HomePage() {
             {/* ── 5. Popular Astrology Services ── */}
             <section className="exclusivity-section">
                 <div className="container">
-                    <ScaleLetterHeading as="h2" className="section-title" text="Popular Astrology Services" />
-                    <div className="services-grid">
-                        {popularServices.map((service) => (
-                            <article
-                                key={service.title}
-                                className="service-card"
-                                style={{ backgroundImage: `url(${service.image})` }}
-                            >
-                                {service.badge && <span className="service-badge">{service.badge}</span>}
-                                <div className="service-overlay" />
-                                <div className="service-content">
-                                    <h3>{service.title}</h3>
-                                    <p>{service.subtitle}</p>
+                    <ScaleLetterHeading 
+                        as="h2" 
+                        className="section-title" 
+                        parts={[
+                            { text: 'Explore ', className: 'text-explore-brown' },
+                            { text: 'Podcast', className: 'text-podcast-red' }
+                        ]} 
+                    />
+                    <div className="services-marquee-wrapper">
+                        {/* Row 1 — scrolling track */}
+                        <div className="services-marquee-row-container">
+                            <div className="services-marquee-track-wrapper">
+                                <div className="services-row services-row-track">
+                                    {[...servicesRow1, ...servicesRow1].map((service, index) => (
+                                        <article
+                                            key={`row1-card-${index}`}
+                                            className={`service-card ${service.image ? '' : 'service-card-no-image'}`}
+                                            style={service.image ? { backgroundImage: `url(${service.image})` } : undefined}
+                                        >
+                                            {service.badge && <span className="service-badge">{service.badge}</span>}
+                                            <div className="service-overlay" />
+                                            <div className="service-content">
+                                                <h3>{service.title}</h3>
+                                                <p>{service.subtitle}</p>
+                                            </div>
+                                        </article>
+                                    ))}
                                 </div>
-                            </article>
-                        ))}
+                            </div>
+                        </div>
+
+                        {/* Row 2 — scrolling track */}
+                        <div className="services-marquee-row-container">
+                            <div className="services-marquee-track-wrapper">
+                                <div className="services-row services-row-track">
+                                    {[...servicesRow2.filter(Boolean), ...servicesRow2.filter(Boolean)].map((service, index) => (
+                                        <article
+                                            key={`row2-card-${index}`}
+                                            className={`service-card ${service.image ? '' : 'service-card-no-image'}`}
+                                            style={service.image ? { backgroundImage: `url(${service.image})` } : undefined}
+                                        >
+                                            {service.badge && <span className="service-badge">{service.badge}</span>}
+                                            <div className="service-overlay" />
+                                            <div className="service-content">
+                                                <h3>{service.title}</h3>
+                                                <p>{service.subtitle}</p>
+                                            </div>
+                                        </article>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -728,41 +806,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ── 7. Pricing ── */}
-            <section className="pricing-section">
-                <div className="container">
-                    <ScaleLetterHeading
-                        as="h2"
-                        className="pricing-title-top section-title section-title--pricing"
-                        text="Simple Pricing"
-                    />
-                    <div className="pricing-grid">
-                        <div className="pricing-card glass-panel">
-                            <h3>Basic Report</h3>
-                            <div className="price">₹499</div>
-                            <ul className="features-list">
-                                <li><FiCheck /> Birth Chart Analysis</li>
-                                <li><FiCheck /> Personality Insights</li>
-                                <li><FiCheck /> Basic Remedies</li>
-                            </ul>
-                            <Link to="/book" className="btn btn-secondary width-full">Choose Basic</Link>
-                        </div>
-                        <div className="pricing-card glass-panel popular">
-                            <div className="popular-tag">Most Popular</div>
-                            <h3>Premium Guidance</h3>
-                            <div className="price">₹999</div>
-                            <ul className="features-list">
-                                <li><FiCheck /> <strong>Everything in Basic</strong></li>
-                                <li><FiCheck /> 5-Year Life Predictions</li>
-                                <li><FiCheck /> Career & Love Analysis</li>
-                                <li><FiCheck /> Detailed Gemstone Report</li>
-                                <li><FiCheck /> Ask 3 Specific Questions</li>
-                            </ul>
-                            <Link to="/book" className="btn btn-primary width-full">Get Premium</Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
 
             {/* ── 8. Final CTA ── */}
             <section className="final-cta-section">
