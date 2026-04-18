@@ -1,14 +1,27 @@
-import heroKundliM from '../assets/heroKundliM.png'
+import janamKundaliHero from '../assets/janamkundali.jpeg'
+import kmBg from '../assets/kmBg.png'
 import ServiceShowcasePage from './ServiceShowcasePage'
 
 const config = {
   variant: 'janam',
+  heroBgImage: kmBg,
   heroBadge: '🕉️ Authentic Birth Chart Guidance',
   heroTitleLine1: 'Discover Your',
   heroTitleHighlight: 'Janam Kundli',
   heroTitleLine2: 'with Vedic Precision',
   heroDesc: 'Decode your birth chart to understand personality, life path, career trends, relationships, and key planetary periods.',
-  heroImage: heroKundliM,
+  heroGlassCard: {
+    image: janamKundaliHero,
+    imageAlt: 'Traditional Janam Kundli birth chart diagram',
+    kicker: '📿 Birth chart focus',
+    title: 'Lagna · Grahas · Bhavas',
+    subtitle: 'A structured map of karma, strengths, and timing — from your exact date, time, and place of birth.',
+    rows: [
+      { label: 'Chart wheel', value: '12 houses & planetary placements' },
+      { label: 'Dasha timeline', value: 'Major & sub-period guidance' },
+      { label: 'Remedial path', value: 'Personalized Vedic corrections' },
+    ],
+  },
   heroStats: [
     { value: '12,000+', label: 'Charts Analyzed' },
     { value: '97%', label: 'Client Satisfaction' },

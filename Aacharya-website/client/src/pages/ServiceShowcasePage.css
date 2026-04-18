@@ -8,6 +8,19 @@
   --ss-services: #faf5ee;
   --ss-guna: #f4ede3;
   --ss-bottom: #fff;
+  /* Wider content + tighter side gutters than global .container */
+  --ss-container-max: 1680px;
+}
+
+.ss-page .container {
+  max-width: min(var(--ss-container-max), 100%);
+  padding-left: clamp(0.65rem, 2vw, 1.35rem);
+  padding-right: clamp(0.65rem, 2vw, 1.35rem);
+  box-sizing: border-box;
+}
+
+.ss-page .km-hero-inner {
+  gap: clamp(1.5rem, 3.2vw, 3rem);
 }
 
 .ss-page .km-hero {
@@ -81,6 +94,155 @@
   --ss-services: #fef6ea;
   --ss-guna: #f9efe2;
   --ss-bottom: #fffaf2;
+}
+
+/* Decorative artwork — right side of Janam Kundli hero (above gradient wash, below copy/card) */
+.ss-page--janam .ss-janam-hero-side-bg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(58vw, 760px);
+  height: min(72vh, 680px);
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.94;
+  filter: saturate(1.02);
+  /* Shift artwork down (below hero headline band) */
+  transform: translateY(5.30rem);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.35) 14%, #000 32%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.35) 14%, #000 32%);
+}
+
+.ss-page--janam .km-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Nudge hero glass card toward center / left on wide layouts */
+@media (min-width: 961px) {
+  .ss-page--janam .ss-hero-visual--glass {
+    justify-content: flex-start;
+    padding-left: clamp(0.25rem, 2vw, 1.25rem);
+    transform: translateX(-clamp(1rem, 3vw, 2.75rem));
+  }
+}
+
+@media (max-width: 960px) {
+  .ss-page--janam .ss-janam-hero-side-bg {
+    width: min(92vw, 520px);
+    height: min(38vh, 320px);
+    opacity: 0.55;
+    transform: translateY(3.25rem);
+  }
+}
+
+/* ── Janam: “Why Janam Kundli Matters” — readable type on card, section harmony, soft motion ── */
+.ss-page--janam .km-guna-section {
+  background:
+    radial-gradient(ellipse 58% 72% at 96% 18%, rgba(109, 23, 51, 0.14) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 45% at 8% 88%, rgba(212, 162, 76, 0.12) 0%, transparent 48%),
+    linear-gradient(180deg, #fdf6ef 0%, var(--ss-guna) 45%, #f3e6d8 100%);
+  padding: clamp(3.75rem, 8vw, 5.75rem) 0;
+}
+
+.ss-page--janam .km-guna-inner {
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+  align-items: stretch;
+}
+
+.ss-page--janam .km-guna-card {
+  border-radius: 22px;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  border: 1px solid rgba(212, 175, 120, 0.38);
+  background: linear-gradient(155deg, #4f1630 0%, #5c1a38 26%, #3d1225 58%, #2a0c1a 100%);
+  box-shadow:
+    0 28px 60px rgba(25, 8, 14, 0.48),
+    0 0 0 1px rgba(255, 240, 220, 0.07) inset,
+    inset 0 1px 0 rgba(255, 240, 220, 0.13);
+  animation: ssJanamGunaShimmer 10s ease-in-out infinite alternate;
+}
+
+.ss-page--janam .km-guna-card::before {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(212, 162, 76, 0.24) 0%, transparent 62%);
+}
+
+.ss-page--janam .km-guna-card::after {
+  background: radial-gradient(circle, rgba(212, 162, 76, 0.16) 0%, transparent 65%);
+}
+
+.ss-page--janam .km-guna-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.35vw, 1.72rem);
+  font-weight: 700;
+  color: #fff9ed;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35), 0 0 36px rgba(212, 162, 76, 0.22);
+}
+
+.ss-page--janam .km-guna-sub {
+  font-size: clamp(0.9rem, 1.25vw, 0.98rem);
+  color: rgba(255, 242, 224, 0.88);
+  line-height: 1.78;
+  margin-bottom: 1.5rem;
+}
+
+.ss-page--janam .km-guna-card .km-modal-benefits li {
+  color: rgba(255, 247, 236, 0.95);
+}
+
+.ss-page--janam .km-guna-card .km-modal-benefits li:hover {
+  color: #fffdf9;
+  border-color: rgba(212, 175, 120, 0.28);
+}
+
+.ss-page--janam .km-guna-card .km-check {
+  background: linear-gradient(135deg, #fff5de 0%, #e8c078 40%, #8b5a2a 100%);
+  color: #3d1520;
+}
+
+.ss-page--janam .km-guna-btn {
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #3a1420 !important;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+}
+
+.ss-page--janam .km-guna-btn:hover {
+  transform: translateY(-2px) scale(1.01) !important;
+  filter: brightness(1.05);
+}
+
+@keyframes ssJanamGunaShimmer {
+  0% {
+    box-shadow:
+      0 28px 60px rgba(25, 8, 14, 0.48),
+      0 0 0 1px rgba(255, 240, 220, 0.07) inset,
+      inset 0 1px 0 rgba(255, 240, 220, 0.13),
+      0 0 28px rgba(212, 162, 76, 0.06);
+  }
+  100% {
+    box-shadow:
+      0 30px 68px rgba(25, 8, 14, 0.52),
+      0 0 0 1px rgba(255, 240, 220, 0.1) inset,
+      inset 0 1px 0 rgba(255, 240, 220, 0.17),
+      0 0 52px rgba(212, 162, 76, 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-page--janam .km-guna-card {
+    animation: none;
+  }
 }
 
 .ss-page--vastu {
@@ -288,5 +450,160 @@
 
   .ss-process-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Janam Kundli hero: floating glass card (replaces hero image) */
+.ss-hero-visual--glass {
+  margin-right: 0;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 0.5rem 0 1rem;
+}
+
+.ss-hero-glass-card {
+  position: relative;
+  width: min(100%, 400px);
+  padding: 1.35rem 1.35rem 1.2rem;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--ss-accent) 42%, rgba(255, 255, 255, 0.65));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, #ffffff 72%, transparent) 0%,
+    color-mix(in srgb, var(--ss-accent) 8%, rgba(255, 255, 255, 0.45)) 100%
+  );
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow:
+    0 22px 48px color-mix(in srgb, var(--ss-accent-2) 18%, transparent),
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset;
+  overflow: hidden;
+  animation: ssHeroGlassFloat 6s ease-in-out infinite;
+}
+
+.ss-hero-glass-card__glow {
+  position: absolute;
+  inset: -40% -20%;
+  background: radial-gradient(
+    ellipse 70% 55% at 30% 20%,
+    color-mix(in srgb, var(--ss-accent) 35%, transparent),
+    transparent 62%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ss-hero-glass-card__media {
+  position: relative;
+  z-index: 1;
+  margin: -0.25rem -0.35rem 0.85rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ss-accent-2) 12%, rgba(255, 255, 255, 0.5));
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--ss-accent-2) 12%, transparent);
+}
+
+.ss-hero-glass-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(220px, 38vh);
+  object-fit: contain;
+  object-position: center;
+}
+
+.ss-hero-glass-card__kicker,
+.ss-hero-glass-card__title,
+.ss-hero-glass-card__sub,
+.ss-hero-glass-card__rows {
+  position: relative;
+  z-index: 1;
+}
+
+.ss-hero-glass-card__kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ss-accent-2) 78%, #5c4a3d);
+}
+
+.ss-hero-glass-card__title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+  line-height: 1.25;
+  color: color-mix(in srgb, var(--ss-accent-2) 92%, #1a1a1a);
+}
+
+.ss-hero-glass-card__sub {
+  margin: 0 0 1rem;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ss-accent-2) 58%, #6b5c52);
+}
+
+.ss-hero-glass-card__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ss-hero-glass-card__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid color-mix(in srgb, var(--ss-accent-2) 10%, transparent);
+}
+
+.ss-hero-glass-card__label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ss-accent-2) 70%, #6f6f6f);
+  flex: 0 0 auto;
+}
+
+.ss-hero-glass-card__value {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-align: right;
+  color: #4a3d34;
+  font-weight: 600;
+}
+
+@keyframes ssHeroGlassFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-hero-glass-card {
+    animation: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .ss-hero-visual--glass {
+    width: 100%;
+    max-width: min(400px, 100%);
+    margin-left: auto;
+    margin-right: auto;
   }
 }

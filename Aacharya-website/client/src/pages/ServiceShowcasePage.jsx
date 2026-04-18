@@ -183,6 +183,13 @@ export default function ServiceShowcasePage({ config }) {
       {activeModal && <ServiceModal service={activeModal} onClose={() => setActiveModal(null)} />}
 
       <section className="km-hero">
+        {config.heroBgImage && (
+          <div
+            className="ss-janam-hero-side-bg"
+            aria-hidden="true"
+            style={{ backgroundImage: `url(${config.heroBgImage})` }}
+          />
+        )}
         <div className="container km-hero-inner">
           <div className="km-hero-text">
             <div className="km-hero-badge">{config.heroBadge}</div>
@@ -204,8 +211,41 @@ export default function ServiceShowcasePage({ config }) {
             </div>
           </div>
 
-          <div className="km-hero-visual" aria-hidden="true">
-            <img src={config.heroImage} alt="" className="km-hero-kundli-img" width={960} height={960} decoding="async" />
+          <div
+            className={`km-hero-visual ${config.heroGlassCard ? 'ss-hero-visual--glass' : ''}`}
+            aria-hidden={config.heroGlassCard ? undefined : true}
+          >
+            {config.heroImage && (
+              <img src={config.heroImage} alt="" className="km-hero-kundli-img" width={960} height={960} decoding="async" />
+            )}
+            {!config.heroImage && config.heroGlassCard && (
+              <div className="ss-hero-glass-card">
+                <span className="ss-hero-glass-card__glow" aria-hidden="true" />
+                {config.heroGlassCard.image && (
+                  <div className="ss-hero-glass-card__media">
+                    <img
+                      src={config.heroGlassCard.image}
+                      alt={config.heroGlassCard.imageAlt || ''}
+                      className="ss-hero-glass-card__img"
+                      width={800}
+                      height={600}
+                      decoding="async"
+                    />
+                  </div>
+                )}
+                <p className="ss-hero-glass-card__kicker">{config.heroGlassCard.kicker}</p>
+                <h3 className="ss-hero-glass-card__title">{config.heroGlassCard.title}</h3>
+                <p className="ss-hero-glass-card__sub">{config.heroGlassCard.subtitle}</p>
+                <ul className="ss-hero-glass-card__rows">
+                  {config.heroGlassCard.rows.map((row) => (
+                    <li key={row.label} className="ss-hero-glass-card__row">
+                      <span className="ss-hero-glass-card__label">{row.label}</span>
+                      <span className="ss-hero-glass-card__value">{row.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </section>

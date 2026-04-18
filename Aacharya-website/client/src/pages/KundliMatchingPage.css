@@ -645,6 +645,40 @@
   z-index: 1;
 }
 
+/* Highlight points inside dark guna card (ServiceShowcase “Why … Matters”) */
+.km-guna-card .km-modal-benefits {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1.35rem;
+  padding: 0;
+}
+
+.km-guna-card .km-modal-benefits li {
+  color: rgba(255, 248, 238, 0.92);
+  font-size: 0.91rem;
+  line-height: 1.6;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.km-guna-card .km-modal-benefits li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.km-guna-card .km-modal-benefits li:hover {
+  color: #fffdf8;
+  border-color: rgba(212, 175, 120, 0.22);
+}
+
+.km-guna-card .km-check {
+  background: linear-gradient(135deg, #f4e8c8 0%, #d4af37 42%, #9a6b2e 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
 .km-guna-table {
   width: 100%;
   border-collapse: collapse;
