@@ -50,6 +50,8 @@ import podcastJyotirling from '../assets/podcast_jyotirling.webp'
 import podcastJyotirling2 from '../assets/podcast_jyotirling_2.webp'
 import podcastSamudraManthan from '../assets/podcast_samudra_manthan.webp'
 import podcastGangaChandrama from '../assets/podcast_ganga_chandrama.webp'
+import homeFeaturedMoment1 from '../assets/home_featured_moment_1.png'
+import homeFeaturedMoment2 from '../assets/home_featured_moment_2.png'
 import bestAwardAnchalImg from '../assets/best_award_anchal_munjal.webp'
 import bestAwardHariRawatImg from '../assets/best_award_hari_singh_rawat.webp'
 import bestAwardAtalImg from '../assets/best_award_atal.webp'
@@ -68,19 +70,6 @@ export default function HomePage() {
         { src: marqueeDaisyShah, alt: 'Daisy Shah' },
         { src: marqueeBhagyashree, alt: 'Bhagyashree' },
         { src: marqueeAnchalMunjal, alt: 'Anchal Munjal' },
-    ]
-
-    const proofItems = [
-        { image: ajaiBhambiImg, caption: 'With Industry CEOs at Global Leadership Summit' },
-        { image: deepakKapoorImg, caption: 'Invited Speaker at National Governance Forum' },
-        { image: gdVashistImg, caption: 'Awarded Best Astrologer 2023 (Public Recognition)' },
-        { image: hemantBaruaImg, caption: 'Private Strategy Session with Startup Founders' },
-        { image: induPrakashImg, caption: 'VIP Consultation Circle for Policy Advisors' },
-        { image: knRaoImg, caption: 'Mentoring Next-Gen Business Leaders' },
-        { image: premSharmaImg, caption: 'Exclusive Wealth Guidance Roundtable' },
-        { image: sandeepKocharImg, caption: 'Invited Address at Entrepreneurship Conclave' },
-        { image: sanjayJumaaniImg, caption: 'Featured Guest at Premium Investor Event' },
-        { image: sohiniShastriImg, caption: 'High-Profile Consultation Panel Appearance' },
     ]
 
     const servicesRow1 = [
@@ -148,6 +137,36 @@ export default function HomePage() {
             title: 'Ganga aur Chandrama',
             subtitle: 'Jyotish Rahasya',
             image: podcastGangaChandrama,
+        },
+    ]
+
+    const featuredMoments = [
+        {
+            id: 'entrepreneurs',
+            image: homeFeaturedMoment1,
+            alt: "Dr. Kunwar Harshit Rajveer with top entrepreneurs",
+            title: "Trusted by India's Top Entrepreneurs",
+            summary:
+                'Guided founders and investors on expansion timing, partnerships, and key financial decisions through practical Vedic intelligence.',
+            badge: 'Leadership Guidance',
+        },
+        {
+            id: 'policy-forums',
+            image: homeFeaturedMoment2,
+            alt: 'Dr. Kunwar Harshit Rajveer at a policy and public forum',
+            title: 'Invited on Public and Policy Platforms',
+            summary:
+                'Invited to share predictive frameworks and remedial insights in forums where clarity, trust, and responsibility matter most.',
+            badge: 'Public Platform',
+        },
+        {
+            id: 'personalized-outcomes',
+            image: homeFeaturedMoment1,
+            alt: 'Personalized client consultation moment',
+            title: 'Personalized Guidance with Measurable Outcomes',
+            summary:
+                'Every consultation is tailored to individual timelines, helping clients convert uncertainty into structured action plans.',
+            badge: 'Client Impact',
         },
     ]
 
@@ -523,14 +542,6 @@ export default function HomePage() {
                         </div>
                     </div>
 
-                    <div className="proof-grid">
-                        {proofItems.map((item, idx) => (
-                            <div className="proof-item" key={idx}>
-                                <img src={item.image} alt={item.caption} className="proof-image" loading="lazy" decoding="async" />
-                                <p className="proof-caption">{item.caption}</p>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </section>
 
@@ -538,38 +549,28 @@ export default function HomePage() {
             <section className="featured-moments-section">
                 <div className="container">
                     <ScaleLetterHeading as="h2" className="section-title" text="Featured Moments" />
-
-                    <div className="featured-story-row">
-                        <img src={deepakKapoorImg} alt="Trusted by top entrepreneurs" className="featured-story-image" loading="lazy" decoding="async" />
-                        <div className="featured-story-content">
-                            <h3>Trusted by India&apos;s Top Entrepreneurs</h3>
-                            <p>
-                                Guided founders and investors on expansion timing, partnerships, and key financial decisions
-                                through practical Vedic intelligence.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="featured-story-row reverse">
-                        <img src={sandeepKocharImg} alt="Government and public platform presence" className="featured-story-image" loading="lazy" decoding="async" />
-                        <div className="featured-story-content">
-                            <h3>Invited on Public and Policy Platforms</h3>
-                            <p>
-                                Invited to share predictive frameworks and remedial insights in forums where clarity,
-                                trust, and responsibility matter most.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="featured-story-row">
-                        <img src={knRaoImg} alt="Personalized guidance stories" className="featured-story-image" loading="lazy" decoding="async" />
-                        <div className="featured-story-content">
-                            <h3>Personalized Guidance with Measurable Outcomes</h3>
-                            <p>
-                                Every consultation is tailored to individual timelines, helping clients convert uncertainty
-                                into structured action plans.
-                            </p>
-                        </div>
+                    <div className="featured-story-list">
+                        {featuredMoments.map((moment, index) => (
+                            <article
+                                key={moment.id}
+                                className={`featured-story-row ${moment.id === 'policy-forums' ? 'featured-story-row--image-right' : (index % 2 === 1 ? 'reverse' : '')}`}
+                            >
+                                <div className="featured-story-media-card">
+                                    <img
+                                        src={moment.image}
+                                        alt={moment.alt}
+                                        className="featured-story-image"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </div>
+                                <div className="featured-story-content">
+                                    <span className="featured-story-badge">{moment.badge}</span>
+                                    <h3>{moment.title}</h3>
+                                    <p>{moment.summary}</p>
+                                </div>
+                            </article>
+                        ))}
                     </div>
                 </div>
             </section>
