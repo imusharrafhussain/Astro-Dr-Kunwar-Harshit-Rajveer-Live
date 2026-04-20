@@ -7,9 +7,17 @@
     "server:dev": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
-    "install:all": "cd server && npm install && cd ../client && npm install"
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "optimize:images": "node scripts/optimize-assets.mjs",
+    "optimize:video": "node scripts/compress-video.mjs",
+    "optimize:assets": "npm run optimize:images && npm run optimize:video"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "ioredis": "^5.10.1",
+    "sharp": "^0.34.5"
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiSend, FiX, FiRefreshCw } from 'react-icons/fi';
 import '../App.css';
-import chatbotBg from '../assets/chatbot_bg.png';
+import chatbotBg from '../assets/chatbot_bg.webp';
 
 const ChatInterface = ({ isWidget = false, onClose }) => {
     const initialWelcomeText = 'Namaste! I am AI Baba. How can I guide you today?';

@@ -7,7 +7,9 @@ const reportSchema = new mongoose.Schema({
     reportType: {
         type: String,
         required: true,
-        enum: ['Life Journey', 'Career Forecast', 'Marriage Compatibility', 'Annual Prediction', 'Gemstone Recommendation', 'Kundli Analysis'],
+        // Frontend sends values like "Love Report", "Life Journey Report", etc.
+        // Keeping this open avoids enum mismatches when new report types are added.
+        trim: true,
     },
     dateOfBirth: { type: Date, required: true },
     birthTime: { type: String, required: true },

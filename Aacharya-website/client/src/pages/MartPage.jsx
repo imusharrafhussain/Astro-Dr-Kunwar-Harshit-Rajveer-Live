@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import '../App.css';
 import rubyImg from '../assets/ruby_stone.webp';
 import rudrakshaImg from '../assets/rudraksha_mala.webp';
-import pyramidImg from '../assets/crystal_pyramid.jpg';
-import sapphireImg from '../assets/blue_sapphire.jpg';
-import ganeshImg from '../assets/ganesh_idol.jpg';
+import pyramidImg from '../assets/crystal_pyramid.webp';
+import sapphireImg from '../assets/blue_sapphire.webp';
+import ganeshImg from '../assets/ganesh_idol.webp';
 import incenseImg from '../assets/sandalwood_incense.webp';
 import ComingSoonModal from '../components/ui/ComingSoonModal';
 

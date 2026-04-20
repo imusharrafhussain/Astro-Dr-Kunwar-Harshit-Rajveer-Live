@@ -1,11 +1,11 @@
-import loveReportImg from '../assets/lovereport.png'
-import lifeJourneyImg from '../assets/lifejourney.png'
+import loveReportImg from '../assets/lovereport.webp'
+import lifeJourneyImg from '../assets/lifejourney.webp'
 import numberAnalysisImg from '../assets/numberanalysis.png'
-import govtJobImg from '../assets/govtjob.png'
-import lifeChangingReportImg from '../assets/lifechangingreport.png'
-import wealthReportImg from '../assets/wealth&report.png'
-import kundaliMatchingImg from '../assets/kundlimatching report.png'
-import mahaComboImg from '../assets/maha combo.png'
+import govtJobImg from '../assets/govtjob.webp'
+import lifeChangingReportImg from '../assets/lifechangingreport.webp'
+import wealthReportImg from '../assets/wealth&report.webp'
+import kundaliMatchingImg from '../assets/kundlimatching report.webp'
+import mahaComboImg from '../assets/maha combo.webp'
 
 export const REPORTS_CATALOG = [
     {

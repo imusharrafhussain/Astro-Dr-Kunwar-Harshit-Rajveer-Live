@@ -1,19 +1,32 @@
-import heroKundliM from '../assets/heroKundliM.png'
+import faceHeroImage from '../assets/facereadingBg.png'
+import testimonialImg1 from '../assets/p1.png'
+import testimonialImg2 from '../assets/p2.png'
+import testimonialImg3 from '../assets/P3.png'
 import ServiceShowcasePage from './ServiceShowcasePage'
 
 const config = {
   variant: 'face',
   heroBadge: '🧠 Face Reading Insights',
-  heroTitleLine1: 'Decode Character',
+  heroTitleLine1: 'Decode Character - ',
   heroTitleHighlight: 'Face Reading',
   heroTitleLine2: 'with Ancient Wisdom',
   heroDesc: 'Understand personality tendencies, behavioral patterns, and opportunity indicators by analyzing facial structure and expressions.',
-  heroImage: heroKundliM,
+  heroImage: faceHeroImage,
   heroStats: [
-    { value: '7,500+', label: 'Profiles Read' },
-    { value: '94%', label: 'Helpful Insights' },
-    { value: '14+ Yrs', label: 'Face Reading Experience' },
+    { value: '5,500+', label: 'Profiles Read' },
+    { value: '100%', label: 'Helpful Insights' },
+    { value: '15+ Yrs', label: 'Face Reading Experience' },
   ],
+  heroBenefits: {
+    title: 'Benefits of Face Reading',
+    items: [
+      { emoji: '🎯', text: 'Clarity on strengths & blind spots' },
+      { emoji: '🧠', text: 'Better decision-making patterns' },
+      { emoji: '📈', text: 'Career direction & leadership fit' },
+      { emoji: '💞', text: 'Relationship communication insights' },
+      { emoji: '🛡️', text: 'Stress triggers & emotional tendencies' },
+    ],
+  },
   servicesTitle: 'Explore Our Face Reading Services',
   formDefaultService: 'Complete Face Profile Reading',
   highlightTitle: 'What Face Reading Tells You',
@@ -107,9 +120,9 @@ const config = {
     { q: 'How should I prepare for a face reading consultation?', a: 'Keep your key concerns ready and provide clear profile details for a focused reading.' },
   ],
   testimonials: [
-    { name: 'Ishita R', rating: 5, text: 'Face reading explained my behavior patterns perfectly.', avatar: 'https://i.pravatar.cc/80?img=20' },
-    { name: 'Dev P', rating: 5, text: 'Clear career insights and practical steps to improve.', avatar: 'https://i.pravatar.cc/80?img=34' },
-    { name: 'Mona K', rating: 5, text: 'Very unique and helpful consultation style.', avatar: 'https://i.pravatar.cc/80?img=40' },
+    { name: 'Ishita R', rating: 5, text: 'Face reading explained my behavior patterns perfectly.', avatar: testimonialImg1 },
+    { name: 'Dev P', rating: 5, text: 'Clear career insights and practical steps to improve.', avatar: testimonialImg2 },
+    { name: 'Mona K', rating: 5, text: 'Very unique and helpful consultation style.', avatar: testimonialImg3 },
   ],
   trustPoints: [
     { icon: '🔍', title: 'Structured Analysis', desc: 'Systematic facial zone reading with practical interpretation.' },

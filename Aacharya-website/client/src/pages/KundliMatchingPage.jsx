@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../api/axios'
-import heroKundliM from '../assets/heroKundliM.png'
+import heroKundliM from '../assets/heroKundliM.webp'
 import './KundliMatchingPage.css'
 
 /* ═══════════════════════════════════════════════

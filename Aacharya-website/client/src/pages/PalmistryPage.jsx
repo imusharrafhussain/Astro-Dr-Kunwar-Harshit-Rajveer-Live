@@ -1,4 +1,3 @@
-import heroKundliM from '../assets/heroKundliM.png'
 import ServiceShowcasePage from './ServiceShowcasePage'
 
 const config = {
@@ -8,12 +7,21 @@ const config = {
   heroTitleHighlight: 'Palmistry',
   heroTitleLine2: 'through Hand Lines',
   heroDesc: 'Understand your personality, career potential, relationships, and life events through a detailed palm reading session.',
-  heroImage: heroKundliM,
   heroStats: [
     { value: '9,000+', label: 'Hand Readings' },
     { value: '95%', label: 'Accuracy Rated' },
     { value: '15+ Yrs', label: 'Palmistry Expertise' },
   ],
+  heroBenefits: {
+    title: 'Benefits of Palmistry',
+    items: [
+      { emoji: '💓', text: 'Heart Line - emotions, love style, relationship depth' },
+      { emoji: '🧠', text: 'Head Line - mindset, intellect, decision quality' },
+      { emoji: '🌿', text: 'Life Line - vitality, resilience, life momentum' },
+      { emoji: '💼', text: 'Fate Line - career path, work stability, direction' },
+      { emoji: '✨', text: 'Sun Line - recognition, success, creative potential' },
+    ],
+  },
   servicesTitle: 'Explore Our Palmistry Services',
   formDefaultService: 'Complete Palm Reading',
   highlightTitle: 'What Palmistry Reveals',

@@ -1,6 +1,5 @@
-import heroKundliM from '../assets/heroKundliM.png'
 import ServiceShowcasePage from './ServiceShowcasePage'
-import vastuBg from '../assets/vastuB.png'
+import vastuBg from '../assets/vastupageBg.png'
 
 const config = {
   variant: 'vastu',

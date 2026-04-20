@@ -158,7 +158,15 @@ export default function ServiceShowcasePage({ config }) {
   }
 
   const durationOptions = useMemo(
-    () => ['all', ...Array.from(new Set(config.services.map((s) => s.duration)))],
+    () => {
+      const uniqueDurations = Array.from(new Set(config.services.map((s) => s.duration)))
+      const toMinutes = (value) => {
+        const match = value.match(/\d+/)
+        return match ? Number(match[0]) : Number.MAX_SAFE_INTEGER
+      }
+      uniqueDurations.sort((a, b) => toMinutes(a) - toMinutes(b) || a.localeCompare(b))
+      return ['all', ...uniqueDurations]
+    },
     [config.services]
   )
 
@@ -185,7 +193,7 @@ export default function ServiceShowcasePage({ config }) {
       <section className="km-hero">
         {config.heroBgImage && (
           <div
-            className="ss-janam-hero-side-bg"
+            className="ss-hero-side-bg"
             aria-hidden="true"
             style={{ backgroundImage: `url(${config.heroBgImage})` }}
           />
@@ -210,6 +218,24 @@ export default function ServiceShowcasePage({ config }) {
               <Link to="/contact" className="km-btn-outline">Consult Astrologer</Link>
             </div>
           </div>
+
+          {config.heroBenefits?.items?.length ? (
+            <div className="ss-hero-benefits">
+              {config.heroBenefits.title ? <p className="ss-hero-benefits__title">{config.heroBenefits.title}</p> : null}
+              <div className="ss-hero-benefits__list">
+                {config.heroBenefits.items.map((item, idx) => {
+                  const text = typeof item === 'string' ? item : item.text
+                  const emoji = typeof item === 'string' ? '✨' : item.emoji || '✨'
+                  return (
+                    <span key={`${text}-${idx}`} className="ss-hero-benefits__tag">
+                      <span aria-hidden="true">{emoji}</span>
+                      <span>{text}</span>
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          ) : null}
 
           <div
             className={`km-hero-visual ${config.heroGlassCard ? 'ss-hero-visual--glass' : ''}`}

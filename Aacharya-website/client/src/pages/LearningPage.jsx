@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import '../App.css';
-import vedicImg from '../assets/vedic_astrology_course.png';
-import nakshatraImg from '../assets/nakshatras_course.png';
-import tarotImg from '../assets/tarot_course.png';
-import palmistryImg from '../assets/palmistry_course.png';
+import vedicImg from '../assets/vedic_astrology_course.webp';
+import nakshatraImg from '../assets/nakshatras_course.webp';
+import tarotImg from '../assets/tarot_course.webp';
+import palmistryImg from '../assets/palmistry_course.webp';
 import vastuImg from '../assets/vastu_course.webp';
-import numerologyImg from '../assets/numerology_course.jpg';
+import numerologyImg from '../assets/numerology_course.webp';
 import ComingSoonModal from '../components/ui/ComingSoonModal';
 
 const LearningPage = () => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ChatInterface from './ChatInterface';
 import chatbotIdle from '../assets/chatbot_idle.webp';
 import chatbotActive from '../assets/chatbot_active.webp';
-import chatbotBg from '../assets/chatbot_bg.png';
+import chatbotBg from '../assets/chatbot_bg.webp';
 
 // Button area height (img 80px + label ~20px + gap ~10px + margin ~10px)
 const BTN_AREA = 120;
