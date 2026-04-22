@@ -318,21 +318,10 @@
         display: block;
     }
 
-    .header-bottom {
-        position: fixed;
-        top: 70px;
-        /* Below top bar */
-        left: -100%;
-        width: 80%;
-        height: 100vh;
-        background: #5D1916;
-        padding: 2rem;
-        transition: left 0.3s ease;
-        z-index: 999;
-    }
-
+    /* Old full-panel mobile drawer — replaced by compact hamburger dropdown */
+    .header-bottom,
     .header-bottom.active {
-        left: 0;
+        display: none !important;
     }
 
     .main-nav {
@@ -565,4 +554,383 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ── Mobile Navbar fixes (≤767px) — do NOT touch tablet or desktop ── */
+@media (max-width: 767px) {
+    .app-header {
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .header-top {
+        padding: 0.35rem 0;
+    }
+
+    .header-top-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0.75rem !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        overflow: hidden;
+    }
+
+    /* Keep brand name on ONE line — use a small enough font */
+    .brand-name {
+        font-size: clamp(0.72rem, 3.8vw, 0.95rem) !important;
+        white-space: nowrap !important;   /* critical — prevents 4-line wrap */
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        max-width: 58vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .logo-brand {
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 60vw;
+    }
+
+}
+
+/* ════════════════════════════════════════════
+   Compact Hamburger Dropdown
+   Visible only on tablet/mobile (≤ 1199px)
+   Anchored to top-right; width = longest item
+   Height = auto (number of items × row-height)
+   ════════════════════════════════════════════ */
+
+/* Base — hidden on ALL screen sizes */
+.hamburger-menu {
+    display: none;
+    position: absolute;              /* relative to .app-header */
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+
+    /* ── Glassmorphism ── */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(4px) saturate(180%);
+    -webkit-backdrop-filter: blur(4px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top: none;                /* flush to header */
+    box-shadow:
+        6px 12px 32px rgba(0, 0, 0, 0.22),
+        0 1px 0 rgba(255, 255, 255, 0.5) inset;
+
+    padding: 0.3rem 0;
+    z-index: 998;
+    border-radius: 0 0 16px 0;
+    min-width: max-content;
+    max-width: 92vw;
+
+    /* ── Scrollable with invisible scrollbar ── */
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;        /* IE / Edge */
+}
+
+/* Hide WebKit scrollbar track + thumb */
+.hamburger-menu::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mobile / Tablet — show when open */
+@media (max-width: 1199px) {
+    .hamburger-menu.open {
+        display: flex;
+        animation: hamburgerSlideIn 0.2s ease;
+    }
+
+    /* Hide the desktop nav links — already in the hamburger */
+    .top-nav-items {
+        display: none !important;
+    }
+}
+
+@keyframes hamburgerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Individual menu rows */
+.hamburger-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.72rem 1.6rem;
+    color: rgba(30, 20, 20, 0.88);          /* dark text on glass */
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(180, 160, 160, 0.20);
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    line-height: 1.4;
+    transition: background 0.25s ease, color 0.25s ease, padding-left 0.18s ease, backdrop-filter 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    
+    /* ── Layered glass for individual fields ── */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.05); /* very subtle tint */
+}
+
+/* ── Reflection animation on hover/active ── */
+.hamburger-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hamburger-link:hover::after,
+.hamburger-link.active::after {
+    animation: reflectionGlare 0.75s ease-in-out forwards;
+}
+
+@keyframes reflectionGlare {
+    0% { left: -100%; }
+    100% { left: 150%; }
+}
+
+.hamburger-link:last-child {
+    border-bottom: none;
+}
+
+.hamburger-link:hover {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px) brightness(1.1);
+    color: #5D1916;
+    padding-left: 2rem;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.hamburger-link.active {
+    color: #8B1A10;
+    background: rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(6px) brightness(1.1);
+    font-weight: 600;
+}
+
+/* ── Hamburger Accordion (Services / Horoscope) ── */
+
+/* Wrapper holds the trigger button + the submenu */
+.hamburger-accordion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(180, 160, 160, 0.20);
+}
+
+/* The trigger button row */
+.hamburger-accordion-btn {
+    justify-content: space-between !important;
+    border-bottom: none !important;
+    width: 100%;
+}
+
+/* Chevron icon — rotates when open */
+.hamburger-chevron {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    transition: transform 0.22s ease;
+    opacity: 0.55;
+    color: #5D1916;
+}
+
+.hamburger-chevron.rotated {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* Slightly darker inset panel for sub-items */
+.hamburger-submenu {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.18);
+    animation: submenuSlideDown 0.18s ease;
+}
+
+@keyframes submenuSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Individual sub-links (indented) */
+.hamburger-sublink {
+    display: flex;
+    align-items: center;
+    padding: 0.58rem 1.6rem 0.58rem 2.6rem;   /* extra left indent vs parent */
+    color: rgba(30, 20, 20, 0.85);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(180, 160, 160, 0.15);
+    transition: background 0.15s ease, color 0.15s ease, padding-left 0.18s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.hamburger-sublink:last-child {
+    border-bottom: none;
+}
+
+/* Sub-link reflection glare */
+.hamburger-sublink::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hamburger-sublink:hover::after,
+.hamburger-sublink.active::after {
+    animation: reflectionGlare 0.75s ease-in-out forwards;
+}
+
+.hamburger-sublink::before {
+    content: '›';
+    margin-right: 0.45rem;
+    opacity: 0.5;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.hamburger-sublink:hover {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px) brightness(1.1);
+    color: #5D1916;
+    padding-left: 3rem;
+}
+
+.hamburger-sublink:hover::before {
+    opacity: 1;
+}
+
+.hamburger-sublink.active {
+    color: #8B1A10;
+    font-weight: 600;
+    background: rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(6px) brightness(1.1);
+}
+
+/* ══════════════════════════════════════════════════════
+   Inline Hamburger Mega Grid
+   Shows inside the hamburger dropdown (NOT full-screen).
+   Width = exactly 2 card columns.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Back button (top of card-grid view) ── */
+.hamburger-mega-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0.65rem 1.1rem;
+    background: rgba(93, 25, 22, 0.08);
+    border: none;
+    border-bottom: 1px solid rgba(180, 160, 160, 0.20);
+    color: rgba(30, 20, 20, 0.85);
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: var(--font-body, sans-serif);
+    cursor: pointer;
+    text-align: left;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+}
+.hamburger-mega-back-btn:hover {
+    background: rgba(93, 25, 22, 0.15);
+    color: #5D1916;
+}
+
+/* ── 2-column card grid ── */
+.hamburger-mega-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 148px);   /* exactly 2 cards wide */
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* ── Individual card ── */
+.hamburger-mega-card {
+    display: flex;
+    flex-direction: column;
+    width: 148px;
+    min-width: 148px;
+    text-decoration: none;
+    border: 1.5px solid rgba(212, 175, 55, 0.55);
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+}
+.hamburger-mega-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold-primary, #D4AF37);
+    box-shadow: 0 4px 14px rgba(93, 25, 22, 0.22);
+}
+
+/* ── Card thumbnail ── */
+.hamburger-mega-img {
+    width: 100%;
+    height: 88px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+}
+.hamburger-mega-card:hover .hamburger-mega-img {
+    transform: scale(1.04);
+}
+
+/* ── Card label ── */
+.hamburger-mega-card-text {
+    padding: 0.38rem 0.45rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #5D1916;
+    font-family: var(--font-body, sans-serif);
+    line-height: 1.25;
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
 }

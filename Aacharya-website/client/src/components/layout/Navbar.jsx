@@ -22,7 +22,10 @@ export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [showComingSoon, setShowComingSoon] = useState(false)
     const [isServicesOpen, setIsServicesOpen] = useState(false)
+    const [hamburgerView, setHamburgerView] = useState('main') // 'main' | 'services' | 'horoscope'
     const servicesButtonRef = useRef(null)
+    const hamburgerMenuRef = useRef(null)
+    const hamburgerToggleRef = useRef(null)
     const location = useLocation()
     const { user, logout } = useAuth() || {}; // Handle potential null context if used outside provider (though unlikely here)
     const isServicesRoute = location.pathname === '/services' || location.pathname.startsWith('/services/')
@@ -49,6 +52,28 @@ export default function Navbar() {
     useEffect(() => {
         setIsServicesOpen(false)
     }, [location.pathname, location.search])
+
+    // Reset inline mega view when hamburger closes
+    useEffect(() => {
+        if (!isOpen) setHamburgerView('main')
+    }, [isOpen])
+
+    // Close hamburger when clicking outside
+    useEffect(() => {
+        if (!isOpen) return
+        const handleOutsideClick = (e) => {
+            if (
+                hamburgerMenuRef.current &&
+                !hamburgerMenuRef.current.contains(e.target) &&
+                hamburgerToggleRef.current &&
+                !hamburgerToggleRef.current.contains(e.target)
+            ) {
+                setIsOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleOutsideClick)
+        return () => document.removeEventListener('mousedown', handleOutsideClick)
+    }, [isOpen])
 
     const servicesMegaItems = [
         {
@@ -197,7 +222,13 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile Toggle */}
-                    <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
+                    <div
+                        ref={hamburgerToggleRef}
+                        className="navbar-toggle"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle navigation menu"
+                        aria-expanded={isOpen}
+                    >
                         {isOpen ? <FiX /> : <FiMenu />}
                     </div>
                 </div>
@@ -237,6 +268,67 @@ export default function Navbar() {
                         )}
                     </div>
                 </nav>
+            </div>
+            {/* ── Compact Hamburger Dropdown — Mobile / Tablet only ── */}
+            <div ref={hamburgerMenuRef} className={`hamburger-menu${isOpen ? ' open' : ''}`}>
+
+                {hamburgerView === 'main' ? (
+                    /* ── Main menu list ── */
+                    <>
+                        <button
+                            className="hamburger-link hamburger-accordion-btn"
+                            onClick={() => setHamburgerView('services')}
+                        >
+                            <span>Services</span>
+                            <FiChevronDown className="hamburger-chevron" />
+                        </button>
+                        <button
+                            className="hamburger-link hamburger-accordion-btn"
+                            onClick={() => setHamburgerView('horoscope')}
+                        >
+                            <span>Horoscope</span>
+                            <FiChevronDown className="hamburger-chevron" />
+                        </button>
+                        <NavLink to="/panchang" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Daily Panchang</NavLink>
+                        <NavLink to="/numerology" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Numerology</NavLink>
+                        <NavLink to="/reports" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Reports</NavLink>
+                        <NavLink to="/blog" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Blog</NavLink>
+                        <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiPhone /> Talk to AstroHarshit Ji</button>
+                        <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiVideo /> Get Live Consultation</button>
+                        <NavLink to="/contact" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Contact Us</NavLink>
+                        {user ? (
+                            <button className="hamburger-link" onClick={() => { logout(); setIsOpen(false) }}><FiUser /> Logout</button>
+                        ) : (
+                            <NavLink to="/login" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiUser /> Login</NavLink>
+                        )}
+                    </>
+                ) : (
+                    /* ── Inline card-grid view (Services / Horoscope) ── */
+                    <>
+                        {/* Back button */}
+                        <button
+                            className="hamburger-mega-back-btn"
+                            onClick={() => setHamburgerView('main')}
+                        >
+                            &#8592;&nbsp;{hamburgerView === 'services' ? 'Services' : 'Horoscope'}
+                        </button>
+
+                        {/* 2-column card grid — same images as desktop */}
+                        <div className="hamburger-mega-grid">
+                            {(hamburgerView === 'services' ? servicesMegaItems : horoscopeMegaItems).map(item => (
+                                <Link
+                                    key={item.to}
+                                    to={item.to}
+                                    className="hamburger-mega-card"
+                                    onClick={() => { setIsOpen(false); setHamburgerView('main') }}
+                                >
+                                    <img src={item.image} alt={item.title} className="hamburger-mega-img" loading="lazy" decoding="async" />
+                                    <div className="hamburger-mega-card-text">{item.title}</div>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
         </header>
 

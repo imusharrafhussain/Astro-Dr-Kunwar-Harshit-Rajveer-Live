@@ -271,6 +271,11 @@
     line-height: 1.25;
 }
 
+/* ── Mobile-only astrologer image (shown between title and focus block) ── */
+.hero-mobile-visual {
+    display: none; /* hidden on tablet & desktop */
+}
+
 /* ── Authority Wall (reference: uppercase serif titles, sans body, muted gold accents) ── */
 .authority-wall-section {
     --authority-cream: #fef9f3;
@@ -2366,22 +2371,72 @@
     /* Hero: keep 2-column side-by-side layout exactly like desktop */
     .hero-container,
     .hero-container--full {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         text-align: left;
-        gap: 4rem;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    /* Scaling down all hero text/assets for tablet 50% left column */
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+    .hero-solid-title {
+        font-size: clamp(1.7rem, 3.8vw, 2.25rem);
+        margin: 0 0 0.6rem;
+    }
+    .hero-message-lead {
+        font-size: 1.05rem;
+        margin: 0 0 0.6rem;
+    }
+    .hero-message-body {
+        font-size: 0.85rem;
+    }
+    .hero-focus-label, 
+    .hero-focus-item {
+        font-size: 0.85rem;
+    }
+    .hero-authority {
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+    }
+    .hero-proof-face {
+        width: 50px;
+        height: 50px;
+    }
+    .hero-actions {
+        gap: 0.7rem;
+        margin-bottom: 1rem;
+    }
+    .hero-actions .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    .hero-note {
+        font-size: 0.8rem;
+    }
+    .hero-proof-marquee {
+        max-width: 345px;
+    }
+    .hero-right-visual {
+        align-items: flex-start;
+        padding-top: 5rem;
     }
 
     .hero-right-image {
-    width: min(1320px, 180%);
-    max-height: 96vh;
-    height: auto;
-    object-fit: contain;
-    border-radius: 0;
-    box-shadow: none;
-    filter: drop-shadow(0 22px 55px rgba(212, 175, 55, 0.22));
-    -webkit-mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
-    mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
-}
+        width: min(1320px, 260%);
+        max-height: 96vh;
+        height: auto;
+        object-fit: contain;
+        border-radius: 0;
+        box-shadow: none;
+        transform: translateX(-15%);
+        filter: drop-shadow(0 22px 55px rgba(212, 175, 55, 0.22));
+        -webkit-mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
+        mask-image: radial-gradient(circle at 55% 45%, #000 58%, rgba(0,0,0,0) 78%);
+    }
 
     .hero-actions {
         justify-content: flex-start;
@@ -2654,7 +2709,7 @@
 
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
     .featured-moments-section {
         --featured-split: 100%;
     }
@@ -2667,43 +2722,76 @@
         padding-top: 102px;
     }
 
+    /* Show mobile-only image between title and focus block */
+    .hero-mobile-visual {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        margin: 0.5rem 0 0.25rem;
+        overflow: visible;        /* allow image to breathe without clipping */
+    }
+
+    .hero-mobile-image {
+        width: min(420px, 100%);
+        height: auto;
+        max-height: 52vw;
+        object-fit: contain;
+        filter: drop-shadow(0 16px 40px rgba(212, 175, 55, 0.25));
+        -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 60%, rgba(0,0,0,0) 100%);
+        mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 60%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Hide the original right-column image on mobile (mobile-visual above takes its place) */
+    .hero-right-visual {
+        display: none;
+    }
+
+    /* Hero on mobile: stacked */
     .hero-container--full,
-    .hero-container,
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+        align-items: stretch;
+    }
+
+    /* Left-align remaining hero text blocks on mobile only */
+    .hero-content .hero-badge,
+    .hero-content .hero-message,
+    .hero-content .hero-message-lead,
+    .hero-content .hero-message-body,
+    .hero-content .hero-authority {
+        text-align: left;
+        align-self: flex-start;
+    }
+
     .preview-layout {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
     }
 
-    .hero-content {
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
-    .hero-right-visual {
-        min-height: auto;
-        justify-content: center;
-    }
-
-    .hero-right-image {
-        width: min(680px, 92vw);
-        max-height: none;
-        -webkit-mask-image: none;
-        mask-image: none;
-    }
-
     .hero-actions,
     .hero-note {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .hero-focus-block {
-        grid-template-columns: 1fr;
-        justify-items: center;
+        grid-template-columns: auto 1fr;
+        justify-items: start;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
     }
 
     .hero-focus-line {
-        justify-content: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.4rem;
+        overflow: hidden;
     }
 
     .authority-featured-top,
@@ -2755,26 +2843,48 @@
     }
 
     .hero-section {
-        padding-top: 92px;
+        /* header ~56px + 24px breathing room = 80px */
+        padding-top: 80px;
+    }
+
+    /* Badge: ensure it sits fully below the fixed header */
+    .hero-badge {
+        margin-top: 0.25rem;
+        margin-bottom: 1.2rem;
     }
 
     .hero-solid-title {
-        font-size: clamp(1.7rem, 9vw, 2.25rem);
+        font-size: clamp(1.45rem, 7.5vw, 1.9rem);
         line-height: 1.14;
     }
 
     .hero-message-lead {
-        font-size: 1.02rem;
+        font-size: 0.88rem;
     }
 
     .hero-message-body,
     .hero-focus-item {
-        font-size: 0.92rem;
+        font-size: 0.82rem;
+    }
+
+    .hero-focus-label {
+        font-size: 0.82rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .hero-authority {
+        font-size: 0.82rem;
     }
 
     .hero-focus-line {
-        grid-template-columns: 1fr;
-        row-gap: 0.35rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.35rem;
+        overflow: hidden;
         width: 100%;
     }
 
@@ -2830,4 +2940,346 @@
         height: min(300px, 88vw);
     }
 
+}
+
+/* ════════════════════════════════════════════════════
+   MOBILE COMPREHENSIVE FIX (≤767px)
+   Desktop & Tablet views are NOT touched here.
+   ════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+    /* 1. Prevent ALL horizontal overflow site-wide on mobile */
+    .home-page {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    /* 2. All sections: full-width, no side overflow */
+    .home-page section,
+    .home-page .container {
+        max-width: 100% !important;
+        overflow-x: hidden;
+    }
+
+    /* 3. ── AUTHORITY WALL (Chosen by Leaders section) ──
+          The main-panel was a fixed 2-col grid with a 220px min col — collapses it to single column */
+    .authority-main-panel {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* image-wrap: full width, not fixed */
+    .authority-featured-image-wrap {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* trust copy beside: becomes stacked */
+    .authority-featured-content--beside {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        max-width: 100%;
+        padding-top: 0;
+    }
+
+    /* clarify bottom row: full width */
+    .authority-featured-bottom {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        max-width: 100%;
+    }
+
+    /* gallery panel: full width, no min-width */
+    .authority-featured-gallery {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* checklist lines that overflow */
+    .authority-checklist li {
+        font-size: 0.88rem;
+    }
+
+    .authority-callout-keyword {
+        font-size: 1.1em;
+    }
+
+    /* 4. ── SERVICE CARDS (LinearCardGallery) ──
+          Cards were 240px fixed min-width causing side overflow */
+    .linear-card-gallery {
+        --linear-card-max-width: 100% !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 0.6rem !important;
+    }
+
+    .linear-card-gallery__cell {
+        max-width: 100% !important;
+        width: 100%;
+    }
+
+    /* 5. ── BEST AWARD CARDS ── */
+    .best-award-card {
+        grid-template-columns: 1fr !important;
+        flex-direction: column;
+    }
+
+    .best-award-grid {
+        gap: 1.2rem;
+    }
+
+    .best-award-card__image {
+        width: 100%;
+        height: auto;
+        max-height: 220px;
+        object-fit: cover;
+    }
+
+    /* 6. ── HERO SECTION containment ── */
+    .hero-content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .hero-message-lead,
+    .hero-message-body,
+    .hero-authority,
+    .hero-focus-block {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    /* Focus block: same row for label + items, left-aligned */
+    .hero-focus-block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    /* 7. ── PODCAST / SERVICE MARQUEE ──
+          Cards inside the marquee rows can stay their size (scroll is intentional)
+          but service-card-empty was pushing content off */
+    .services-marquee-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* 8. ── MEDIA TAB / BHARAT SHREE / EIA section ── */
+    .media-tab-layout {
+        grid-template-columns: 1fr !important;
+        overflow: hidden;
+    }
+
+    .media-tab-mosaic {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .bharat-top-nameplate {
+        padding: 0.75rem;
+    }
+
+    /* 9. ── PLAIN CONTENT INNER ── */
+    .plain-content-inner {
+        padding: 0 0.75rem !important;
+        overflow: hidden;
+    }
+
+    /* 10. ── EXCLUSIVITY / CTA section ── */
+    .exclusivity-section .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    /* 11. ── EIA SHOWCASE ── */
+    .eia-showcase-inner {
+        flex-direction: column !important;
+        overflow: hidden;
+    }
+
+    .eia-showcase-image {
+        width: 100%;
+        height: auto;
+    }
+
+    /* 12. ── FEATURED MOMENTS: popular-services strip ── */
+    .popular-services-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .popular-service-glass-card {
+        width: calc(50% - 0.5rem);
+        flex-shrink: 0;
+    }
+
+    /* 13. ── PREVIEW / PLAN SECTION ── */
+    .preview-layout {
+        overflow: hidden;
+    }
+
+    /* 14. ── GLOBAL: any grid/flex that might still overflow ── */
+    .home-page * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ...except images which are handled by object-fit */
+    .home-page img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* ── MARQUEE EXEMPTION: the track MUST be wider than the viewport to scroll ──
+       The global max-width:100% rule above breaks this — explicitly undo it here */
+    .hero-proof-marquee-track,
+    .hero-proof-marquee-set {
+        max-width: none !important;   /* allow both sets to sit side-by-side beyond viewport */
+        width: max-content !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* ════════════════════════════════════════════════════
+   MOBILE REFINEMENTS — visual polish (≤767px only)
+   ════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+    /* 1. ── ASTROLOGER HERO IMAGE: full-width on mobile ── */
+    .hero-mobile-image {
+        width: 110vw !important;        /* stretch edge-to-edge */
+        max-height: 110vw !important;   /* keep proportional height */
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        transform: translateX(-8%);     /* compensate for right-heavy zodiac glow */
+    }
+
+    /* 2. ── MARQUEE FACE IMAGES: fix distortion — enforce exact square + crop ── */
+    .hero-proof-face {
+        width: 70px !important;
+        height: 70px !important;
+        flex: 0 0 70px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+        aspect-ratio: 1 / 1 !important;
+        display: block;
+        flex-shrink: 0;
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    .hero-proof-marquee-set {
+        gap: 0.75rem;              /* consistent spacing between images */
+        align-items: center;
+        flex-shrink: 0;            /* never shrink the set itself */
+        padding-inline-end: 0.75rem; /* gap between the two duplicate sets */
+    }
+
+    .hero-proof-marquee-track {
+        align-items: center;
+        gap: 0;                    /* gap lives inside each set, not between sets */
+        flex-wrap: nowrap;         /* never wrap — keep all images on one line */
+    }
+
+    /* Force each face to hold its size — never compress */
+    .hero-proof-marquee-set .hero-proof-face {
+        flex: 0 0 70px !important;
+        width: 70px !important;
+        height: 70px !important;
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    /* 3. ── ZODIAC CIRCULAR GALLERY ── */
+    /* Restore height so text is visible without cropping the main titles */
+    .zodiac-gallery-wrapper .h-\[320px\] {
+        height: 260px !important;
+        min-height: 260px !important;
+    }
+
+    /* Reduce font sizes */
+    .zodiac-gallery-wrapper h2 {
+        font-size: clamp(1.8rem, 6vw, 2.25rem) !important;
+    }
+    .zodiac-gallery-wrapper p.text-lg {
+        font-size: clamp(0.9rem, 3.5vw, 1.125rem) !important;
+    }
+    .zodiac-gallery-wrapper p.text-\[24px\] {
+        font-size: clamp(1.1rem, 4.5vw, 1.5rem) !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Reduce card height without affecting width (150px) */
+    .zodiac-gallery-wrapper .h-\[270px\] {
+        height: 210px !important;
+        margin-top: -105px !important; /* half of 210px to keep it vertically centered */
+    }
+
+
+    /* 4. ── RAHUL GUPTA SHOW IMAGE: bigger ── */
+    .featured-story-row--podcast .featured-story-media-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        aspect-ratio: 16 / 9 !important;
+        margin: 0 0 0.75rem !important;
+    }
+
+    .featured-story-row--podcast .featured-story-image {
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 12px;
+    }
+
+    /* 5. ── SLIDE TABS (Awards nav): smaller text & padding ── */
+    /* The SlideTabs use inline styles; we target the <ul> and <li> via attribute approach */
+    .media-awards-section ul {
+        padding: 4px !important;
+        gap: 2px;
+    }
+
+    .media-awards-section ul li {
+        font-size: clamp(9px, 2.4vw, 11px) !important;
+        padding: 5px 8px !important;
+        max-width: 160px !important;
+        line-height: 1.2;
+    }
+}
+
+/* Extra-small phones (≤420px) — tighter tweaks */
+@media (max-width: 420px) {
+    .hero-mobile-image {
+        width: 175% !important;
+        max-height: 117vw !important;
+    }
+
+    .hero-proof-face {
+        width: 58px !important;
+        height: 58px !important;
+        flex: 0 0 58px !important;
+        min-width: 58px;
+        min-height: 58px;
+    }
+
+    .media-awards-section ul li {
+        font-size: clamp(8px, 2.2vw, 10px) !important;
+        padding: 4px 7px !important;
+        max-width: 140px !important;
+    }
 }

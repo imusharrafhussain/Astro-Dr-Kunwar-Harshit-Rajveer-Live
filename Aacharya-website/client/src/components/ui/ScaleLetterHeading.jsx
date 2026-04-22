@@ -1,18 +1,35 @@
 import { useMemo, useState } from 'react'
 import './ScaleLetterHeading.css'
 
-function lettersFromParts(parts) {
-    const letters = []
+function wordsFromParts(parts) {
+    const words = []
+    let currentWord = []
+    let globalIndex = 0
+
     parts.forEach(({ text, className = '' }) => {
         for (let i = 0; i < text.length; i += 1) {
-            letters.push({ char: text[i], className })
+            const char = text[i]
+            if (char === ' ') {
+                if (currentWord.length > 0) {
+                    words.push(currentWord)
+                    currentWord = []
+                }
+                words.push([{ char: ' ', className, globalIndex }])
+                globalIndex += 1
+            } else {
+                currentWord.push({ char, className, globalIndex })
+                globalIndex += 1
+            }
         }
     })
-    return letters
+    if (currentWord.length > 0) {
+        words.push(currentWord)
+    }
+    return words
 }
 
-function lettersFromText(str) {
-    return str.split('').map((char) => ({ char, className: '' }))
+function wordsFromText(str) {
+    return wordsFromParts([{ text: str, className: '' }])
 }
 
 function getLetterStyle(index, hoveredIndex, variant) {
@@ -78,9 +95,9 @@ export default function ScaleLetterHeading({
     parts,
     variant = 'default',
 }) {
-    const letters = useMemo(() => {
-        if (parts?.length) return lettersFromParts(parts)
-        if (text != null && text !== '') return lettersFromText(String(text))
+    const words = useMemo(() => {
+        if (parts?.length) return wordsFromParts(parts)
+        if (text != null && text !== '') return wordsFromText(String(text))
         return []
     }, [text, parts])
 
@@ -97,16 +114,20 @@ export default function ScaleLetterHeading({
 
     return (
         <Tag className={rootClass} style={style} aria-label={ariaLabel || undefined}>
-            <span className="scale-letter-heading__track" aria-hidden="true">
-                {letters.map((item, index) => (
-                    <span
-                        key={`sl-${index}-${item.className || 'x'}`}
-                        className={`scale-letter-heading__char ${item.className || ''}`.trim()}
-                        style={getLetterStyle(index, hoveredIndex, variant)}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(-1)}
-                    >
-                        {item.char === ' ' ? '\u00A0' : item.char}
+            <span className="scale-letter-heading__track" aria-hidden="true" style={{ display: 'inline-flex', flexWrap: 'wrap' }}>
+                {words.map((word, wIndex) => (
+                    <span key={`word-${wIndex}`} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                        {word.map((item) => (
+                            <span
+                                key={`sl-${item.globalIndex}-${item.className || 'x'}`}
+                                className={`scale-letter-heading__char ${item.className || ''}`.trim()}
+                                style={getLetterStyle(item.globalIndex, hoveredIndex, variant)}
+                                onMouseEnter={() => setHoveredIndex(item.globalIndex)}
+                                onMouseLeave={() => setHoveredIndex(-1)}
+                            >
+                                {item.char === ' ' ? '\u00A0' : item.char}
+                            </span>
+                        ))}
                     </span>
                 ))}
             </span>

@@ -358,6 +358,18 @@ export default function HomePage() {
                                 { text: 'Cosmic Path', className: 'text-gradient' },
                             ]}
                         />
+                        {/* Mobile-only astrologer image — sits between title and focus/message */}
+                        <div className="hero-mobile-visual animate-in" style={{ animationDelay: '0.12s' }} aria-hidden="true">
+                            <img
+                                src={harshitHeroImg}
+                                alt="Dr. Kunwar Harshit Rajveer"
+                                className="hero-mobile-image"
+                                loading="eager"
+                                fetchPriority="high"
+                                decoding="async"
+                                draggable={false}
+                            />
+                        </div>
                         <div className="hero-focus-block animate-in" style={{ animationDelay: '0.15s' }}>
                             <span className="hero-focus-label">Focus:</span>
                             <div className="hero-focus-line" aria-label="Key focus areas">
@@ -428,7 +440,10 @@ export default function HomePage() {
             </section>
 
             {/* ── 1.5 Circular Gallery Section ── */}
-            <CircularGallerySection />
+            <div className="zodiac-gallery-wrapper">
+                <CircularGallerySection />
+            </div>
+
 
             {/* ── 2. Social Proof Wall ── */}
             <section className="authority-wall-section">

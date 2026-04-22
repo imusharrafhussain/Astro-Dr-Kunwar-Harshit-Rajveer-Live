@@ -63,6 +63,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: clip;
 }
 
 body {
@@ -300,6 +301,11 @@ section {
 }
 
 @media (max-width: 767px) {
+  /* ── Mobile header is now a single compact row (~56px) ── */
+  :root {
+    --header-height: 56px;
+  }
+
   .section-title {
     font-size: 1.75rem;
   }
