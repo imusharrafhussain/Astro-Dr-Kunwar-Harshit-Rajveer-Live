@@ -2520,14 +2520,11 @@
     }
 
     .hero-focus-block {
-        justify-content: center;
-        grid-template-columns: 1fr;
+        display: none;
     }
 
     .hero-focus-line {
-        justify-content: center;
-        grid-template-columns: repeat(2, max-content);
-        column-gap: 20px;
+        display: none;
     }
 
     .hero-proof-marquee {
@@ -3087,6 +3084,11 @@
         overflow: hidden;
     }
 
+    .media-tab-mosaic--clean {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 0.5rem;
+    }
+
     .bharat-top-nameplate {
         padding: 0.75rem;
     }
@@ -3101,6 +3103,26 @@
     .exclusivity-section .container {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
+    }
+
+    .cta-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.75rem;
+    }
+
+    .cta-subtitle {
+        font-size: 0.625rem !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .final-cta-section .btn-large {
+        font-size: 0.6rem !important;
+        padding: 0.5rem 1.5rem !important;
+    }
+
+    .cta-guarantee {
+        font-size: 0.45rem !important;
+        margin-top: 0.75rem;
     }
 
     /* 11. ── EIA SHOWCASE ── */
@@ -3146,7 +3168,9 @@
     /* ── MARQUEE EXEMPTION: the track MUST be wider than the viewport to scroll ──
        The global max-width:100% rule above breaks this — explicitly undo it here */
     .hero-proof-marquee-track,
-    .hero-proof-marquee-set {
+    .hero-proof-marquee-set,
+    .services-row,
+    .services-row-track {
         max-width: none !important;   /* allow both sets to sit side-by-side beyond viewport */
         width: max-content !important;
         flex-shrink: 0 !important;
@@ -3158,14 +3182,21 @@
    ════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
-    /* 1. ── ASTROLOGER HERO IMAGE: full-width on mobile ── */
-    .hero-mobile-image {
-        width: 110vw !important;        /* stretch edge-to-edge */
-        max-height: 110vw !important;   /* keep proportional height */
+    .hero-mobile-visual {
+        justify-content: flex-start !important;
+        margin-left: -0.85rem !important; /* Counteract container padding */
+        width: calc(100% + 0.85rem) !important;
+    }
+
+    /* 1. ── ASTROLOGER HERO IMAGE: full-width on mobile, aligned to left ── */
+    .hero-mobile-image,
+    .hero-right-image {
+        width: 125vw !important;        
+        max-height: 125vw !important;   
         object-fit: contain;
         display: block;
-        margin: 0 auto;
-        transform: translateX(-8%);     /* compensate for right-heavy zodiac glow */
+        margin: 0 0 0 -18vw !important; /* pull to the left edge so body touches it */
+        transform: none !important;
     }
 
     /* 2. ── MARQUEE FACE IMAGES: fix distortion — enforce exact square + crop ── */
@@ -3247,7 +3278,12 @@
         border-radius: 12px;
     }
 
-    /* 5. ── SLIDE TABS (Awards nav): smaller text & padding ── */
+    /* 5. ── EXPLORE PODCAST MARQUEE SPEED ── */
+    .services-row-track {
+        animation-duration: 25s !important;
+    }
+
+    /* 6. ── SLIDE TABS (Awards nav): smaller text & padding ── */
     /* The SlideTabs use inline styles; we target the <ul> and <li> via attribute approach */
     .media-awards-section ul {
         padding: 4px !important;
@@ -3281,5 +3317,20 @@
         font-size: clamp(8px, 2.2vw, 10px) !important;
         padding: 4px 7px !important;
         max-width: 140px !important;
+    }
+}
+
+/* ── Force-hide Focus block on ALL mobile widths ── */
+@media (max-width: 767px) {
+    .hero-focus-block,
+    .hero-focus-label,
+    .hero-focus-line,
+    .hero-focus-item {
+        display: none !important;
+    }
+
+    /* Make lead heading 1.5× bolder below astrologer image */
+    .hero-message-lead {
+        font-weight: 900 !important;
     }
 }

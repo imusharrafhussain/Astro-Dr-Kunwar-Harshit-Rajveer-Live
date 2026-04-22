@@ -49,7 +49,7 @@
     radial-gradient(ellipse 60% 80% at 10% 80%, rgba(123, 28, 28, 0.08) 0%, transparent 55%),
     linear-gradient(160deg, #fdf6ee 0%, #fff4e8 45%, #fef2e6 100%);
   /* No bottom padding — hero background ends flush with content so the image can meet the section bottom */
-  padding: 4.5rem 0 0;
+  padding: 0;
   /* allow hero art to bleed flush to viewport right (see .km-hero-visual) */
   overflow-x: clip;
   overflow-y: visible;
@@ -258,6 +258,11 @@
   z-index: 0;
   /* Break out of centered .container to the viewport edge (same math as full-bleed layouts) */
   margin-right: calc(50% - 50vw);
+}
+
+/* Mid-image slot — hidden everywhere; shown only on face reading mobile */
+.km-hero-mid-img {
+  display: none;
 }
 
 .km-hero-kundli-img {
@@ -645,13 +650,39 @@
   z-index: 1;
 }
 
+.km-guna-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.km-guna-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+  /* Custom scrollbar for horizontal scroll */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 160, 82, 0.5) transparent;
+}
+
+.km-guna-table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.km-guna-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(200, 160, 82, 0.5);
+  border-radius: 4px;
+}
+
 .km-guna-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 2rem;
   font-size: 0.88rem;
-  position: relative;
-  z-index: 1;
+  min-width: 500px; /* Ensure it forces scroll on small screens */
 }
 
 .km-guna-table th {
@@ -689,6 +720,23 @@
   background: linear-gradient(135deg, var(--km-gold-light) 0%, var(--km-gold) 100%) !important;
   transform: translateY(-3px) scale(1.02) !important;
   box-shadow: 0 10px 30px rgba(200, 160, 60, 0.45) !important;
+}
+
+/* ── All text inside the dark highlight card should be creamy, not brown ── */
+.km-guna-card .km-guna-title {
+  color: #fef3d8;
+}
+
+.km-guna-card .km-guna-sub {
+  color: rgba(254, 243, 216, 0.85);
+}
+
+.km-guna-card .km-modal-benefits li {
+  color: rgba(254, 243, 216, 0.9);
+}
+
+.km-guna-card .km-modal-benefits li:hover {
+  color: #fff9ee;
 }
 
 /* ── Testimonials ── */
@@ -1042,6 +1090,10 @@
 }
 
 @media (max-width: 960px) {
+  .km-hero {
+    padding-top: 0;
+  }
+
   .km-hero-inner {
     flex-direction: column-reverse;
     align-items: stretch;
@@ -1137,8 +1189,65 @@
     grid-template-columns: 1fr;
   }
 
+  /* Hero text layout */
+  .km-hero-text {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .km-hero-badge {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.72rem;
+  }
+
   .km-hero-title {
-    font-size: 2.1rem;
+    font-size: 2rem;
+    line-height: 1.25;
+    margin-bottom: 0.9rem;
+  }
+
+  .km-hero-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  /* Stats — clean 3-across row */
+  .km-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem 0.25rem;
+    margin-bottom: 1.6rem;
+    justify-items: center;
+  }
+
+  .km-hero-stat {
+    align-items: center;
+  }
+
+  .km-hero-stat-num {
+    font-size: 1.25rem;
+  }
+
+  .km-hero-stat-label {
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  /* Buttons — full width stack */
+  .km-hero-btns {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .km-btn-solid,
+  .km-btn-outline {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 
   .km-form-row {
@@ -1147,6 +1256,11 @@
 
   .km-form-row-split {
     grid-template-columns: 1fr;
+  }
+  
+  .km-guna-inputs {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 

@@ -53,6 +53,7 @@ import bestAwardHariRawatImg from '../assets/best_award_hari_singh_rawat.webp'
 import bestAwardAtalImg from '../assets/best_award_atal.webp'
 import bestAward2024Img from '../assets/best_award_2024.webp'
 import './HomePage.css'
+import HeroFloatingBadges from '../components/ui/HeroFloatingBadges'
 
 const LinearCardGallery = lazy(() => import('../components/ui/LinearCardGallery'))
 const BrillianceAwardsShowcase = lazy(() => import('../components/awards/BrillianceAwardsShowcase'))
@@ -359,7 +360,8 @@ export default function HomePage() {
                             ]}
                         />
                         {/* Mobile-only astrologer image — sits between title and focus/message */}
-                        <div className="hero-mobile-visual animate-in" style={{ animationDelay: '0.12s' }} aria-hidden="true">
+                        <div className="hero-mobile-visual animate-in" style={{ animationDelay: '0.12s', position: 'relative' }} aria-hidden="true">
+                            <HeroFloatingBadges />
                             <img
                                 src={harshitHeroImg}
                                 alt="Dr. Kunwar Harshit Rajveer"

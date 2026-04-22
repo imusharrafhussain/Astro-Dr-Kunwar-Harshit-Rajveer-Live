@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import defaultAvatar from '../assets/default_avatar.png'
 import './KundliMatchingPage.css'
 import './ServiceShowcasePage.css'
 
@@ -204,6 +205,9 @@ export default function ServiceShowcasePage({ config }) {
             <h1 className="km-hero-title">
               {config.heroTitleLine1} <span>{config.heroTitleHighlight}</span><br />{config.heroTitleLine2}
             </h1>
+            {config.heroImage && (
+              <img src={config.heroImage} alt="" className="km-hero-mid-img" aria-hidden="true" />
+            )}
             <p className="km-hero-desc">{config.heroDesc}</p>
             <div className="km-hero-stats">
               {config.heroStats.map((s) => (
@@ -367,7 +371,7 @@ export default function ServiceShowcasePage({ config }) {
             <div className="km-testimonial-cards">
               {config.testimonials.map((t, i) => (
                 <div key={t.name} className={`km-testimonial-card ${i === activeTestimonial ? 'km-t-active' : ''}`}>
-                  <img src={t.avatar} alt={t.name} className="km-avatar" />
+                  <img src={defaultAvatar} alt={t.name} className="km-avatar" />
                   <div>
                     <div className="km-t-name">{t.name}</div>
                     <div className="km-stars">{'★'.repeat(t.rating)}</div>

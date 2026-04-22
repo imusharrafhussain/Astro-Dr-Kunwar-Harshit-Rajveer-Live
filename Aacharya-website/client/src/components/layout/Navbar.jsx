@@ -293,6 +293,7 @@ export default function Navbar() {
                         <NavLink to="/numerology" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Numerology</NavLink>
                         <NavLink to="/reports" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Reports</NavLink>
                         <NavLink to="/blog" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Blog</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>About Us</NavLink>
                         <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiPhone /> Talk to AstroHarshit Ji</button>
                         <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiVideo /> Get Live Consultation</button>
                         <NavLink to="/contact" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Contact Us</NavLink>

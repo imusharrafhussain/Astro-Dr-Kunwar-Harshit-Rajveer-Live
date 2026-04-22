@@ -1,121 +1,194 @@
-/* Footer.css */
+/* ── Footer.css ── */
 .footer {
-    background: #5D1916;
-    /* Maroon Background */
-    border-top: 4px solid var(--gold-primary);
-    padding: 3rem 0 2rem;
-    margin-top: 0;
-    color: #FFFFFF;
-    /* White text */
+    background: #3b0d0d;
+    border-top: 3px solid var(--gold-primary, #c8a23a);
+    padding: 3.5rem 0 2rem;
+    color: #fff;
 }
 
-.footer-content {
+/* ── 4-column grid ── */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ── Column titles ── */
+.footer-col-title {
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gold-primary, #c8a23a);
+    margin: 0 0 1.1rem;
+    letter-spacing: 0.01em;
+}
+
+/* ── About column ── */
+.footer-about-text {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.7;
+    margin: 0 0 1.4rem;
+}
+
+/* ── Social icons ── */
+.footer-socials {
     display: flex;
-    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-socials a {
+    display: flex;
     align-items: center;
-    text-align: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-}
-
-.footer-logo-img {
-    height: 50px;
-    /* matched to header somewhat */
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    /* Ensure logo is white if needed, or nice contrast */
-}
-
-.footer-tagline {
-    color: rgba(255, 255, 255, 0.8);
-    /* Light text */
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-}
-
-.footer-links {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
     justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
-.footer-links a {
-    color: rgba(255, 255, 255, 0.95);
-    /* White text */
+.footer-socials a:hover {
+    background: var(--gold-primary, #c8a23a);
+    border-color: var(--gold-primary, #c8a23a);
+    transform: translateY(-3px);
+}
+
+/* ── Nav lists ── */
+.footer-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-nav-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-nav-list li::before {
+    content: '▸';
+    color: var(--gold-primary, #c8a23a);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.footer-nav-list a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
     font-weight: 500;
-    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.footer-nav-list a:hover {
+    color: var(--gold-primary, #c8a23a);
+}
+
+/* ── Contact list ── */
+.footer-contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.6;
+}
+
+.footer-contact-icon {
+    color: var(--gold-primary, #c8a23a);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.footer-contact-list a {
+    color: rgba(255, 255, 255, 0.82);
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.footer-links a:hover {
-    color: var(--gold-primary);
-    /* Gold on hover */
+.footer-contact-list a:hover {
+    color: var(--gold-primary, #c8a23a);
 }
 
-.footer-socials {
+/* ── Bottom bar ── */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-bottom-links {
     display: flex;
     gap: 1.5rem;
 }
 
-.footer-socials a {
-    color: #FFFFFF;
-    /* White Icons */
-    font-size: 1.4rem;
-    transition: all 0.3s ease;
+.footer-bottom-links a {
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
-.footer-socials a:hover {
-    color: var(--gold-primary);
-    transform: translateY(-2px);
+.footer-bottom-links a:hover {
+    color: var(--gold-primary, #c8a23a);
 }
 
-/* ── Emoji Rating ── */
-.footer-rating {
-    display: flex;
-    justify-content: center;
-    padding: 1.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 0;
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
 }
 
-.footer-bottom {
-    text-align: center;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    /* Muted white */
-    font-size: 0.85rem;
-    font-weight: 400;
-}
-
-@media (min-width: 768px) {
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
+/* ── Mobile ── */
+@media (max-width: 767px) {
+    .footer {
+        padding-bottom: 5.5rem; /* clears fixed bottom navbar */
     }
 
-    .footer-brand {
-        align-items: flex-start;
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.6rem;
+    }
+
+    .footer-bottom-links {
+        gap: 1.2rem;
     }
 }

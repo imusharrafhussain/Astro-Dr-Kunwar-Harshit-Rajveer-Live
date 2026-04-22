@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../api/axios'
 import heroKundliM from '../assets/heroKundliM.webp'
+import defaultAvatar from '../assets/default_avatar.png'
 import './KundliMatchingPage.css'
 
 /* ═══════════════════════════════════════════════
@@ -233,9 +234,9 @@ const services = [
 
 /* ── Other static data ── */
 const testimonials = [
-  { name: 'Maya Sharma', rating: 5, text: 'The Kundali matching service settled lifelong matters. Highly recommended!', avatar: 'https://i.pravatar.cc/80?img=5' },
-  { name: 'Arjun Patel', rating: 5, text: 'Excellent and accurate analysis by the astrologer. Patient and very helpful.', avatar: 'https://i.pravatar.cc/80?img=12' },
-  { name: 'Priya Mehta', rating: 5, text: 'Very satisfied consultation. Content evidence truly made a difference in my life.', avatar: 'https://i.pravatar.cc/80?img=9' },
+  { name: 'Maya Sharma', rating: 5, text: 'The Kundali matching service settled lifelong matters. Highly recommended!', avatar: defaultAvatar },
+  { name: 'Arjun Patel', rating: 5, text: 'Excellent and accurate analysis by the astrologer. Patient and very helpful.', avatar: defaultAvatar },
+  { name: 'Priya Mehta', rating: 5, text: 'Very satisfied consultation. Content evidence truly made a difference in my life.', avatar: defaultAvatar },
 ]
 
 const trustPoints = [
@@ -560,7 +561,7 @@ function GunaMilanMatchingCard({ boyData, girlData, apiResult }) {
       </p>
 
       {/* Input controls (minimal, inside same card; no layout/class changes) */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.9rem', marginBottom: '1.2rem', position: 'relative', zIndex: 2 }}>
+      <div className="km-guna-inputs">
         <div>
           <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'rgba(232,201,126,0.9)', marginBottom: '0.35rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Boy</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
@@ -617,30 +618,32 @@ function GunaMilanMatchingCard({ boyData, girlData, apiResult }) {
         </div>
       </div>
 
-      <table className="km-guna-table">
-        <thead>
-          <tr><th>#</th><th>Koot</th><th>Boy</th><th>Girl</th><th>Points</th></tr>
-        </thead>
-        <tbody>
-          {gunaData.map((row, i) => (
-            <tr key={row.koot}>
-              <td style={{ color: 'rgba(232,201,126,0.7)', fontWeight: 700 }}>{i + 1}</td>
-              <td style={{ fontWeight: 600 }}>{row.koot}</td>
-              <td>{row.boy || '—'}</td>
-              <td>{row.girl || '—'}</td>
-              <td style={{ textAlign: 'center', fontWeight: 700, color: '#e8c97e' }}>{row.points} / {row.maxPoints}</td>
+      <div className="km-guna-table-wrapper">
+        <table className="km-guna-table">
+          <thead>
+            <tr><th>#</th><th>Koot</th><th>Boy</th><th>Girl</th><th>Points</th></tr>
+          </thead>
+          <tbody>
+            {gunaData.map((row, i) => (
+              <tr key={row.koot}>
+                <td style={{ color: 'rgba(232,201,126,0.7)', fontWeight: 700 }}>{i + 1}</td>
+                <td style={{ fontWeight: 600 }}>{row.koot}</td>
+                <td>{row.boy || '—'}</td>
+                <td>{row.girl || '—'}</td>
+                <td style={{ textAlign: 'center', fontWeight: 700, color: '#e8c97e' }}>{row.points} / {row.maxPoints}</td>
+              </tr>
+            ))}
+            <tr style={{ borderTop: '1px solid rgba(200,160,82,0.4)' }}>
+              <td colSpan={4} style={{ fontWeight: 700, color: '#e8c97e', paddingTop: '0.7rem' }}>
+              🔱 Total Score: {total} / 36 &nbsp;•&nbsp;<br /> {label} 
+              </td>
+              <td style={{ textAlign: 'center', fontWeight: 800, color: '#e8c97e', fontSize: '1rem', paddingTop: '0.7rem' }}>
+                {total} / 36
+              </td>
             </tr>
-          ))}
-          <tr style={{ borderTop: '1px solid rgba(200,160,82,0.4)' }}>
-            <td colSpan={4} style={{ fontWeight: 700, color: '#e8c97e', paddingTop: '0.7rem' }}>
-             🔱 Total Score: {total} / 36 &nbsp;•&nbsp;<br /> {label} 
-            </td>
-            <td style={{ textAlign: 'center', fontWeight: 800, color: '#e8c97e', fontSize: '1rem', paddingTop: '0.7rem' }}>
-              {total} / 36
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
       <Link to="/contact" className="km-btn-solid km-guna-btn">Consult Our Astrologer( For 100% Accuracy⚡)</Link>
     </div>
   )
@@ -1031,8 +1034,10 @@ export default function KundliMatchingPage() {
               {trustPoints.map((tp, i) => (
                 <div key={i} className={`km-trust-card glass-panel ${i === activeTrust ? 'km-t-active' : ''}`}>
                   <div className="km-trust-icon">{tp.icon}</div>
-                  <h4 className="km-trust-title">{tp.title}</h4>
-                  <p className="km-trust-desc">{tp.desc}</p>
+                  <div>
+                    <h4 className="km-trust-title">{tp.title}</h4>
+                    <p className="km-trust-desc">{tp.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>

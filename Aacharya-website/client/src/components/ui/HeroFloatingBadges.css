@@ -1,0 +1,179 @@
+/* ── Hero Floating Badges Container ── */
+.hero-floating-badges-container {
+    display: none; /* Hidden by default, shown on mobile */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 80%; /* Takes up 80% of hero height */
+    max-height: 400px;
+    width: 140px;
+    overflow: hidden;
+    z-index: 20;
+    pointer-events: none; /* Let touches pass through the container... */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+@media (max-width: 767px) {
+    .hero-floating-badges-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.hero-floating-badges-track {
+    display: flex;
+    flex-direction: column;
+    animation: verticalMarqueeScroll 20s linear infinite;
+    pointer-events: auto; /* ...but capture interactions on the track */
+}
+
+/* Pause animation on hover */
+.hero-floating-badges-track:hover {
+    animation-play-state: paused;
+}
+
+.hero-floating-badges-set {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding-bottom: 0.85rem;
+}
+
+@keyframes verticalMarqueeScroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* ── Badge Wrapper for Layout ── */
+.floating-badge-wrapper {
+    display: flex;
+    justify-content: flex-end; /* Align badges to the right */
+    padding-right: 0.5rem; /* Slight padding from edge */
+}
+
+/* ── The Floating Badge Shape ── */
+.floating-badge {
+    position: relative;
+    cursor: pointer;
+    padding: 0.6rem 1rem 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: right center;
+    /* We use drop-shadow on the parent to allow outer glow even with clip-path or skew inner */
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 8px rgba(212, 175, 55, 0.2));
+}
+
+/* Background element to handle the skew (parallelogram shape) */
+.floating-badge-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(75, 28, 28, 0.85) 0%, rgba(212, 175, 55, 0.65) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 8px;
+    transform: skewX(-12deg);
+    z-index: -1;
+    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Un-skew the content inside */
+.floating-badge-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: skewX(12deg); /* Counter-skew */
+}
+
+.badge-icon {
+    display: flex;
+    color: #fceecb;
+    font-size: 1.1rem;
+    filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.8));
+}
+
+.badge-text {
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-body, 'Poppins', sans-serif);
+    max-width: 80px;
+    text-align: left;
+}
+
+/* ── Sparkles ── */
+.badge-sparkle {
+    position: absolute;
+    font-size: 0.6rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    transform: skewX(12deg); /* Counter-skew so sparkles aren't distorted */
+}
+
+.badge-sparkle.top-right {
+    top: -4px;
+    right: 4px;
+}
+
+.badge-sparkle.bottom-left {
+    bottom: -4px;
+    left: 4px;
+}
+
+/* ── Hover Effects ── */
+.floating-badge:hover {
+    transform: scale(1.05) translateX(5px);
+}
+
+.floating-badge:hover .floating-badge-bg {
+    filter: brightness(1.2);
+    border-color: rgba(212, 175, 55, 0.8);
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3), 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.floating-badge:hover .badge-text {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
+.floating-badge:hover .badge-sparkle {
+    opacity: 1;
+    animation: sparklePulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes sparklePulse {
+    0% { transform: skewX(12deg) scale(0.8); opacity: 0.5; }
+    100% { transform: skewX(12deg) scale(1.2); opacity: 1; filter: drop-shadow(0 0 4px #d4af37); }
+}
+
+/* ── Responsiveness constraints ── */
+@media (max-width: 480px) {
+    .hero-floating-badges-container {
+        width: 130px;
+        height: 85%;
+        max-height: 380px;
+    }
+    
+    .floating-badge {
+        padding: 0.5rem 0.8rem 0.5rem 1rem;
+    }
+    
+    .badge-icon {
+        font-size: 1rem;
+    }
+    
+    .badge-text {
+        font-size: 0.68rem;
+    }
+}

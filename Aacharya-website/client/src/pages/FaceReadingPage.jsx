@@ -1,7 +1,4 @@
 import faceHeroImage from '../assets/facereadingBg.png'
-import testimonialImg1 from '../assets/p1.png'
-import testimonialImg2 from '../assets/p2.png'
-import testimonialImg3 from '../assets/P3.png'
 import ServiceShowcasePage from './ServiceShowcasePage'
 
 const config = {
@@ -120,9 +117,9 @@ const config = {
     { q: 'How should I prepare for a face reading consultation?', a: 'Keep your key concerns ready and provide clear profile details for a focused reading.' },
   ],
   testimonials: [
-    { name: 'Ishita R', rating: 5, text: 'Face reading explained my behavior patterns perfectly.', avatar: testimonialImg1 },
-    { name: 'Dev P', rating: 5, text: 'Clear career insights and practical steps to improve.', avatar: testimonialImg2 },
-    { name: 'Mona K', rating: 5, text: 'Very unique and helpful consultation style.', avatar: testimonialImg3 },
+    { name: 'Ishita R', rating: 5, text: 'Face reading explained my behavior patterns perfectly.', avatar: '' },
+    { name: 'Dev P', rating: 5, text: 'Clear career insights and practical steps to improve.', avatar: '' },
+    { name: 'Mona K', rating: 5, text: 'Very unique and helpful consultation style.', avatar: '' },
   ],
   trustPoints: [
     { icon: '🔍', title: 'Structured Analysis', desc: 'Systematic facial zone reading with practical interpretation.' },
