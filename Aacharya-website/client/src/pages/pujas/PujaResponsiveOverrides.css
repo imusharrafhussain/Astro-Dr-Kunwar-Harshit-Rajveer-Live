@@ -1,0 +1,114 @@
+/* Shared responsive overrides for all Book Puja templates */
+
+@media (max-width: 1024px) {
+  .sp-container,
+  .festival-container,
+  .mp-container,
+  .lp-container,
+  .vp-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .sp-section,
+  .festival-section,
+  .mp-section,
+  .lp-section,
+  .vp-section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-hero,
+  .festival-hero,
+  .mp-hero,
+  .lp-hero,
+  .vp-hero {
+    min-height: 72vh !important;
+  }
+
+  .sp-form,
+  .mp-booking-card,
+  .festival-book-card,
+  .lp-form,
+  .vp-form {
+    padding: 1rem !important;
+    border-radius: 12px !important;
+  }
+
+  .sp-form-summary,
+  .lp-form-summary {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+
+  .sp-package-card,
+  .festival-package,
+  .mp-pkg-card,
+  .lp-package-card,
+  .vp-package {
+    padding: 1rem !important;
+  }
+
+  .sp-price-amount,
+  .lp-price-amount,
+  .vp-price {
+    font-size: 2rem !important;
+  }
+
+  .sp-stair,
+  .festival-process-step,
+  .mp-step,
+  .lp-step-card,
+  .vp-step-card {
+    padding: 0.8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sp-hero-overlay,
+  .mp-hero__content,
+  .lp-hero-grid,
+  .vp-hero-content {
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
+  }
+
+  .sp-hero-overlay h1,
+  .festival-hero h1,
+  .mp-hero__title,
+  .lp-hero h1,
+  .vp-hero h1 {
+    font-size: 1.8rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .sp-hero-overlay p,
+  .festival-hero p,
+  .mp-hero__desc,
+  .lp-subtitle,
+  .vp-tagline {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .sp-submit-btn,
+  .festival-btn,
+  .mp-btn,
+  .lp-submit-btn,
+  .vp-submit {
+    font-size: 0.95rem !important;
+    padding: 0.8rem 0.9rem !important;
+  }
+
+  .sp-benefit-card,
+  .festival-card,
+  .mp-benefit-card,
+  .lp-benefit-card,
+  .vp-card {
+    padding: 0.9rem !important;
+  }
+}
