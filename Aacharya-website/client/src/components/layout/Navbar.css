@@ -1006,3 +1006,228 @@
     line-height: 1.25;
     border-top: 1px solid rgba(212, 175, 55, 0.25);
 }
+
+/* ══════════════════════════════════════════
+   Puja Mega-Dropdown (Book Puja button)
+   ══════════════════════════════════════════ */
+
+.pu-dropdown-override {
+    right: 0 !important;
+    left: auto !important;
+    min-width: 760px;
+    max-width: 90vw;
+    padding: 0 !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+}
+
+.puja-mega-dropdown {
+    display: flex;
+    width: 100%;
+    min-height: 420px;
+    background: rgba(255,253,245,0.98);
+}
+
+/* Left sidebar — category buttons */
+.puja-mega-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.65);
+    border-right: 1px solid rgba(212,175,55,0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0;
+}
+
+.puja-mega-cat-btn {
+    padding: 0.85rem 1.5rem;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+    font-family: var(--font-body, sans-serif);
+}
+
+.puja-mega-cat-btn:hover {
+    background: rgba(255,255,255,0.5);
+    color: #5D1916;
+}
+
+.puja-mega-cat-btn.active {
+    background: rgba(255,255,255,0.9);
+    color: #5D1916;
+    border-left-color: #D4AF37;
+    font-weight: 700;
+}
+
+/* Right content area */
+.puja-mega-content {
+    flex-grow: 1;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+/* Search bar */
+.puja-mega-search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(212,175,55,0.35);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+
+.puja-mega-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.9rem;
+    width: 100%;
+    color: #333;
+    font-family: var(--font-body, sans-serif);
+}
+
+.puja-mega-search input::placeholder {
+    color: #bbb;
+}
+
+/* Puja items grid */
+.puja-mega-grid-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    overflow-y: auto;
+    max-height: 320px;
+    padding-right: 4px;
+}
+
+.puja-mega-grid-items::-webkit-scrollbar { width: 6px; }
+.puja-mega-grid-items::-webkit-scrollbar-track { background: transparent; }
+.puja-mega-grid-items::-webkit-scrollbar-thumb { background-color: rgba(93,25,22,0.2); border-radius: 10px; }
+.puja-mega-grid-items::-webkit-scrollbar-thumb:hover { background-color: rgba(93,25,22,0.4); }
+
+/* Individual puja card */
+.puja-mega-item-card {
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: rgba(255,255,255,0.8);
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.puja-mega-item-card:hover {
+    border-color: rgba(212,175,55,0.6);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    background: #fff;
+}
+
+.puja-mega-item-icon {
+    font-size: 1.9rem;
+    line-height: 1;
+    flex-shrink: 0;
+    color: #5D1916;
+}
+
+.puja-mega-item-details { flex: 1; min-width: 0; }
+
+.puja-mega-item-details h4 {
+    margin: 0 0 0.2rem 0;
+    color: #5D1916;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.3;
+    font-family: var(--font-body, sans-serif);
+}
+
+.puja-mega-item-details p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #777;
+    line-height: 1.35;
+    font-family: var(--font-body, sans-serif);
+}
+
+/* ── Tablet responsive (≤ 1199px) ── */
+@media (max-width: 1199px) {
+    .pu-dropdown-override {
+        position: fixed !important;
+        left: 8px !important;
+        right: 8px !important;
+        top: 70px !important;
+        min-width: unset;
+        max-width: calc(100vw - 16px);
+    }
+
+    .puja-mega-dropdown {
+        flex-direction: column;
+        min-height: unset;
+    }
+
+    .puja-mega-sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.6rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(212,175,55,0.2);
+        gap: 0.35rem;
+    }
+
+    .puja-mega-cat-btn {
+        border-left: none;
+        border-radius: 20px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.8rem;
+        border: 1px solid rgba(93,25,22,0.15);
+    }
+
+    .puja-mega-cat-btn.active {
+        border-left: none;
+        border: 1px solid rgba(212,175,55,0.6);
+        background: #5D1916;
+        color: #fff;
+    }
+
+    .puja-mega-content { padding: 0.9rem; }
+
+    .puja-mega-grid-items {
+        grid-template-columns: 1fr 1fr;
+        max-height: 280px;
+    }
+}
+
+/* ── Mobile (≤ 767px) ── */
+@media (max-width: 767px) {
+    .pu-dropdown-override {
+        top: 60px !important;
+        left: 4px !important;
+        right: 4px !important;
+    }
+
+    .puja-mega-grid-items {
+        grid-template-columns: 1fr;
+    }
+
+    .puja-mega-item-card { padding: 0.65rem 0.75rem; gap: 0.6rem; }
+    .puja-mega-item-icon { font-size: 1.5rem; }
+    .puja-mega-item-details h4 { font-size: 0.84rem; }
+    .puja-mega-item-details p { font-size: 0.74rem; }
+}

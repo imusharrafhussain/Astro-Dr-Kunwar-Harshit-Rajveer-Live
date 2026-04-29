@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { FiMenu, FiX, FiChevronDown, FiPhone, FiVideo, FiUser, FiHome, FiBookOpen, FiArchive, FiShoppingCart, FiSun } from 'react-icons/fi'
+import { FiMenu, FiX, FiChevronDown, FiPhone, FiVideo, FiUser, FiHome, FiBookOpen, FiArchive, FiShoppingCart, FiSun, FiSearch, FiChevronRight } from 'react-icons/fi'
+import { GiSunrise, GiMoon, GiMaceHead, GiBookAura, GiScrollUnfurled, GiLotusFlower, GiCrowDive, GiCobra, GiSnake, GiCircleSparks, GiAries, GiTaurus, GiGemini, GiCancer, GiLeo, GiVirgo, GiLibra, GiScorpio, GiSagittarius, GiCapricorn, GiAquarius, GiPisces, GiBarefoot, GiCoins, GiElephantHead, GiTargetPrize, GiGoldNuggets, GiScales, GiLoveMystery, GiLovers, GiHeartBeats, GiScrollQuill, GiHealing, GiHourglass, GiTrident, GiEvilEyes, GiShield, GiVortex, GiSnakeSpiral, GiCandleLight, GiFireBowl, GiRaven, GiEclipse, GiMusicalScore } from 'react-icons/gi'
 import logo from '../../assets/logo.svg'
 import megaKundliMatching from '../../assets/mega_kundli_matching.webp'
 import megaJanamKundli from '../../assets/mega_janam_kundli.webp'
@@ -22,7 +23,10 @@ export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [showComingSoon, setShowComingSoon] = useState(false)
     const [isServicesOpen, setIsServicesOpen] = useState(false)
-    const [hamburgerView, setHamburgerView] = useState('main') // 'main' | 'services' | 'horoscope'
+    const [hamburgerView, setHamburgerView] = useState('main') // 'main' | 'services' | 'horoscope' | 'puja'
+    const [isPujaOpen, setIsPujaOpen] = useState(false)
+    const [pujaCategory, setPujaCategory] = useState('all')
+    const [pujaSearch, setPujaSearch] = useState('')
     const servicesButtonRef = useRef(null)
     const hamburgerMenuRef = useRef(null)
     const hamburgerToggleRef = useRef(null)
@@ -51,6 +55,7 @@ export default function Navbar() {
 
     useEffect(() => {
         setIsServicesOpen(false)
+        setIsPujaOpen(false)
     }, [location.pathname, location.search])
 
     // Reset inline mega view when hamburger closes
@@ -140,6 +145,82 @@ export default function Navbar() {
             image: megaHoroscopeZodiac,
         },
     ]
+
+    const pujaCategories = [
+        { id: 'all', name: 'All Categories' },
+        { id: 'planet', name: 'Planet (Graha) Pujas' },
+        { id: 'zodiac', name: 'Zodiac (Rashi) Pujas' },
+        { id: 'wealth', name: 'Wealth & Career Pujas' },
+        { id: 'relationship', name: 'Relationship & Marriage' },
+        { id: 'health', name: 'Health & Protection' },
+        { id: 'dosha', name: 'Dosha Nivaran' },
+        { id: 'special', name: 'Festival Pujas' }
+    ]
+
+    const allPujas = useMemo(() => [
+        { id: 1,  title: 'Surya (Sun) Puja',             category: 'planet',       slug: 'surya-puja',                   icon: <GiSunrise />,      desc: 'Gain success and vitality.' },
+        { id: 2,  title: 'Chandra (Moon) Puja',          category: 'planet',       slug: 'chandra-puja',                 icon: <GiMoon />,         desc: 'For emotional balance.' },
+        { id: 3,  title: 'Mangal (Mars) Puja',           category: 'planet',       slug: 'mangal-puja',                  icon: <GiMaceHead />,     desc: 'Enhance courage and strength.' },
+        { id: 4,  title: 'Budh (Mercury) Puja',          category: 'planet',       slug: 'budh-puja',                    icon: <GiBookAura />,     desc: 'Boost intellect and speech.' },
+        { id: 5,  title: 'Guru (Jupiter) Puja',          category: 'planet',       slug: 'guru-puja',                    icon: <GiScrollUnfurled />, desc: 'Attract wisdom and luck.' },
+        { id: 6,  title: 'Shukra (Venus) Puja',          category: 'planet',       slug: 'shukra-puja',                  icon: <GiLotusFlower />,  desc: 'For luxury and romance.' },
+        { id: 7,  title: 'Shani (Saturn) Puja',          category: 'planet',       slug: 'shani-puja',                   icon: <GiCrowDive />,     desc: 'Overcome hurdles and karma.' },
+        { id: 8,  title: 'Rahu Puja',                    category: 'planet',       slug: 'rahu-puja',                    icon: <GiCobra />,        desc: 'Pacify sudden disruptions.' },
+        { id: 9,  title: 'Ketu Puja',                    category: 'planet',       slug: 'ketu-puja',                    icon: <GiSnake />,        desc: 'For spiritual growth.' },
+        { id: 10, title: 'Navgraha Shanti Puja',         category: 'planet',       slug: 'navgraha-shanti-puja',          icon: <GiCircleSparks />, desc: 'Pacify the nine planets.' },
+        { id: 11, title: 'Mesh (Aries) Puja',            category: 'zodiac',       slug: 'mesh-puja',                    icon: <GiAries />,        desc: 'Aries alignment correction.' },
+        { id: 12, title: 'Vrishabh (Taurus) Puja',       category: 'zodiac',       slug: 'vrishabh-puja',                icon: <GiTaurus />,       desc: 'Taurus specific rituals.' },
+        { id: 13, title: 'Mithun (Gemini) Puja',         category: 'zodiac',       slug: 'mithun-puja',                  icon: <GiGemini />,       desc: 'Gemini specific rituals.' },
+        { id: 14, title: 'Kark (Cancer) Puja',           category: 'zodiac',       slug: 'kark-puja',                    icon: <GiCancer />,       desc: 'Cancer harmony puja.' },
+        { id: 15, title: 'Singh (Leo) Puja',             category: 'zodiac',       slug: 'singh-puja',                   icon: <GiLeo />,          desc: 'Leo specific rituals.' },
+        { id: 16, title: 'Kanya (Virgo) Puja',           category: 'zodiac',       slug: 'kanya-puja',                   icon: <GiVirgo />,        desc: 'Virgo specific alignment.' },
+        { id: 17, title: 'Tula (Libra) Puja',            category: 'zodiac',       slug: 'tula-puja',                    icon: <GiLibra />,        desc: 'Libra specific harmony.' },
+        { id: 18, title: 'Vrishchik (Scorpio) Puja',     category: 'zodiac',       slug: 'vrishchik-puja',               icon: <GiScorpio />,      desc: 'Scorpio specific rituals.' },
+        { id: 19, title: 'Dhanu (Sagittarius) Puja',     category: 'zodiac',       slug: 'dhanu-puja',                   icon: <GiSagittarius />,  desc: 'Sagittarius alignment.' },
+        { id: 20, title: 'Makar (Capricorn) Puja',       category: 'zodiac',       slug: 'makar-puja',                   icon: <GiCapricorn />,    desc: 'Capricorn specific harmony.' },
+        { id: 21, title: 'Kumbh (Aquarius) Puja',        category: 'zodiac',       slug: 'kumbh-puja',                   icon: <GiAquarius />,     desc: 'Aquarius specific rituals.' },
+        { id: 22, title: 'Meen (Pisces) Puja',           category: 'zodiac',       slug: 'meen-puja',                    icon: <GiPisces />,       desc: 'Pisces alignment correction.' },
+        { id: 23, title: 'Lakshmi Prapti Puja',          category: 'wealth',       slug: 'lakshmi-prapti-puja',           icon: <GiBarefoot />,     desc: 'Attract unending prosperity.' },
+        { id: 24, title: 'Lakshmi Kubera Puja',          category: 'wealth',       slug: 'lakshmi-kubera-puja',           icon: <GiCoins />,        desc: 'Magnetize material wealth.' },
+        { id: 25, title: 'Ganesh Puja',                  category: 'wealth',       slug: 'ganesh-puja',                  icon: <GiElephantHead />, desc: 'For success & obstacle removal.' },
+        { id: 26, title: 'Business Growth Puja',         category: 'wealth',       slug: 'business-growth-puja',          icon: <GiTargetPrize />,  desc: 'Accelerate business success.' },
+        { id: 27, title: 'Career / Job Success Puja',    category: 'wealth',       slug: 'career-job-success-puja',       icon: <GiTargetPrize />,  desc: 'Achieve professional milestones.' },
+        { id: 28, title: 'Dhan Yog Activation Puja',     category: 'wealth',       slug: 'dhan-yog-activation-puja',      icon: <GiGoldNuggets />,  desc: 'Activate wealth combinations.' },
+        { id: 29, title: 'Financial Stability Puja',     category: 'wealth',       slug: 'financial-stability-puja',      icon: <GiScales />,       desc: 'Ensure steady income flow.' },
+        { id: 30, title: 'Vivah (Marriage) Puja',        category: 'relationship', slug: 'vivah-puja',                   icon: <GiLoveMystery />,  desc: 'Blessings for a holy union.' },
+        { id: 31, title: 'Love Marriage Puja',           category: 'relationship', slug: 'love-marriage-puja',            icon: <GiLovers />,       desc: 'Remove marriage obstacles.' },
+        { id: 32, title: 'Relationship Healing Puja',    category: 'relationship', slug: 'relationship-healing-puja',     icon: <GiHeartBeats />,   desc: 'Restore emotional bonds.' },
+        { id: 33, title: 'Compatibility Puja',           category: 'relationship', slug: 'compatibility-puja',            icon: <GiScrollQuill />,  desc: 'Harmonize astrological charts.' },
+        { id: 34, title: 'Breakup Recovery Puja',        category: 'relationship', slug: 'breakup-recovery-puja',         icon: <GiHealing />,      desc: 'Inner peace and moving on.' },
+        { id: 35, title: 'Delay in Marriage Puja',       category: 'relationship', slug: 'delay-in-marriage-puja',        icon: <GiHourglass />,    desc: 'Speed up the marriage process.' },
+        { id: 36, title: 'Mahamrityunjaya Puja',         category: 'health',       slug: 'mahamrityunjaya-puja',          icon: <GiTrident />,      desc: 'For ultimate health & longevity.' },
+        { id: 37, title: 'Health Recovery Puja',         category: 'health',       slug: 'health-recovery-puja',          icon: <GiHealing />,      desc: 'Speedy recovery from illness.' },
+        { id: 38, title: 'Nazar Dosh Removal Puja',      category: 'health',       slug: 'nazar-dosh-removal-puja',       icon: <GiEvilEyes />,     desc: 'Cleanse negative influences.' },
+        { id: 39, title: 'Protection Energy Shield Puja',category: 'health',       slug: 'protection-energy-shield-puja', icon: <GiShield />,       desc: 'Secure aura from harm.' },
+        { id: 40, title: 'Negative Energy Removal Puja', category: 'health',       slug: 'negative-energy-removal-puja',  icon: <GiVortex />,       desc: 'Purify mind, body & surroundings.' },
+        { id: 41, title: 'Kaal Sarp Dosh Puja',          category: 'dosha',        slug: 'kaal-sarp-dosh-puja',           icon: <GiSnakeSpiral />,  desc: 'Neutralize Kaal Sarp Dosh.' },
+        { id: 42, title: 'Pitra Dosh Puja',              category: 'dosha',        slug: 'pitra-dosh-puja',               icon: <GiCandleLight />,  desc: 'Pacify ancestral curses.' },
+        { id: 43, title: 'Mangal Dosh Puja',             category: 'dosha',        slug: 'mangal-dosh-puja',              icon: <GiFireBowl />,     desc: 'Reduce Mars malefic effects.' },
+        { id: 44, title: 'Shani Dosh Puja',              category: 'dosha',        slug: 'shani-dosh-puja',               icon: <GiRaven />,        desc: 'Mitigate Saturn afflictions.' },
+        { id: 45, title: 'Grahan Dosh Puja',             category: 'dosha',        slug: 'grahan-dosh-puja',              icon: <GiEclipse />,      desc: 'Remove eclipse doshas.' },
+        { id: 46, title: 'Vastu Dosh Puja',              category: 'dosha',        slug: 'vastu-dosh-puja',               icon: <GiCircleSparks />, desc: 'Correct Vastu imbalances.' },
+        { id: 47, title: 'Diwali Pujas',                 category: 'special',      slug: 'diwali-pujas-puja',             icon: <GiCandleLight />,  desc: 'Lakshmi puja & Diwali rituals.' },
+        { id: 48, title: 'Ganesh Chaturthi Pujas',       category: 'special',      slug: 'ganesh-chaturthi-pujas-puja',   icon: <GiElephantHead />, desc: 'Celebrate Ganesh Chaturthi.' },
+        { id: 49, title: 'Navratri / Durga Pujas',       category: 'special',      slug: 'navratri-durga-pujas-puja',     icon: <GiLotusFlower />,  desc: 'Invoke the divine feminine.' },
+        { id: 50, title: 'Makar Sankranti Puja',         category: 'special',      slug: 'makar-sankranti-pongal-puja',   icon: <GiSunrise />,      desc: 'Harvest festival blessings.' },
+        { id: 51, title: 'Chhath Puja',                  category: 'special',      slug: 'chhath-puja',                   icon: <GiSunrise />,      desc: 'Sun deity worship rituals.' },
+        { id: 52, title: 'Maha Shivratri Pujas',         category: 'special',      slug: 'maha-shivratri-pujas-puja',     icon: <GiTrident />,      desc: 'Night of Shiva worship.' },
+        { id: 53, title: 'Saraswati Puja',               category: 'special',      slug: 'saraswati-puja',                icon: <GiMusicalScore />, desc: 'Blessings of knowledge.' },
+        { id: 54, title: 'Karwa Chauth Puja',            category: 'special',      slug: 'karwa-chauth-puja',             icon: <GiMoon />,         desc: 'Fasting ritual for spouse.' },
+    ], [])
+
+    const filteredPujas = useMemo(() => {
+        return allPujas.filter(p => {
+            const matchCat = pujaCategory === 'all' || p.category === pujaCategory
+            const matchSearch = p.title.toLowerCase().includes(pujaSearch.toLowerCase())
+            return matchCat && matchSearch
+        })
+    }, [allPujas, pujaCategory, pujaSearch])
 
     return (
         <>
@@ -252,9 +333,66 @@ export default function Navbar() {
 
                     {/* Right Side */}
                     <div className="bottom-nav-right grid-right align-right-anchor" style={{ display: 'flex', alignItems: 'center', gap: '1.5vw' }}>
-                        <NavLink to="/book-puja" className="book-puja-btn btn-type1" onClick={() => setIsOpen(false)}>
-                            <span className="btn-txt">Book Puja</span>
-                        </NavLink>
+                        <div
+                            className={`nav-dropdown-container ${isPujaOpen ? 'is-open' : ''}`}
+                            onMouseLeave={() => setIsPujaOpen(false)}
+                            style={{ height: 'auto' }}
+                        >
+                            <button
+                                type="button"
+                                className="book-puja-btn btn-type1"
+                                onClick={() => setIsPujaOpen(prev => !prev)}
+                                onMouseEnter={() => setIsPujaOpen(true)}
+                            >
+                                <span className="btn-txt">Book Puja</span>
+                            </button>
+                            <div className="nav-dropdown-menu pu-dropdown-override" onClick={e => e.stopPropagation()}>
+                                <div className="puja-mega-dropdown">
+                                    <div className="puja-mega-sidebar">
+                                        {pujaCategories.map(cat => (
+                                            <button
+                                                key={cat.id}
+                                                className={`puja-mega-cat-btn ${pujaCategory === cat.id ? 'active' : ''}`}
+                                                onClick={() => setPujaCategory(cat.id)}
+                                            >
+                                                {cat.name}
+                                                {pujaCategory === cat.id && <FiChevronRight style={{ color: 'var(--gold-primary, #D4AF37)' }} />}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="puja-mega-content">
+                                        <div className="puja-mega-search">
+                                            <FiSearch color="#aaa" />
+                                            <input
+                                                type="text"
+                                                placeholder="Search Pujas..."
+                                                value={pujaSearch}
+                                                onChange={e => setPujaSearch(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="puja-mega-grid-items">
+                                            {filteredPujas.map(puja => (
+                                                <Link
+                                                    to={`/puja/${puja.slug}`}
+                                                    key={puja.id}
+                                                    className="puja-mega-item-card"
+                                                    onClick={() => { setIsPujaOpen(false); setIsOpen(false) }}
+                                                >
+                                                    <div className="puja-mega-item-icon">{puja.icon}</div>
+                                                    <div className="puja-mega-item-details">
+                                                        <h4>{puja.title}</h4>
+                                                        <p>{puja.desc}</p>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                            {filteredPujas.length === 0 && (
+                                                <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#888' }}>No Pujas Found.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <NavLink to="/contact" className="main-link" onClick={() => setIsOpen(false)}>Contact Us</NavLink>
                         {user ? (
                             <div className="user-menu" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255, 255, 255, 0.9)' }}>
@@ -272,9 +410,61 @@ export default function Navbar() {
             {/* ── Compact Hamburger Dropdown — Mobile / Tablet only ── */}
             <div ref={hamburgerMenuRef} className={`hamburger-menu${isOpen ? ' open' : ''}`}>
 
-                {hamburgerView === 'main' ? (
+                {hamburgerView === 'puja' ? (
+                    /* ── Puja mega panel in mobile hamburger ── */
+                    <>
+                        <button className="hamburger-mega-back-btn" onClick={() => setHamburgerView('main')}>
+                            &#8592;&nbsp;Book Puja
+                        </button>
+                        <div className="puja-mega-search" style={{ margin: '0.5rem 1rem' }}>
+                            <FiSearch color="#aaa" />
+                            <input
+                                type="text"
+                                placeholder="Search Pujas..."
+                                value={pujaSearch}
+                                onChange={e => setPujaSearch(e.target.value)}
+                                style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontSize: '0.9rem' }}
+                            />
+                        </div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', padding: '0 1rem 0.5rem' }}>
+                            {pujaCategories.map(cat => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setPujaCategory(cat.id)}
+                                    style={{
+                                        padding: '0.3rem 0.75rem', borderRadius: '20px', fontSize: '0.78rem', cursor: 'pointer',
+                                        background: pujaCategory === cat.id ? '#5D1916' : 'rgba(93,25,22,0.08)',
+                                        color: pujaCategory === cat.id ? '#fff' : '#5D1916',
+                                        border: '1px solid rgba(93,25,22,0.2)'
+                                    }}
+                                >{cat.name}</button>
+                            ))}
+                        </div>
+                        <div className="hamburger-mega-grid" style={{ gridTemplateColumns: '1fr' }}>
+                            {filteredPujas.map(puja => (
+                                <Link
+                                    key={puja.id}
+                                    to={`/puja/${puja.slug}`}
+                                    className="hamburger-mega-card"
+                                    style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+                                    onClick={() => { setIsOpen(false); setHamburgerView('main'); setPujaSearch('') }}
+                                >
+                                    <span style={{ fontSize: '1.5rem' }}>{puja.icon}</span>
+                                    <span style={{ fontSize: '0.88rem', color: '#5D1916', fontWeight: 600 }}>{puja.title}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                ) : hamburgerView === 'main' ? (
                     /* ── Main menu list ── */
                     <>
+                        <button
+                            className="hamburger-link hamburger-accordion-btn"
+                            onClick={() => setHamburgerView('puja')}
+                        >
+                            <FiSun style={{ marginRight: '0.5rem' }} /><span>Book Puja</span>
+                            <FiChevronDown className="hamburger-chevron" />
+                        </button>
                         <button
                             className="hamburger-link hamburger-accordion-btn"
                             onClick={() => setHamburgerView('services')}
@@ -351,10 +541,13 @@ export default function Navbar() {
                 <FiShoppingCart className="mobile-tab-icon" />
                 <span>Digital Mart</span>
             </NavLink>
-            <NavLink to="/book-puja" className={({ isActive }) => `mobile-tab-link ${isActive ? 'active' : ''}`}>
+            <button
+                className={`mobile-tab-link ${isPujaOpen ? 'active' : ''}`}
+                onClick={() => { setIsOpen(true); setHamburgerView('puja') }}
+            >
                 <FiSun className="mobile-tab-icon" />
                 <span>Book Puja</span>
-            </NavLink>
+            </button>
         </nav>
 
         <ComingSoonModal isOpen={showComingSoon} onClose={() => setShowComingSoon(false)} />
