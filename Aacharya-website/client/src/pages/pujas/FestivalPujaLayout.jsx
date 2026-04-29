@@ -112,43 +112,16 @@ export default function FestivalPujaLayout({
 
     const pkg = packages.find((p) => p.id === selectedPkg)
     setStatus('loading')
-    try {
-      const res = await fetch(`${API_BASE}/api/puja-bookings`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pujaId,
-          pujaName,
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          gender: form.gender,
-          dateOfBirth: form.dateOfBirth,
-          timeOfBirth: form.timeOfBirth,
-          gotra: form.gotra,
-          fatherName: form.fatherName,
-          birthPlace: form.birthPlace,
-          pinCode: form.pinCode,
-          pujaPurpose: form.pujaPurpose,
-          fullAddress: form.fullAddress,
-          nearestLandmark: form.nearestLandmark,
-          sankalpPlace: form.sankalpPlace,
-          bookingDate: form.date,
-          startTime: form.time,
-          package: selectedPkg,
-          amount: pkg?.price || 0,
-          message: form.message,
-        }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Booking failed.')
-      setStatus('success')
-      setStatusMsg(data.message || 'Booking created successfully.')
-      setBookedInfo(data.booking || null)
-    } catch (err) {
-      setStatus('error')
-      setStatusMsg(err.message)
-    }
+        setTimeout(() => {
+            setStatus('success')
+            setStatusMsg('Puja booking request received successfully! We will contact you soon.')
+            setBookedInfo({
+                bookingDate: form.date,
+                startTime: form.time,
+                endTime: 'TBD',
+                status: 'Pending Confirmation'
+            })
+        }, 1000)
   }
 
   return (

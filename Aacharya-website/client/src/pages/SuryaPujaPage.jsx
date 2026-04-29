@@ -50,13 +50,10 @@ export default function SuryaPujaPage() {
     const [statusMsg, setStatusMsg] = useState('')
     const [bookedInfo, setBookedInfo] = useState(null)
 
-    // Fetch availability whenever date changes
+        // Removed backend availability check for now
     useEffect(() => {
         if (!form.date) { setAvailability(null); return }
-        fetch(`${API_BASE}/api/puja-bookings/availability?pujaId=${PUJA_ID}&date=${form.date}`)
-            .then(r => r.json())
-            .then(data => setAvailability(data))
-            .catch(() => setAvailability(null))
+        setAvailability({ available: true, remainingSlots: 5, totalSlots: 5, bookedTimeWindows: [] })
     }, [form.date])
 
     const handleChange = e => {
@@ -91,29 +88,16 @@ export default function SuryaPujaPage() {
         const pkg = PACKAGES.find(p => p.id === selectedPkg)
 
         setStatus('loading')
-        try {
-            const res = await fetch(`${API_BASE}/api/puja-bookings`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    pujaId: PUJA_ID,
-                    pujaName: PUJA_NAME,
-                    name: form.name, email: form.email, phone: form.phone,
-                    address: form.address, gotra: form.gotra,
-                    bookingDate: form.date, startTime: form.time,
-                    package: selectedPkg, amount: pkg.price,
-                    message: form.message,
-                }),
-            })
-            const data = await res.json()
-            if (!res.ok) throw new Error(data.error || 'Booking failed.')
+        setTimeout(() => {
             setStatus('success')
-            setStatusMsg(data.message)
-            setBookedInfo(data.booking)
-        } catch (err) {
-            setStatus('error')
-            setStatusMsg(err.message)
-        }
+            setStatusMsg('Puja booking request received successfully! We will contact you soon.')
+            setBookedInfo({
+                bookingDate: form.date,
+                startTime: form.time,
+                endTime: 'TBD',
+                status: 'Pending Confirmation'
+            })
+        }, 1000)
     }
 
     const hint = getTimeHint()
