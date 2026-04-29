@@ -1,0 +1,704 @@
+/* ── Base ── */
+.sp-page {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    color: #1a1a1a;
+    background: #fdf9f4;
+    /* Keep first section below fixed navbar/header */
+    padding-top: calc(var(--header-height, 120px) - 4px);
+}
+
+.sp-container {
+    max-width: 1440px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.sp-section {
+    padding: 5rem 0;
+}
+
+.sp-label {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37, #f5c842);
+    color: #5D1916;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.sp-section h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: #5D1916;
+    margin: 0 0 1.5rem;
+    line-height: 1.2;
+}
+
+.sp-section p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+}
+
+/* ── Translations ── */
+.sp-translation-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.sp-translation-wrapper > p {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Styling for Hindi text specifically */
+p.sp-hindi {
+    color: #8B2520 !important; /* distinct matching maroon color */
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+/* Inside Why Cards, keep vertical stack since space is narrow */
+.sp-why-card .sp-translation-wrapper {
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0;
+}
+
+/* Inside Hero, give more width limit */
+.sp-hero-overlay .sp-translation-wrapper {
+    max-width: 1000px;
+}
+
+.sp-hero-overlay .sp-translation-wrapper p {
+    max-width: none;
+    margin-bottom: 0;
+}
+
+/* ── Hero ── */
+.sp-hero {
+    position: relative;
+    /* Prevent hairline seam between fixed header and hero */
+    margin-top: -4px;
+    height: min(calc(100vh - var(--header-height, 120px)), 860px);
+    min-height: 640px;
+    overflow: hidden;
+    /* Fills the full section; URL set inline as --sp-hero-image */
+    background-color: #1a0800;
+    background-image: var(--sp-hero-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.sp-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(10,5,0,0.85) 40%, rgba(10,5,0,0.15));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6%;
+    color: #fff;
+    z-index: 2;
+}
+
+.sp-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    color: #d4af37;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    letter-spacing: 0.05em;
+}
+
+.sp-hero-overlay h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 1.2rem;
+    background: linear-gradient(135deg, #fff 60%, #f5c842);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 580px;
+}
+
+.sp-hero-overlay p {
+    color: rgba(255,255,255,0.82);
+    font-size: 1.1rem;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.sp-hero-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37, #f5c842);
+    color: #5D1916;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    width: fit-content;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+}
+
+.sp-hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(212, 175, 55, 0.5);
+}
+
+/* ── About ── */
+.sp-about {
+    background: #fff;
+}
+
+/* ── Why ── */
+.sp-why {
+    background: linear-gradient(135deg, #fdf3e0 0%, #fff9f0 100%);
+}
+
+.sp-why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.sp-why-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.6rem;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.sp-why-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5D1916;
+    margin: 0 0 0.7rem;
+}
+
+.sp-why-card p {
+    font-size: 0.92rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.65;
+}
+
+/* ── Benefits ── */
+.sp-benefits {
+    background: #fff;
+}
+
+.sp-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.sp-benefit-card {
+    padding: 2rem;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #fdf8ee, #fff);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sp-benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.sp-benefit-icon {
+    font-size: 2.4rem;
+    color: #d4af37;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.sp-benefit-card h4 {
+    font-weight: 700;
+    color: #5D1916;
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+}
+
+.sp-benefit-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ── Process ── */
+.sp-process {
+    background: linear-gradient(135deg, #5D1916 0%, #8B2520 100%);
+    color: #fff;
+    overflow: hidden;
+}
+
+.sp-process .sp-label {
+    background: rgba(212, 175, 55, 0.2);
+    color: #f5c842;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.sp-process h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* ── Staircase Process Diagram ── */
+.sp-stairs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sp-stair {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-left: 2px solid rgba(212, 175, 55, 0.7);
+    border-radius: 10px;
+    padding: 0.9rem 1.4rem;
+    margin-left: calc(var(--i) * 42px);
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    cursor: default;
+}
+
+.sp-stair:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateX(6px);
+}
+
+/* Connector line bridging each step to the previous one */
+.sp-stair:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -0.9rem;
+    width: 2px;
+    height: 0.9rem;
+    background: rgba(212, 175, 55, 0.7);
+}
+
+.sp-stair-num {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #d4af37, #f5c842);
+    color: #5D1916;
+    font-weight: 900;
+    font-size: 0.9rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+}
+
+.sp-stair-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 2rem;
+    text-align: center;
+}
+
+.sp-stair-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.sp-stair-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.sp-stair-sub {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+/* ── Pricing ── */
+.sp-pricing {
+    background: #fdf9f4;
+}
+
+.sp-packages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.sp-package-card {
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    padding: 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.sp-package-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.sp-package-card.selected {
+    border-color: #d4af37;
+    background: linear-gradient(145deg, #fffbf0, #fff);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.25);
+}
+
+.sp-package-card.popular {
+    border-color: #5D1916;
+}
+
+.sp-popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #5D1916, #8B2520);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 1.2rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.sp-package-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #5D1916;
+    margin: 0 0 0.8rem;
+}
+
+.sp-price {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.sp-price-currency {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #5D1916;
+    margin-top: 0.4rem;
+}
+
+.sp-price-amount {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #5D1916;
+    line-height: 1;
+}
+
+.sp-duration {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1.2rem;
+}
+
+.sp-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sp-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.sp-features li svg {
+    color: #d4af37;
+    flex-shrink: 0;
+}
+
+.sp-select-btn {
+    text-align: center;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: #f5f5f5;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.sp-select-btn.active {
+    background: linear-gradient(135deg, #d4af37, #f5c842);
+    color: #5D1916;
+}
+
+/* ── Booking Form ── */
+.sp-booking-section {
+    background: linear-gradient(135deg, #fdf3e0, #fdf9f4);
+}
+
+.sp-booking-section .sp-label,
+.sp-booking-section h2 {
+    text-align: center;
+}
+
+.sp-booking-section .sp-label {
+    display: table;
+    margin: 0 auto 1rem;
+}
+
+.sp-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.sp-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.sp-full-width { grid-column: 1 / -1; }
+
+.sp-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.sp-form-group label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #5D1916;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sp-form-group input,
+.sp-form-group textarea {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    transition: border-color 0.2s;
+    background: #fafafa;
+    font-family: inherit;
+}
+
+.sp-form-group input:focus,
+.sp-form-group textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+    background: #fff;
+}
+
+.sp-avail-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.sp-avail-badge.ok { background: #e6f9e6; color: #1a7a1a; }
+.sp-avail-badge.full { background: #fde; color: #c00; }
+
+.sp-hint {
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0;
+}
+
+.sp-hint.ok { color: #1a7a1a; }
+.sp-hint.error { color: #c00; }
+
+.sp-time-note {
+    font-size: 0.78rem !important;
+    color: #999 !important;
+    margin: 0 !important;
+}
+
+.sp-form-summary {
+    background: linear-gradient(135deg, #fdf8ee, #fff);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.sp-form-summary strong { color: #5D1916; }
+
+.sp-error-msg {
+    background: #fff5f5;
+    border: 1px solid #fcc;
+    color: #c00;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sp-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #5D1916, #8B2520);
+    color: #f5c842;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.sp-submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #8B2520, #5D1916);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(93,25,22,0.3);
+}
+
+.sp-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.sp-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Success ── */
+.sp-success-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    max-width: 600px;
+}
+
+.sp-success-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #d4af37, #f5c842);
+    color: #5D1916;
+    font-size: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+}
+
+.sp-success-card h3 {
+    color: #5D1916;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 0.8rem;
+}
+
+.sp-booking-summary {
+    background: #fdf8ee;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.8;
+}
+
+.sp-success-note {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+    .sp-stair { margin-left: calc(var(--i) * 22px); }
+}
+
+@media (max-width: 768px) {
+    .sp-translation-wrapper {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .sp-form-grid { grid-template-columns: 1fr; }
+    .sp-hero-overlay h1 { font-size: 2rem; }
+    .sp-why-grid { grid-template-columns: 1fr; }
+    .sp-benefits-grid, .sp-packages { grid-template-columns: 1fr; }
+    .sp-form { padding: 1.5rem; }
+    .sp-stair { margin-left: 0 !important; }
+    .sp-stair::before { display: none; }
+    .sp-hero {
+        height: calc(72vh - (var(--header-height, 120px) * 0.3));
+        min-height: 500px;
+    }
+}
