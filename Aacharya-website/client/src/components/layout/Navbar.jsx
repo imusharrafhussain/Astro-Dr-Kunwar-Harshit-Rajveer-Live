@@ -13,6 +13,14 @@ import megaHoroscopeWeekly from '../../assets/mega_horoscope_weekly.webp'
 import megaHoroscopeMonthly from '../../assets/mega_horoscope_monthly.webp'
 import megaHoroscopeYearly from '../../assets/mega_horoscope_yearly.webp'
 import megaHoroscopeZodiac from '../../assets/mega_horoscope_zodiac.webp'
+import planetPujaBg from '../../assets/planet_puja_bg.webp'
+import zodiacPujaBg from '../../assets/zodiac_puja_bg.webp'
+import wealthPujaBg from '../../assets/wealth_puja_bg.webp'
+import relationshipPujaBg from '../../assets/relationship_puja_bg.webp'
+import healthPujaBg from '../../assets/health_puja_bg.webp'
+import doshaPujaBg from '../../assets/dosha_puja_bg.webp'
+import specialPujaBg from '../../assets/special_puja_bg.webp'
+import allPujaBg from '../../assets/all_puja_bg.webp'
 import './Navbar.css'
 
 import { useAuth } from '../../context/AuthContext'
@@ -41,6 +49,15 @@ export default function Navbar() {
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    // Preload all puja category bg images for instant switching
+    useEffect(() => {
+        const bgImages = [allPujaBg, planetPujaBg, zodiacPujaBg, wealthPujaBg, relationshipPujaBg, healthPujaBg, doshaPujaBg, specialPujaBg]
+        bgImages.forEach(src => {
+            const img = new Image()
+            img.src = src
+        })
     }, [])
 
     useEffect(() => {
@@ -222,6 +239,32 @@ export default function Navbar() {
         })
     }, [allPujas, pujaCategory, pujaSearch])
 
+    const getDynamicBgStyle = () => {
+        let bgImage = null;
+        switch (pujaCategory) {
+            case 'all': bgImage = allPujaBg; break;
+            case 'planet': bgImage = planetPujaBg; break;
+            case 'zodiac': bgImage = zodiacPujaBg; break;
+            case 'wealth': bgImage = wealthPujaBg; break;
+            case 'relationship': bgImage = relationshipPujaBg; break;
+            case 'health': bgImage = healthPujaBg; break;
+            case 'dosha': bgImage = doshaPujaBg; break;
+            case 'special': bgImage = specialPujaBg; break;
+            default: break;
+        }
+
+        if (bgImage) {
+            return {
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                transition: 'background-image 0.4s ease-in-out'
+            };
+        }
+        return { transition: 'background-image 0.4s ease-in-out' };
+    };
+
     return (
         <>
         <header className={`app-header ${isScrolled ? 'scrolled' : ''}`}>
@@ -347,7 +390,7 @@ export default function Navbar() {
                                 <span className="btn-txt">Book Puja</span>
                             </button>
                             <div className="nav-dropdown-menu pu-dropdown-override" onClick={e => e.stopPropagation()}>
-                                <div className="puja-mega-dropdown">
+                                <div className="puja-mega-dropdown" style={getDynamicBgStyle()}>
                                     <div className="puja-mega-sidebar">
                                         {pujaCategories.map(cat => (
                                             <button
