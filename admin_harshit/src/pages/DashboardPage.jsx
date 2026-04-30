@@ -12,6 +12,7 @@ const CATEGORY_TITLES = {
   'book-puja': 'Book Puja',
   horoscope: 'Horoscope',
   contacts: 'Contacts',
+  users: 'Registered Users',
 };
 
 export default function DashboardPage() {

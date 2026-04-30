@@ -562,7 +562,10 @@ export default function Navbar() {
                         <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiVideo /> Get Live Consultation</button>
                         <NavLink to="/contact" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Contact Us</NavLink>
                         {user ? (
-                            <button className="hamburger-link" onClick={() => { logout(); setIsOpen(false) }}><FiUser /> Logout</button>
+                            <>
+                                <span className="hamburger-link" style={{ fontWeight: 'bold', color: '#D4AF37' }}><FiUser /> Hello, {user.name}</span>
+                                <button className="hamburger-link" onClick={() => { logout(); setIsOpen(false) }}>Logout</button>
+                            </>
                         ) : (
                             <NavLink to="/login" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiUser /> Login</NavLink>
                         )}

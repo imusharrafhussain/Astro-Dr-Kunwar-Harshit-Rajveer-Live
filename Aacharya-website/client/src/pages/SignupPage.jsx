@@ -7,6 +7,8 @@ const SignupPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        phone: '',
+        address: '',
         password: '',
         confirmPassword: ''
     });
@@ -15,7 +17,7 @@ const SignupPage = () => {
     const { signup, loading, error: serverError } = useAuth();
     const navigate = useNavigate();
 
-    const { name, email, password, confirmPassword } = formData;
+    const { name, email, phone, address, password, confirmPassword } = formData;
 
     const onChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,7 +36,7 @@ const SignupPage = () => {
             return;
         }
 
-        await signup({ name, email, password });
+        await signup({ name, email, phone, address, password });
     };
 
     return (
@@ -68,6 +70,30 @@ const SignupPage = () => {
                             onChange={onChange}
                             required
                             placeholder="Enter your email"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            name="phone"
+                            value={phone}
+                            onChange={onChange}
+                            required
+                            placeholder="Enter your phone number"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="address">Address</label>
+                        <textarea
+                            name="address"
+                            value={address}
+                            onChange={onChange}
+                            required
+                            placeholder="Enter your full address"
+                            rows="2"
                         />
                     </div>
 

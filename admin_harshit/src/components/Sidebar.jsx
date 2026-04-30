@@ -6,6 +6,7 @@ export default function Sidebar({ active, onSelect }) {
     { key: 'book-puja', label: 'Book Puja' },
     { key: 'horoscope', label: 'Horoscope' },
     { key: 'contacts', label: 'Contacts' },
+    { key: 'users', label: 'Users' },
   ];
 
   return (

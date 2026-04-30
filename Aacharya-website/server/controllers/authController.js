@@ -41,13 +41,15 @@ const sendTokenResponse = (user, statusCode, res) => {
 // @access  Public
 exports.signup = async (req, res, next) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, phone, address } = req.body;
 
         // Create user
         const user = await User.create({
             name,
             email,
-            password
+            password,
+            phone,
+            address
         });
 
         sendTokenResponse(user, 201, res);

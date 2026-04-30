@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const Report = require('../models/Report');
 const Appointment = require('../models/Appointment');
 const Contact = require('../models/Contact');
+const PujaBooking = require('../models/PujaBooking');
+
+const User = require('../models/User');
 
 function getAdminSecret() {
   return process.env.ADMIN_JWT_SECRET || process.env.JWT_SECRET;
@@ -61,16 +64,17 @@ exports.summary = async (req, res, next) => {
       });
     }
 
-    const [reports, consultations, contacts] = await Promise.all([
+    const [reports, consultations, contacts, users] = await Promise.all([
       Report.countDocuments(),
       Appointment.countDocuments(),
       Contact.countDocuments(),
+      User.countDocuments()
     ]);
 
     const [numerologyReports, numerologyAppointments, bookPujaAppointments, horoscopeAppointments] = await Promise.all([
       Report.countDocuments({ reportType: { $regex: 'Name Number', $options: 'i' } }),
       Appointment.countDocuments({ service: { $regex: 'Numerology', $options: 'i' } }),
-      Appointment.countDocuments({ service: { $regex: 'Puja', $options: 'i' } }),
+      PujaBooking.countDocuments(),
       Appointment.countDocuments({
         $or: [
           { service: { $regex: 'Vedic Birth', $options: 'i' } },
@@ -89,6 +93,7 @@ exports.summary = async (req, res, next) => {
         bookPuja: bookPujaAppointments,
         horoscope: horoscopeAppointments,
         contacts,
+        users,
       },
     });
   } catch (err) {
@@ -142,10 +147,7 @@ exports.listRecords = async (req, res, next) => {
       return res.json({ success: true, data: merged.slice(0, limit) });
     }
     if (category === 'book-puja' || category === 'bookpuja') {
-      const rows = await Appointment.find({ service: { $regex: 'Puja', $options: 'i' } })
-        .sort({ createdAt: -1 })
-        .limit(limit)
-        .lean();
+      const rows = await PujaBooking.find().sort({ createdAt: -1 }).limit(limit).lean();
       return res.json({ success: true, data: rows });
     }
     if (category === 'horoscope') {
@@ -163,6 +165,10 @@ exports.listRecords = async (req, res, next) => {
     }
     if (category === 'contacts' || category === 'contact') {
       const rows = await Contact.find().sort({ createdAt: -1 }).limit(limit).lean();
+      return res.json({ success: true, data: rows });
+    }
+    if (category === 'users') {
+      const rows = await User.find().select('-password').sort({ createdAt: -1 }).limit(limit).lean();
       return res.json({ success: true, data: rows });
     }
 
