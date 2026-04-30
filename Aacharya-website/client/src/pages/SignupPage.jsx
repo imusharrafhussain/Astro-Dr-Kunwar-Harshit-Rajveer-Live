@@ -26,6 +26,28 @@ const SignupPage = () => {
         e.preventDefault();
         setClientError('');
 
+        if (name.trim().length < 3) {
+            setClientError('Name must be at least 3 characters long');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setClientError('Please enter a valid email address');
+            return;
+        }
+
+        const phoneRegex = /^[0-9\-\+]{9,15}$/;
+        if (!phoneRegex.test(phone)) {
+            setClientError('Please enter a valid phone number (9-15 digits)');
+            return;
+        }
+
+        if (address.trim().length < 10) {
+            setClientError('Please enter a complete address (at least 10 characters)');
+            return;
+        }
+
         if (password !== confirmPassword) {
             setClientError('Passwords do not match');
             return;
