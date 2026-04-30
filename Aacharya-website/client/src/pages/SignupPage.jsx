@@ -19,8 +19,25 @@ const SignupPage = () => {
 
     const { name, email, phone, address, password, confirmPassword } = formData;
 
-    const onChange = (e) =>
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        
+        if (name === 'phone') {
+            // Only allow numbers, plus, and hyphens in phone field
+            const phoneVal = value.replace(/[^0-9\-\+]/g, '');
+            setFormData({ ...formData, [name]: phoneVal });
+            return;
+        }
+
+        if (name === 'name') {
+            // Only allow letters and spaces in name field
+            const nameVal = value.replace(/[^a-zA-Z\s]/g, '');
+            setFormData({ ...formData, [name]: nameVal });
+            return;
+        }
+
+        setFormData({ ...formData, [name]: value });
+    };
 
     const onSubmit = async (e) => {
         e.preventDefault();
