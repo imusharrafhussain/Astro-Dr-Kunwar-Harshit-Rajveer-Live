@@ -531,15 +531,7 @@ export default function Navbar() {
                 ) : hamburgerView === 'main' ? (
                     /* ── Main menu list ── */
                     <>
-                        <button
-                            className="hamburger-link hamburger-accordion-btn"
-                            onClick={() => setHamburgerView('puja')}
-                        >
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <FiSun style={{ marginRight: '0.5rem' }} /><span>Book Puja</span>
-                            </div>
-                            <FiChevronDown className="hamburger-chevron" />
-                        </button>
+
                         <button
                             className="hamburger-link hamburger-accordion-btn"
                             onClick={() => setHamburgerView('services')}
