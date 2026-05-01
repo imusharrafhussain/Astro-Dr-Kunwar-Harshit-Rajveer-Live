@@ -538,7 +538,8 @@ export function BookingDialog({ open, onOpenChange, serviceLabel, inline = false
       <div className="bk-modal-body">
         {step === 'details' && (
           <DetailsForm
-            defaultValues={details || undefined}
+            key={serviceLabel || 'default'}
+            defaultValues={details || (SPECIAL_SERVICES.includes(serviceLabel) ? { service: serviceLabel } : undefined)}
             onSubmit={(v) => { setDetails(v); setStep('slot'); }}
           />
         )}
