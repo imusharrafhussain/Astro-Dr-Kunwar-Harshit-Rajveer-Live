@@ -14,6 +14,15 @@ const serviceOptions = [
     'Gemstone Recommendation',
     'Spiritual Healing Session',
     'Puja & Ritual Guidance',
+    'Business Consultation',
+    'Love Report',
+    'Health Consultation',
+    'Career Consultation',
+    'Marriage Consultation',
+    'Education Consultation',
+    'Finance Consultation',
+    'Pregnancy Consultation',
+    'Legal Consultation'
 ]
 
 export default function BookingPage() {
