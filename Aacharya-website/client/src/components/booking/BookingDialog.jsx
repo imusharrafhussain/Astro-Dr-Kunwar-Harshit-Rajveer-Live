@@ -125,6 +125,8 @@ function MiniCalendar({ selected, onSelect }) {
 }
 
 // ─── Step 1: Details Form ──────────────────────────────────────────────
+const SPECIAL_SERVICES = ["Talk to AstroHarshit Ji", "Get Live Consultation"];
+
 const SERVICE_OPTIONS = [
   'Vedic Birth Chart Analysis',
   'Relationship & Compatibility Reading',
@@ -239,41 +241,56 @@ function DetailsForm({ defaultValues, onSubmit }) {
         {errors.address && <p className="bk-error">{errors.address}</p>}
       </div>
       
-      <div className="bk-field" ref={dropdownRef}>
-        <label className="bk-label" htmlFor="service">
-          <span className="bk-label-icon">🕉️</span> Select Service
-        </label>
-        <div 
-          className={`bk-custom-select ${errors.service ? 'error' : ''} ${isDropdownOpen ? 'open' : ''}`}
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
-          <div className="bk-custom-select-value">
-            {values.service || <span className="bk-placeholder">Choose a service...</span>}
-          </div>
-          <span className="bk-custom-select-arrow">▼</span>
-          
-          {isDropdownOpen && (
-            <div className="bk-custom-select-dropdown">
-              <div 
-                className={`bk-custom-select-option ${!values.service ? 'selected' : ''}`}
-                onClick={() => setValues(v => ({ ...v, service: '' }))}
-              >
-                Choose a service...
-              </div>
-              {SERVICE_OPTIONS.map(s => (
-                <div 
-                  key={s} 
-                  className={`bk-custom-select-option ${values.service === s ? 'selected' : ''}`}
-                  onClick={() => setValues(v => ({ ...v, service: s }))}
-                >
-                  {s}
-                </div>
-              ))}
-            </div>
-          )}
+      {SPECIAL_SERVICES.includes(values.service) ? (
+        <div className="bk-field">
+          <label className="bk-label" htmlFor="service-fixed">
+            <span className="bk-label-icon">🕉️</span> Service
+          </label>
+          <input
+            id="service-fixed"
+            type="text"
+            value={values.service}
+            readOnly
+            className="bk-input bk-readonly"
+          />
         </div>
-        {errors.service && <p className="bk-error">{errors.service}</p>}
-      </div>
+      ) : (
+        <div className="bk-field" ref={dropdownRef}>
+          <label className="bk-label" htmlFor="service">
+            <span className="bk-label-icon">🕉️</span> Select Service
+          </label>
+          <div 
+            className={`bk-custom-select ${errors.service ? 'error' : ''} ${isDropdownOpen ? 'open' : ''}`}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <div className="bk-custom-select-value">
+              {values.service || <span className="bk-placeholder">Choose a service...</span>}
+            </div>
+            <span className="bk-custom-select-arrow">▼</span>
+            
+            {isDropdownOpen && (
+              <div className="bk-custom-select-dropdown">
+                <div 
+                  className={`bk-custom-select-option ${!values.service ? 'selected' : ''}`}
+                  onClick={() => setValues(v => ({ ...v, service: '' }))}
+                >
+                  Choose a service...
+                </div>
+                {SERVICE_OPTIONS.map(s => (
+                  <div 
+                    key={s} 
+                    className={`bk-custom-select-option ${values.service === s ? 'selected' : ''}`}
+                    onClick={() => setValues(v => ({ ...v, service: s }))}
+                  >
+                    {s}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {errors.service && <p className="bk-error">{errors.service}</p>}
+        </div>
+      )}
 
       {field('subject', 'Subject of Consultation', '✨', 'text', 'e.g. Career, Marriage, Health…', true)}
 

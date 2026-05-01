@@ -241,6 +241,13 @@
 .bk-input.error {
   border-color: var(--bk-error);
 }
+.bk-input.bk-readonly {
+  background: rgba(0,0,0,0.03);
+  cursor: default;
+  border-color: rgba(0,0,0,0.1);
+  color: var(--bk-maroon);
+  font-weight: 500;
+}
 .bk-textarea {
   resize: vertical;
   min-height: 72px;
