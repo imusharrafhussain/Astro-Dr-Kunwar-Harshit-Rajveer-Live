@@ -26,11 +26,14 @@ import './Navbar.css'
 
 import { useAuth } from '../../context/AuthContext'
 import ComingSoonModal from '../ui/ComingSoonModal'
+import { BookingDialog } from '../booking/BookingDialog'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
     const [showComingSoon, setShowComingSoon] = useState(false)
+    const [bookingOpen, setBookingOpen] = useState(false)
+    const [bookingService, setBookingService] = useState('')
     const [isServicesOpen, setIsServicesOpen] = useState(false)
     const [hamburgerView, setHamburgerView] = useState('main') // 'main' | 'services' | 'horoscope' | 'puja'
     const [isPujaOpen, setIsPujaOpen] = useState(false)
@@ -43,6 +46,11 @@ export default function Navbar() {
     const { user, logout } = useAuth() || {}; // Handle potential null context if used outside provider (though unlikely here)
     const isServicesRoute = location.pathname === '/services' || location.pathname.startsWith('/services/')
     const isHoroscopeRoute = location.pathname.startsWith('/horoscope')
+
+    const launchBooking = (label) => {
+        setBookingService(label);
+        setBookingOpen(true);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -341,8 +349,8 @@ export default function Navbar() {
                     {/* Right Side Actions */}
                     <div className="header-actions grid-right">
                         <div className="header-buttons" style={{ display: 'flex', gap: 'clamp(0.4rem, 0.6vw, 0.8rem)' }}>
-                            <button className="btn-pill" onClick={() => setShowComingSoon(true)}><FiPhone /> Talk to AstroHarshit Ji</button>
-                            <button className="btn-pill" onClick={() => setShowComingSoon(true)}><FiVideo /> Get Live Consultation</button>
+                            <button className="btn-pill" onClick={() => launchBooking('Talk to AstroHarshit Ji')}><FiPhone /> Talk to AstroHarshit Ji</button>
+                            <button className="btn-pill" onClick={() => launchBooking('Get Live Consultation')}><FiVideo /> Get Live Consultation</button>
                         </div>
                     </div>
 
@@ -554,8 +562,8 @@ export default function Navbar() {
                         <NavLink to="/learning" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiBookOpen /> Digital Learning</NavLink>
                         <NavLink to="/mandir" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiArchive /> Digital Mandir</NavLink>
                         <NavLink to="/mart" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiShoppingCart /> Digital Mart</NavLink>
-                        <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiPhone /> Talk to AstroHarshit Ji</button>
-                        <button className="hamburger-link" onClick={() => { setShowComingSoon(true); setIsOpen(false) }}><FiVideo /> Get Live Consultation</button>
+                        <button className="hamburger-link" onClick={() => { launchBooking('Talk to AstroHarshit Ji'); setIsOpen(false) }}><FiPhone /> Talk to AstroHarshit Ji</button>
+                        <button className="hamburger-link" onClick={() => { launchBooking('Get Live Consultation'); setIsOpen(false) }}><FiVideo /> Get Live Consultation</button>
                         <NavLink to="/contact" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Contact Us</NavLink>
                         {user ? (
                             <>
@@ -624,6 +632,7 @@ export default function Navbar() {
         </nav>
 
         <ComingSoonModal isOpen={showComingSoon} onClose={() => setShowComingSoon(false)} />
+        <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} serviceLabel={bookingService} />
         </>
     )
 }

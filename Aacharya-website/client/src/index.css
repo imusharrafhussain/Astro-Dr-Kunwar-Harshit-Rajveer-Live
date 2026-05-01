@@ -2,3 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Astro Harshit Ji — Premium booking design system.
+   All colors MUST be HSL. */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 0 0% 98%;          /* #FAFAFA */
+    --foreground: 0 0% 20%;          /* #333333 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Brand */
+    --maroon: 3 60% 23%;             /* #5D1916 */
+    --maroon-deep: 5 64% 15%;        /* #3E0E0C */
+    --gold: 46 65% 52%;              /* #D4AF37 */
+    --gold-light: 47 87% 62%;        /* #F2C94C */
+    --gold-dark: 42 56% 41%;         /* #AA8C2C */
+
+    --primary: 3 60% 23%;            /* maroon */
+    --primary-foreground: 47 60% 95%;
+
+    --secondary: 46 65% 52%;         /* gold */
+    --secondary-foreground: 3 60% 23%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 46 65% 52%;
+    --accent-foreground: 3 60% 23%;
+
+    --destructive: 0 75% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 88%;
+    --ring: 46 65% 52%;              /* gold focus glow */
+
+    --radius: 0.875rem;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(46 65% 52%) 0%, hsl(47 87% 62%) 100%);
+    --gradient-maroon: linear-gradient(135deg, hsl(3 60% 23%) 0%, hsl(5 64% 15%) 100%);
+    --gradient-cosmic: radial-gradient(ellipse at top, hsl(46 65% 52% / 0.12), transparent 60%),
+                       radial-gradient(ellipse at bottom, hsl(3 60% 23% / 0.08), transparent 60%);
+
+    /* Shadows */
+    --shadow-sm: 0 4px 12px hsl(3 60% 23% / 0.05);
+    --shadow-lg: 0 10px 30px hsl(3 60% 23% / 0.10);
+    --shadow-glow: 0 0 24px hsl(46 65% 52% / 0.35);
+    --shadow-card: 0 8px 32px hsl(3 60% 23% / 0.08);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  .bg-gradient-maroon {
+    background-image: var(--gradient-maroon);
+  }
+  .bg-cosmic {
+    background-image: var(--gradient-cosmic);
+  }
+  .text-gradient-gold {
+    background-image: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+}
