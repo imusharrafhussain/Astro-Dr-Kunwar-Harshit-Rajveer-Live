@@ -458,7 +458,7 @@ export default function Navbar() {
                     /* ── Miniature Puja mega panel in mobile hamburger ── */
                     <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100%' }}>
                         <div style={{ ...getDynamicBgStyle(), display: 'flex', flexDirection: 'row', width: '100%', maxWidth: '340px', height: '450px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
-                            <div style={{ width: '38%', flexShrink: 0, overflowY: 'auto', background: 'rgba(255,255,255,0.65)', borderRight: '1px solid rgba(212,175,55,0.2)', display: 'flex', flexDirection: 'column', padding: '0.5rem 0' }} className="mini-mega-scrollbar">
+                            <div style={{ width: '38%', flexShrink: 0, overflowY: 'auto', borderRight: '1px solid rgba(212,175,55,0.2)', display: 'flex', flexDirection: 'column', padding: '0.5rem 0' }} className="mini-mega-scrollbar mini-mega-glass">
                                 <button className="hamburger-mega-back-btn" onClick={() => setIsOpen(false)} style={{ padding: '0.5rem', fontSize: '0.75rem', background: 'transparent', borderBottom: '1px solid rgba(212,175,55,0.2)', borderTop: 'none', borderLeft: 'none', borderRight: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem', fontWeight: 'bold' }}>
                                     &#8592; Back
                                 </button>
