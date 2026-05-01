@@ -457,13 +457,14 @@ function Stepper({ step }) {
 }
 
 // ─── Main Dialog ───────────────────────────────────────────────────────
-export function BookingDialog({ open, onOpenChange, serviceLabel }) {
+export function BookingDialog({ open, onOpenChange, serviceLabel, inline = false }) {
   const [step, setStep] = useState('details');
   const [details, setDetails] = useState(null);
   const [selection, setSelection] = useState(null);
 
   // Lock body scroll
   useEffect(() => {
+    if (inline) return;
     if (open) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -476,69 +477,82 @@ export function BookingDialog({ open, onOpenChange, serviceLabel }) {
       return () => clearTimeout(t);
     }
     return () => { document.body.style.overflow = ''; };
-  }, [open]);
+  }, [open, inline]);
 
-  const handleClose = useCallback(() => onOpenChange(false), [onOpenChange]);
+  const handleClose = useCallback(() => {
+    if (!inline && onOpenChange) onOpenChange(false);
+  }, [inline, onOpenChange]);
 
   // Close on Escape
   useEffect(() => {
+    if (inline) return;
     const handler = (e) => { if (e.key === 'Escape' && open) handleClose(); };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [open, handleClose]);
+  }, [open, handleClose, inline]);
 
   const titles = {
-    details: { title: serviceLabel, sub: 'Share your details — takes under a minute.' },
+    details: { title: serviceLabel || 'Book a Consultation', sub: 'Share your details — takes under a minute.' },
     slot: { title: 'Pick Your Slot', sub: 'Evening sessions only — limited availability.' },
     done: { title: "You're All Set!", sub: '' },
   };
 
-  if (!open) return null;
+  if (!inline && !open) return null;
+
+  const content = (
+    <div className={`bk-modal ${inline ? 'inline' : ''}`}>
+      {/* Header */}
+      <div className="bk-modal-header">
+        <div className="bk-modal-header-top">
+          <div>
+            <h2 className="bk-modal-title">{titles[step].title}</h2>
+            {titles[step].sub && (
+              <p className="bk-modal-sub">{titles[step].sub}</p>
+            )}
+          </div>
+          {!inline && (
+            <button type="button" className="bk-close" onClick={handleClose} aria-label="Close">
+              ✕
+            </button>
+          )}
+        </div>
+        {step !== 'done' && <Stepper step={step} />}
+      </div>
+
+      {/* Body */}
+      <div className="bk-modal-body">
+        {step === 'details' && (
+          <DetailsForm
+            defaultValues={details || undefined}
+            onSubmit={(v) => { setDetails(v); setStep('slot'); }}
+          />
+        )}
+        {step === 'slot' && (
+          <SlotPicker
+            onConfirm={(s) => { setSelection(s); setStep('done'); }}
+          />
+        )}
+        {step === 'done' && details && selection && (
+          <Confirmation
+            details={details}
+            selection={selection}
+            onBookAnother={() => { setStep('details'); setSelection(null); }}
+          />
+        )}
+      </div>
+    </div>
+  );
+
+  if (inline) {
+    return content;
+  }
 
   return createPortal(
     <div
       className={`bk-overlay ${open ? 'open' : ''}`}
       onClick={(e) => e.target === e.currentTarget && handleClose()}
     >
-      <div className="bk-modal">
-        {/* Header */}
-        <div className="bk-modal-header">
-          <div className="bk-modal-header-top">
-            <div>
-              <h2 className="bk-modal-title">{titles[step].title}</h2>
-              {titles[step].sub && (
-                <p className="bk-modal-sub">{titles[step].sub}</p>
-              )}
-            </div>
-            <button type="button" className="bk-close" onClick={handleClose} aria-label="Close">
-              ✕
-            </button>
-          </div>
-          {step !== 'done' && <Stepper step={step} />}
-        </div>
-
-        {/* Body */}
-        <div className="bk-modal-body">
-          {step === 'details' && (
-            <DetailsForm
-              defaultValues={details || undefined}
-              onSubmit={(v) => { setDetails(v); setStep('slot'); }}
-            />
-          )}
-          {step === 'slot' && (
-            <SlotPicker
-              onConfirm={(s) => { setSelection(s); setStep('done'); }}
-            />
-          )}
-          {step === 'done' && details && selection && (
-            <Confirmation
-              details={details}
-              selection={selection}
-              onBookAnother={() => { setStep('details'); setSelection(null); }}
-            />
-          )}
-        </div>
-      </div>
+      {content}
     </div>,
     document.body
   );

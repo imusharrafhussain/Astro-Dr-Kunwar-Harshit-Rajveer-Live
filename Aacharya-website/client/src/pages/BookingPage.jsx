@@ -1,3 +1,4 @@
+import { BookingDialog } from '../components/booking/BookingDialog'
 import './BookingPage.css'
 
 export default function BookingPage() {
@@ -10,7 +11,11 @@ export default function BookingPage() {
 
             <section className="section">
                 <div className="container booking-container">
-                    <div className="booking-info" style={{ gridColumn: '1 / -1', maxWidth: '800px', margin: '0 auto' }}>
+                    <div className="booking-form-inline-container">
+                        <BookingDialog inline={true} open={true} serviceLabel="Book a Consultation" />
+                    </div>
+
+                    <div className="booking-info">
                         <div className="glass-card info-card">
                             <h3>📞 How It Works</h3>
                             <ol className="how-it-works">
