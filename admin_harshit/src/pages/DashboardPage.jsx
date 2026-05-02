@@ -30,7 +30,15 @@ export default function DashboardPage() {
       const res = await api.get(`/api/admin/records/${encodeURIComponent(cat)}`, { params: { limit: 500 } });
       setRecords(Array.isArray(res?.data?.data) ? res.data.data : []);
     } catch (err) {
-      setError(err?.response?.data?.error || 'Failed to load records');
+      if (err?.response?.status === 401 || err?.response?.status === 403) {
+        setError('Session expired. Redirecting to login…');
+        setTimeout(() => {
+          clearToken();
+          window.location.assign('/login');
+        }, 1500);
+      } else {
+        setError(err?.response?.data?.error || err.message || 'Failed to load records');
+      }
       setRecords([]);
     } finally {
       setLoading(false);
