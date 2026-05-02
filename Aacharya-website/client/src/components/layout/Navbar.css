@@ -585,9 +585,13 @@
     color: #666;
     line-height: 1.35;
     display: -webkit-box;
+    display: box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
+    box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nav-mega-item:hover {
