@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useEffect, useState } from 'react'
 import {
     FiAlertCircle,
@@ -389,31 +390,12 @@ export default function ProtectionEnergyShieldPujaPage() {
                                     <label><FiMapPin /> Birth Place *</label>
                                     <input name="birthPlace" placeholder="Birth place" value={form.birthPlace} onChange={handleChange} required />
                                 </div>
-                                <div className="mm-form-group">
-                                    <label><FiCalendar /> Preferred Puja Date *</label>
-                                    <input name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                                    {availability && (
-                                        <div className={`mm-avail-badge ${availability.available ? 'ok' : 'full'}`}>
-                                            {availability.available
-                                                ? `${availability.remainingSlots}/${availability.totalSlots} slots available`
-                                                : 'No slots available for this date'}
-                                        </div>
-                                    )}
-                                </div>
+                                <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
                                 <div className="mm-form-group">
                                     <label>Pin Code *</label>
                                     <input name="pinCode" placeholder="6-digit pin code" value={form.pinCode} onChange={handleChange} required />
                                 </div>
-                                <div className="mm-form-group">
-                                    <label><FiClock /> Preferred Start Time *</label>
-                                    <input name="time" type="time" value={form.time} onChange={handleChange} required min="05:00" max="19:00" step="1800" />
-                                    {hint && (
-                                        <div className={`mm-hint ${hint.type}`}>
-                                            {hint.type === 'error' ? <FiAlertCircle /> : <FiCheck />} {hint.msg}
-                                        </div>
-                                    )}
-                                    <p className="mm-time-note">Each booking locks a 5-hour window. Max 5 pujas per day.</p>
-                                </div>
+                                
                                 <div className="mm-form-group mm-full-width">
                                     <label>Puja Purpose *</label>
                                     <textarea name="pujaPurpose" rows={2} placeholder="Describe the reason for this puja" value={form.pujaPurpose} onChange={handleChange} required />

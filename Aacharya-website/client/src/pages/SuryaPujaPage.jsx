@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../components/booking/PujaSlotPicker';
 import { useState, useEffect } from 'react'
 import { GiSunrise, GiFlame, GiHealing, GiCoins, GiShield, GiScrollUnfurled } from 'react-icons/gi'
 import { FiUser, FiPhone, FiMail, FiMapPin, FiCalendar, FiClock, FiMessageSquare, FiCheck, FiAlertCircle, FiLoader } from 'react-icons/fi'
@@ -283,28 +284,8 @@ export default function SuryaPujaPage() {
                                     <label>Gotra (Family Lineage)</label>
                                     <input name="gotra" placeholder="e.g. Kashyap, Bharadwaj (optional)" value={form.gotra} onChange={handleChange} />
                                 </div>
-                                <div className="sp-form-group">
-                                    <label><FiCalendar /> Puja Date *</label>
-                                    <input name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                                    {availability && (
-                                        <div className={`sp-avail-badge ${availability.available ? 'ok' : 'full'}`}>
-                                            {availability.available
-                                                ? `${availability.remainingSlots}/${availability.totalSlots} slots available`
-                                                : `No slots available for this date`}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="sp-form-group">
-                                    <label><FiClock /> Preferred Start Time *</label>
-                                    <input name="time" type="time" value={form.time} onChange={handleChange} required
-                                        min="05:00" max="19:00" step="1800" />
-                                    {hint && (
-                                        <div className={`sp-hint ${hint.type}`}>
-                                            {hint.type === 'error' ? <FiAlertCircle /> : <FiCheck />} {hint.msg}
-                                        </div>
-                                    )}
-                                    <p className="sp-time-note">⚠ Each booking locks a 5-hour window. Max 5 pujas per day.</p>
-                                </div>
+                                <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
+                                
                                 <div className="sp-form-group sp-full-width">
                                     <label><FiMessageSquare /> Special Message / Wishes</label>
                                     <textarea name="message" rows={3} placeholder="Any specific wish, health issue, or prayer intention..." value={form.message} onChange={handleChange} />

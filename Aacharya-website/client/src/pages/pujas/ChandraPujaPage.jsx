@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useState, useEffect } from 'react'
 import { GiLotus, GiBrain, GiHealthNormal, GiStairsGoal, GiShield, GiSunrise } from 'react-icons/gi'
 import { FiUser, FiPhone, FiMail, FiMapPin, FiCalendar, FiClock, FiMessageSquare, FiCheck, FiAlertCircle, FiLoader } from 'react-icons/fi'
@@ -376,31 +377,12 @@ export default function ChandraPujaPage() {
                                     <label><FiMapPin /> Birth Place *</label>
                                     <input name="birthPlace" placeholder="Birth place" value={form.birthPlace} onChange={handleChange} required />
                                 </div>
-                                <div className="sp-form-group">
-                                    <label><FiCalendar /> Preferred Puja Date *</label>
-                                    <input name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                                    {availability && (
-                                        <div className={`sp-avail-badge ${availability.available ? 'ok' : 'full'}`}>
-                                            {availability.available
-                                                ? `${availability.remainingSlots}/${availability.totalSlots} slots available`
-                                                : 'No slots available for this date'}
-                                        </div>
-                                    )}
-                                </div>
+                                <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
                                 <div className="sp-form-group">
                                     <label>Pin Code *</label>
                                     <input name="pinCode" placeholder="6-digit pin code" value={form.pinCode} onChange={handleChange} required />
                                 </div>
-                                <div className="sp-form-group">
-                                    <label><FiClock /> Preferred Start Time *</label>
-                                    <input name="time" type="time" value={form.time} onChange={handleChange} required min="05:00" max="19:00" step="1800" />
-                                    {hint && (
-                                        <div className={`sp-hint ${hint.type}`}>
-                                            {hint.type === 'error' ? <FiAlertCircle /> : <FiCheck />} {hint.msg}
-                                        </div>
-                                    )}
-                                    <p className="sp-time-note">Each booking locks a 5-hour window. Max 5 pujas per day.</p>
-                                </div>
+                                
                                 <div className="sp-form-group sp-full-width">
                                     <label>Puja Purpose *</label>
                                     <textarea name="pujaPurpose" rows={2} placeholder="Describe the reason for this puja" value={form.pujaPurpose} onChange={handleChange} required />

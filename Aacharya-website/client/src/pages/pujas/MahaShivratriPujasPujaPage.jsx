@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useEffect, useState } from "react";
 import { Award, Check, Flame, HeartHandshake, ShieldCheck, Sparkles, Moon, Users, Flower2 } from "lucide-react";
 import { FiUser, FiPhone, FiMapPin, FiCalendar, FiClock, FiMessageSquare, FiCheck } from "react-icons/fi";
@@ -321,18 +322,8 @@ export default function MahaShivratriPujasPujaPage() {
                     <label>Gotra (optional)</label>
                     <input name="gotra" value={form.gotra} onChange={handleChange} placeholder="e.g. Kashyap" />
                   </div>
-                  <div className="shiv-form-group">
-                    <label>
-                      <FiCalendar /> Puja Date *
-                    </label>
-                    <input name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                  </div>
-                  <div className="shiv-form-group">
-                    <label>
-                      <FiClock /> Preferred Time *
-                    </label>
-                    <input name="time" type="time" value={form.time} onChange={handleChange} required />
-                  </div>
+                  <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
+                  
                   <div className="shiv-form-group shiv-full">
                     <label>
                       <FiMessageSquare /> Sankalp / Special Message

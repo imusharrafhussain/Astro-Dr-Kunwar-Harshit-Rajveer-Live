@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useEffect, useState } from 'react'
 import {
   FiAlertCircle,
@@ -420,9 +421,9 @@ export default function VastuDoshPujaPage() {
                   <label>Gotra *<input name="gotra" value={form.gotra} onChange={handleChange} required /></label>
                   <label>Father's Name *<input name="fatherName" value={form.fatherName} onChange={handleChange} required /></label>
                   <label><FiMapPin /> Birth Place *<input name="birthPlace" value={form.birthPlace} onChange={handleChange} required /></label>
-                  <label><FiCalendar /> Puja Date *<input name="date" type="date" min={today} value={form.date} onChange={handleChange} required /></label>
+                  <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
                   <label>Pin Code *<input name="pinCode" value={form.pinCode} onChange={handleChange} required /></label>
-                  <label><FiClock /> Start Time *<input name="time" type="time" min="05:00" max="19:00" step="1800" value={form.time} onChange={handleChange} required /></label>
+                  
                   <label className="full">Puja Purpose *<textarea name="pujaPurpose" rows={2} value={form.pujaPurpose} onChange={handleChange} required /></label>
                   <label className="full">Full Address *<textarea name="fullAddress" rows={2} value={form.fullAddress} onChange={handleChange} required /></label>
                   <label className="full">Nearest Landmark *<input name="nearestLandmark" value={form.nearestLandmark} onChange={handleChange} required /></label>

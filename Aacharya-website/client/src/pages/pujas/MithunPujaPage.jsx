@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Briefcase, Users, Shield, Sparkles, Flame, Check, Loader2, AlertCircle } from 'lucide-react';
@@ -523,26 +524,8 @@ export default function MithunPujaPage() {
                       </div>
                     </div>
                     <div className="mp-form-row">
-                      <div className="mp-form-group">
-                        <label className="mp-label" htmlFor="date">Puja Date *</label>
-                        <input className="mp-input" id="date" name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                        {availability && (
-                          <p className={`mp-avail ${availability.available ? 'mp-avail--ok' : 'mp-avail--full'}`}>
-                            {availability.available
-                              ? `${availability.remainingSlots}/${availability.totalSlots} slots available`
-                              : 'No slots available on this date'}
-                          </p>
-                        )}
-                      </div>
-                      <div className="mp-form-group">
-                        <label className="mp-label" htmlFor="time">Start Time *</label>
-                        <input className="mp-input" id="time" name="time" type="time" min="05:00" max="19:00" step="1800" value={form.time} onChange={handleChange} required />
-                        {hint && (
-                          <p className={`mp-hint ${hint.ok ? 'mp-hint--ok' : 'mp-hint--err'}`}>
-                            {hint.ok ? <Check size={12}/> : <AlertCircle size={12}/>} {hint.msg}
-                          </p>
-                        )}
-                      </div>
+                      <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
+                      
                     </div>
                     <div className="mp-form-group">
                       <label className="mp-label">Selected Package</label>

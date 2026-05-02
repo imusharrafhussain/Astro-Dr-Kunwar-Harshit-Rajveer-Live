@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useEffect, useState } from 'react'
 import { FiUser, FiPhone, FiMail, FiMapPin, FiCalendar, FiClock, FiMessageSquare, FiCheck, FiAlertCircle, FiLoader } from 'react-icons/fi'
 import { CheckCircle2, Sprout, TrendingUp, BookOpen, HeartHandshake, Shield, Award, Users, Star, Flame } from 'lucide-react'
@@ -272,8 +273,8 @@ export default function GaneshChaturthiPujasPujaPage() {
                 <label><FiMail /> Email<input name="email" type="email" value={form.email} onChange={handleChange} required /></label>
                 <label><FiPhone /> Phone<input name="phone" value={form.phone} onChange={handleChange} required /></label>
                 <label><FiMapPin /> City / Location<input name="address" value={form.address} onChange={handleChange} /></label>
-                <label><FiCalendar /> Date<input name="date" type="date" min={today} value={form.date} onChange={handleChange} required /></label>
-                <label><FiClock /> Time<input name="time" type="time" value={form.time} onChange={handleChange} min="05:00" max="19:00" step="1800" required /></label>
+                <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
+                
                 <label className="gc-full">Selected Package<input value={PACKAGES.find(p => p.id === selectedPkg)?.name || ''} readOnly /></label>
                 <label className="gc-full"><FiMessageSquare /> Message<textarea name="message" rows={3} value={form.message} onChange={handleChange} /></label>
               </div>

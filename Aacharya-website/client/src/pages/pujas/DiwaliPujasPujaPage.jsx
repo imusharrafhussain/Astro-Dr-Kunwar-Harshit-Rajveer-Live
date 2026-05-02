@@ -1,3 +1,4 @@
+import PujaSlotPicker from '../../components/booking/PujaSlotPicker';
 import { useEffect, useMemo, useState } from 'react'
 import {
   FiUser,
@@ -451,29 +452,8 @@ export default function DiwaliPujasPujaPage() {
                     <label>Gotra (optional)</label>
                     <input name="gotra" placeholder="e.g. Kashyap" value={form.gotra} onChange={handleChange} />
                   </div>
-                  <div className="dw-form-group">
-                    <label>
-                      <FiCalendar /> Puja Date *
-                    </label>
-                    <input name="date" type="date" min={today} value={form.date} onChange={handleChange} required />
-                    {availability && (
-                      <div className={`dw-avail ${availability.available ? 'ok' : 'full'}`}>
-                        {availability.available ? `${availability.remainingSlots}/${availability.totalSlots} slots available` : 'No slots available for this date'}
-                      </div>
-                    )}
-                  </div>
-                  <div className="dw-form-group">
-                    <label>
-                      <FiClock /> Preferred Start Time *
-                    </label>
-                    <input name="time" type="time" value={form.time} onChange={handleChange} required min="05:00" max="19:00" step="1800" />
-                    {timeHint && (
-                      <div className={`dw-hint ${timeHint.type}`}>
-                        {timeHint.type === 'error' ? <FiAlertCircle /> : <FiCheck />} {timeHint.msg}
-                      </div>
-                    )}
-                    <p className="dw-time-note">⚠ Each booking locks a 5-hour window. Max 5 pujas per day.</p>
-                  </div>
+                  <div style={{ gridColumn: '1 / -1', width: '100%' }}><PujaSlotPicker form={form} setForm={setForm} /></div>
+                  
                   <div className="dw-form-group dw-full">
                     <label>
                       <FiMessageSquare /> Special Message / Wishes
