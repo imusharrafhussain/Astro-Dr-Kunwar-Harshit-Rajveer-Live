@@ -67,16 +67,16 @@ export default function RecordsTable({ records, onDelete, onEdit }) {
                   <td key={c}>{normalizeValue(r?.[c])}</td>
                 ))}
                 <td>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     {r.status === 'pending' && (
-                      <button className="buttonPrimary" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => {
+                      <button className="buttonPrimary" style={{ padding: '4px 8px', minHeight: 'unset', whiteSpace: 'nowrap' }} onClick={() => {
                         if (window.confirm('Confirm this booking?')) {
                           onEdit(r._id, { status: 'confirmed' });
                         }
                       }}>Confirm</button>
                     )}
-                    <button className="buttonGhost" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => handleEditClick(r)}>Edit</button>
-                    <button className="buttonSecondary" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => {
+                    <button className="buttonGhost" style={{ padding: '4px 8px', minHeight: 'unset', whiteSpace: 'nowrap' }} onClick={() => handleEditClick(r)}>Edit</button>
+                    <button className="buttonSecondary" style={{ padding: '4px 8px', minHeight: 'unset', whiteSpace: 'nowrap' }} onClick={() => {
                       if (window.confirm('Are you sure you want to delete this record?')) {
                         onDelete(r._id);
                       }

@@ -7,6 +7,8 @@ const Contact = require('../models/Contact');
 const PujaBooking = require('../models/PujaBooking');
 
 const User = require('../models/User');
+const sendEmail = require('../utils/sendEmail');
+const { escapeHtml } = require('../utils/sanitize');
 
 function getAdminSecret() {
   return process.env.ADMIN_JWT_SECRET || process.env.JWT_SECRET;
@@ -226,10 +228,38 @@ exports.updateRecord = async (req, res, next) => {
     }
     // Strip protected fields
     const { _id, __v, createdAt, updatedAt, password, ...safeBody } = req.body || {};
-    const updated = await Model.findByIdAndUpdate(id, { $set: safeBody }, { new: true, runValidators: false }).lean();
-    if (!updated) {
+
+    const oldRecord = await Model.findById(id).lean();
+    if (!oldRecord) {
       return res.status(404).json({ success: false, error: 'Record not found.' });
     }
+
+    const updated = await Model.findByIdAndUpdate(id, { $set: safeBody }, { new: true, runValidators: false }).lean();
+
+    if (Model.modelName === 'Appointment' && safeBody.status === 'confirmed' && oldRecord.status !== 'confirmed') {
+      const safeName = escapeHtml(updated.name);
+      const safeService = escapeHtml(updated.service);
+      const safePreferredTime = escapeHtml(updated.preferredTime);
+      const preferredDate = updated.preferredDate ? new Date(updated.preferredDate) : null;
+      const safePreferredDate = preferredDate && !isNaN(preferredDate)
+          ? preferredDate.toLocaleDateString()
+          : '';
+
+      sendEmail({
+          to: updated.email,
+          subject: 'Consultation Booking Confirmed — Astro Dr Kunwar Harshit Rajveer',
+          html: `
+      <h2>Hello ${safeName},</h2>
+      <p>Your consultation booking has been <strong>confirmed</strong>!</p>
+      <p><strong>Service:</strong> ${safeService}</p>
+      ${safePreferredDate ? `<p><strong>Date:</strong> ${safePreferredDate}</p>` : ''}
+      <p><strong>Time:</strong> ${safePreferredTime}</p>
+      <p>We look forward to connecting with you.</p>
+      <p>— Astro Dr Kunwar Harshit Rajveer Team</p>
+    `,
+      }).catch(console.error);
+    }
+
     return res.json({ success: true, data: updated });
   } catch (err) {
     return next(err);
