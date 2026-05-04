@@ -537,7 +537,7 @@
   letter-spacing: 0.04em;
 }
 .bk-cal-day {
-  aspect-ratio: 1;
+  height: 36px;
   border: none;
   border-radius: 8px;
   background: none;
