@@ -343,7 +343,7 @@ function SlotPicker({ details, onConfirm }) {
         preferredTime: slot.label,
       };
 
-      const API_BASE = import.meta.env.VITE_API_URL || '/api';
+      const API_BASE = import.meta.env.VITE_API_URL || 'https://dr-kunwar-harshit-rajveer.onrender.com/api';
       const res = await fetch(`${API_BASE}/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

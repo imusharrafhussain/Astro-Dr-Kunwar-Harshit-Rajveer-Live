@@ -443,6 +443,11 @@
 
 /* ── Toast ── */
 .bk-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100000;
   background: #2d1a1a;
   color: #FAF0DC;
   border-left: 4px solid var(--bk-gold);
@@ -452,10 +457,12 @@
   font-family: 'Inter', sans-serif;
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   animation: bkToastIn 0.3s ease;
+  max-width: 90vw;
+  text-align: center;
 }
 @keyframes bkToastIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
 /* ── Demand Banner ── */
