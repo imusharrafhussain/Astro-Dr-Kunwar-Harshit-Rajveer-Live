@@ -66,9 +66,9 @@ export default function AnalyticsDashboard() {
         <KpiCard title="Drop-offs" value={kpis.dropOffs} icon={<TrendingDown size={24} />} trend="-5%" isPositive={false} />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '24px', marginBottom: '32px' }}>
         {/* SECTION 2: CONVERSION FUNNEL */}
-        <div className="chart-card">
+        <div className="chart-card glass-card">
           <h3 className="chart-title">Conversion Funnel</h3>
           <div style={{ height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -88,7 +88,7 @@ export default function AnalyticsDashboard() {
         </div>
 
         {/* SECTION 4: TIME-BASED ANALYTICS */}
-        <div className="chart-card">
+        <div className="chart-card glass-card">
           <h3 className="chart-title">Traffic & Submissions (Last 7 Days)</h3>
           <div style={{ height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -107,9 +107,9 @@ export default function AnalyticsDashboard() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '24px' }}>
         {/* SECTION 3: CATEGORY ANALYTICS */}
-        <div className="chart-card">
+        <div className="chart-card glass-card">
           <h3 className="chart-title">Submissions by Category</h3>
           <div style={{ height: 300, display: 'flex' }}>
             <ResponsiveContainer width="50%" height="100%">
@@ -137,7 +137,7 @@ export default function AnalyticsDashboard() {
         </div>
 
         {/* SECTION 5: ADMIN ACTION TRACKING */}
-        <div className="chart-card">
+        <div className="chart-card glass-card">
           <h3 className="chart-title">Status Overview (Consultations)</h3>
           <div style={{ height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -159,11 +159,7 @@ export default function AnalyticsDashboard() {
 
       <style jsx="true">{`
         .chart-card {
-          background: var(--bgCard);
-          border: 1px solid var(--border);
-          border-radius: 12px;
           padding: 20px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .chart-title {
           margin: 0 0 16px;
@@ -179,15 +175,11 @@ export default function AnalyticsDashboard() {
 
 function KpiCard({ title, value, icon, trend, isPositive }) {
   return (
-    <div style={{
-      background: 'var(--bgCard)',
-      border: '1px solid var(--border)',
-      borderRadius: '12px',
+    <div className="glass-card" style={{
       padding: '20px',
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ color: 'var(--textSecondary)', fontSize: '0.9rem', fontWeight: 500 }}>{title}</div>
