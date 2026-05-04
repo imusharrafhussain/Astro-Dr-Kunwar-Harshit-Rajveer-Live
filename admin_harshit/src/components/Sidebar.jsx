@@ -1,6 +1,6 @@
 export default function Sidebar({ active, onSelect }) {
   const items = [
-    { key: 'dashboard', label: 'Dashboard Overview' },
+    { key: 'analytics', label: 'Analytics' },
     { key: 'reports', label: 'Reports' },
     { key: 'consultations', label: 'Consultation' },
     { key: 'numerology', label: 'Numerology' },

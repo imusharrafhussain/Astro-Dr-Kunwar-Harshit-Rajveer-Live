@@ -4,10 +4,10 @@ import api from '../lib/api';
 import { clearToken } from '../lib/auth';
 import Sidebar from '../components/Sidebar.jsx';
 import RecordsTable from '../components/RecordsTable.jsx';
-import DashboardOverview from '../components/DashboardOverview.jsx';
+import AnalyticsDashboard from '../components/AnalyticsDashboard.jsx';
 
 const CATEGORY_TITLES = {
-  dashboard: 'Business Intelligence Dashboard',
+  analytics: 'Analytics',
   reports: 'Reports',
   consultations: 'Consultation',
   numerology: 'Numerology',
@@ -18,7 +18,7 @@ const CATEGORY_TITLES = {
 };
 
 export default function DashboardPage() {
-  const [category, setCategory] = useState('dashboard');
+  const [category, setCategory] = useState('analytics');
   const [loading, setLoading] = useState(false);
   const [records, setRecords] = useState([]);
   const [error, setError] = useState('');
@@ -70,7 +70,7 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    if (category !== 'dashboard') {
+    if (category !== 'analytics') {
       load(category);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,11 +119,11 @@ export default function DashboardPage() {
           <div className="contentHeader">
             <div>
               <div className="contentTitle">{title}</div>
-              {category !== 'dashboard' && (
+              {category !== 'analytics' && (
                 <div className="muted">All fields are shown exactly as submitted by users.</div>
               )}
             </div>
-            {category !== 'dashboard' && (
+            {category !== 'analytics' && (
               <button className="buttonSecondary" type="button" onClick={() => load(category)} disabled={loading}>
                 {loading ? 'Refreshing…' : 'Refresh'}
               </button>
@@ -136,8 +136,8 @@ export default function DashboardPage() {
             </div>
           ) : (
             <>
-              {category === 'dashboard' ? (
-                <DashboardOverview />
+              {category === 'analytics' ? (
+                <AnalyticsDashboard />
               ) : loading ? (
                 <div className="tableBox" style={{ padding: '40px', textAlign: 'center' }}>Loading…</div>
               ) : records?.length ? (
