@@ -20,21 +20,6 @@ const MORNING_AFTERNOON_IDS = ['10', '11', '12', '13', '14', '15'];
 const EVENING_IDS = ['16', '17', '18', '19', '20'];
 const MIN_OFFSET_DAYS = 3;
 
-function hashDate(date) {
-  const s = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  let h = 2166136261;
-  for (let i = 0; i < s.length; i++) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 16777619) >>> 0;
-  }
-  return Math.abs(h);
-}
-function getLockedEveningId(date) {
-  return EVENING_IDS[hashDate(date) % EVENING_IDS.length];
-}
-function getSlotsLeft(date, slotId) {
-  return (hashDate(date) + Number(slotId)) % 3 + 1;
-}
 function isDateDisabled(date) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -310,8 +295,28 @@ function SlotPicker({ details, onConfirm }) {
   const [slotId, setSlotId] = useState(null);
   const [confirming, setConfirming] = useState(false);
   const [toast, setToast] = useState(null);
+  const [bookedSlots, setBookedSlots] = useState([]);
 
-  const lockedEvening = date ? getLockedEveningId(date) : null;
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchBookedSlots() {
+      try {
+        let API_BASE = import.meta.env.VITE_API_URL || 'https://dr-kunwar-harshit-rajveer.onrender.com/api';
+        API_BASE = API_BASE.replace(/\/$/, '');
+        if (!API_BASE.endsWith('/api')) API_BASE += '/api';
+        
+        const res = await fetch(`${API_BASE}/appointments/booked`);
+        const data = await res.json();
+        if (data.success && isMounted) {
+          setBookedSlots(data.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch booked slots', err);
+      }
+    }
+    fetchBookedSlots();
+    return () => { isMounted = false; };
+  }, []);
 
   const showToast = (msg) => {
     setToast(msg);
@@ -324,6 +329,13 @@ function SlotPicker({ details, onConfirm }) {
       return;
     }
     setSlotId(id);
+  };
+
+  const isSlotLocked = (slotLabel) => {
+    if (!date) return false;
+    // Format date as YYYY-MM-DD
+    const dateStr = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+    return bookedSlots.some(b => b.date === dateStr && b.time === slotLabel);
   };
 
   const handleConfirm = async () => {
@@ -396,10 +408,9 @@ function SlotPicker({ details, onConfirm }) {
           <div className="bk-slots-grid">
             {ALL_SLOTS.map(s => {
               const isMorningLock = MORNING_AFTERNOON_IDS.includes(s.id);
-              const isEveningLock = s.id === lockedEvening;
-              const locked = isMorningLock || isEveningLock;
+              const isDbLocked = isSlotLocked(s.label);
+              const locked = isMorningLock || isDbLocked;
               const selected = slotId === s.id;
-              const left = !locked ? getSlotsLeft(date, s.id) : 0;
 
               return (
                 <button

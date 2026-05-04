@@ -68,6 +68,13 @@ export default function RecordsTable({ records, onDelete, onEdit }) {
                 ))}
                 <td>
                   <div style={{ display: 'flex', gap: '8px' }}>
+                    {r.status === 'pending' && (
+                      <button className="buttonPrimary" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => {
+                        if (window.confirm('Confirm this booking?')) {
+                          onEdit(r._id, { status: 'confirmed' });
+                        }
+                      }}>Confirm</button>
+                    )}
                     <button className="buttonGhost" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => handleEditClick(r)}>Edit</button>
                     <button className="buttonSecondary" style={{ padding: '4px 8px', minHeight: 'unset' }} onClick={() => {
                       if (window.confirm('Are you sure you want to delete this record?')) {

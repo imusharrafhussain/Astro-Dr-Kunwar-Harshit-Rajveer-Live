@@ -42,3 +42,27 @@ exports.createAppointment = async (req, res, next) => {
         next(err);
     }
 };
+
+// @desc    Get booked slots
+// @route   GET /api/appointments/booked
+// @access  Public
+exports.getBookedSlots = async (req, res, next) => {
+    try {
+        // Fetch appointments that are not cancelled
+        const appointments = await Appointment.find({ status: { $ne: 'cancelled' } })
+            .select('preferredDate preferredTime status')
+            .lean();
+        
+        const booked = appointments.map(app => {
+            const dateObj = new Date(app.preferredDate);
+            return {
+                date: !isNaN(dateObj) ? dateObj.toISOString().split('T')[0] : null,
+                time: app.preferredTime,
+            };
+        }).filter(b => b.date);
+        
+        res.json({ success: true, data: booked });
+    } catch (err) {
+        next(err);
+    }
+};
