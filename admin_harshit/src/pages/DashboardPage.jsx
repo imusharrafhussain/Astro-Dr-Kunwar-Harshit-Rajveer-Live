@@ -45,6 +45,28 @@ export default function DashboardPage() {
     }
   }
 
+  async function handleDelete(id) {
+    try {
+      setLoading(true);
+      await api.delete(`/api/admin/records/${encodeURIComponent(category)}/${id}`);
+      await load(category);
+    } catch (err) {
+      setError(err?.response?.data?.error || err.message || 'Failed to delete record');
+      setLoading(false);
+    }
+  }
+
+  async function handleEdit(id, updatedData) {
+    try {
+      setLoading(true);
+      await api.patch(`/api/admin/records/${encodeURIComponent(category)}/${id}`, updatedData);
+      await load(category);
+    } catch (err) {
+      setError(err?.response?.data?.error || err.message || 'Failed to update record');
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     load(category);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,7 +127,7 @@ export default function DashboardPage() {
               {error}
             </div>
           ) : null}
-          <RecordsTable records={records} />
+          <RecordsTable records={records} onDelete={handleDelete} onEdit={handleEdit} />
         </section>
       </div>
     </div>

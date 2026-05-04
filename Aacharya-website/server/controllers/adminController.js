@@ -179,3 +179,60 @@ exports.listRecords = async (req, res, next) => {
   }
 };
 
+// ── Helper: resolve model from category ──────────────────────────────────────
+function modelForCategory(category) {
+  const c = String(category || '').toLowerCase();
+  if (c === 'reports') return Report;
+  if (c === 'consultations' || c === 'consultation') return Appointment;
+  if (c === 'numerology') return null; // mixed — handle separately
+  if (c === 'book-puja' || c === 'bookpuja') return PujaBooking;
+  if (c === 'horoscope') return Appointment;
+  if (c === 'contacts' || c === 'contact') return Contact;
+  if (c === 'users') return User;
+  return null;
+}
+
+// DELETE /api/admin/records/:category/:id
+exports.deleteRecord = async (req, res, next) => {
+  try {
+    if (!assertDbConnected()) {
+      return res.status(503).json({ success: false, error: 'Database not connected.' });
+    }
+    const { category, id } = req.params;
+    const Model = modelForCategory(category);
+    if (!Model) {
+      return res.status(400).json({ success: false, error: 'Cannot delete from this category.' });
+    }
+    const deleted = await Model.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).json({ success: false, error: 'Record not found.' });
+    }
+    return res.json({ success: true, message: 'Record deleted.' });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// PATCH /api/admin/records/:category/:id
+exports.updateRecord = async (req, res, next) => {
+  try {
+    if (!assertDbConnected()) {
+      return res.status(503).json({ success: false, error: 'Database not connected.' });
+    }
+    const { category, id } = req.params;
+    const Model = modelForCategory(category);
+    if (!Model) {
+      return res.status(400).json({ success: false, error: 'Cannot update this category.' });
+    }
+    // Strip protected fields
+    const { _id, __v, createdAt, updatedAt, password, ...safeBody } = req.body || {};
+    const updated = await Model.findByIdAndUpdate(id, { $set: safeBody }, { new: true, runValidators: false }).lean();
+    if (!updated) {
+      return res.status(404).json({ success: false, error: 'Record not found.' });
+    }
+    return res.json({ success: true, data: updated });
+  } catch (err) {
+    return next(err);
+  }
+};
+

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { body } = require('express-validator');
 const validate = require('../middleware/validate');
 const adminAuth = require('../middleware/adminAuth');
-const { login, summary, listRecords } = require('../controllers/adminController');
+const { login, summary, listRecords, deleteRecord, updateRecord } = require('../controllers/adminController');
 
 router.post(
   '/login',
@@ -16,6 +16,9 @@ router.post(
 
 router.get('/summary', adminAuth, summary);
 router.get('/records/:category', adminAuth, listRecords);
+router.delete('/records/:category/:id', adminAuth, deleteRecord);
+router.patch('/records/:category/:id', adminAuth, updateRecord);
 
 module.exports = router;
+
 
