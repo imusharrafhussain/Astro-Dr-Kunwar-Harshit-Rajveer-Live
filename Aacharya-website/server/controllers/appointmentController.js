@@ -21,7 +21,7 @@ exports.createAppointment = async (req, res, next) => {
         // Send confirmation email (non-blocking)
         sendEmail({
             to: req.body.email,
-            subject: 'Consultation Booking Confirmation — AstroBharat AI',
+            subject: 'Consultation Booking Confirmation — Astro Dr Kunwar Harshit Rajveer',
             html: `
         <h2>Thank you, ${safeName}!</h2>
         <p>Your consultation booking has been received.</p>
@@ -29,7 +29,7 @@ exports.createAppointment = async (req, res, next) => {
         ${safePreferredDate ? `<p><strong>Date:</strong> ${safePreferredDate}</p>` : ''}
         <p><strong>Time:</strong> ${safePreferredTime}</p>
         <p>We will confirm your appointment within 24 hours.</p>
-        <p>— AstroBharat AI Team</p>
+        <p>— Astro Dr Kunwar Harshit Rajveer Team</p>
       `,
         }).catch(console.error);
 

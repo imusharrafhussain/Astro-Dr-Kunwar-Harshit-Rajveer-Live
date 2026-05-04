@@ -19,7 +19,7 @@ const sendEmail = async ({ to, subject, html }) => {
         });
 
         await transporter.sendMail({
-            from: `"AstroBharat AI" <${process.env.EMAIL_USER}>`,
+            from: `"Astro Dr Kunwar Harshit Rajveer" <${process.env.EMAIL_USER}>`,
             to,
             subject,
             html,

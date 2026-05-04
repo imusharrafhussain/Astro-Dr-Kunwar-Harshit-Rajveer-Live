@@ -14,12 +14,12 @@ exports.submitContactForm = async (req, res, next) => {
 
         sendEmail({
             to: req.body.email,
-            subject: 'We received your message — AstroBharat AI',
+            subject: 'We received your message — Astro Dr Kunwar Harshit Rajveer',
             html: `
         <h2>Hello ${safeName},</h2>
         <p>Thank you for reaching out to us!</p>
         <p>We have received your message about <strong>"${safeSubject}"</strong> and will respond within 24-48 hours.</p>
-        <p>— AstroBharat AI Team</p>
+        <p>— Astro Dr Kunwar Harshit Rajveer Team</p>
       `,
         }).catch(console.error);
 

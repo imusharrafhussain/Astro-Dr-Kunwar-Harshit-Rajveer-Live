@@ -39,7 +39,7 @@ export default function LoginPage() {
     <div className="loginShell">
       <div className="loginCard">
         <div className="loginTitle">Admin Login</div>
-        <div className="loginSubtitle">AstroBharat AI — Harshit Admin Panel</div>
+        <div className="loginSubtitle">Astro Dr Kunwar Harshit Rajveer — Harshit Admin Panel</div>
         <form onSubmit={onSubmit} className="form" autoComplete="off">
           <label className="label">
             Email

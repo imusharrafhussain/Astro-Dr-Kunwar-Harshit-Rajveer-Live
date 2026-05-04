@@ -14,13 +14,13 @@ exports.createReport = async (req, res, next) => {
 
         sendEmail({
             to: req.body.email,
-            subject: `${safeReportType} Report Request — AstroBharat AI`,
+            subject: `${safeReportType} Report Request — Astro Dr Kunwar Harshit Rajveer`,
             html: `
         <h2>Hello ${safeName},</h2>
         <p>Your <strong>${safeReportType}</strong> report request has been received.</p>
         <p>Our experts will prepare your personalized report within 3-5 business days.</p>
         <p>You will receive it via email once ready.</p>
-        <p>— AstroBharat AI Team</p>
+        <p>— Astro Dr Kunwar Harshit Rajveer Team</p>
       `,
         }).catch(console.error);
 

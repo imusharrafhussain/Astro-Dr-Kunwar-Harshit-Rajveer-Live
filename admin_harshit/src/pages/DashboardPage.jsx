@@ -94,7 +94,7 @@ export default function DashboardPage() {
           <img
             className="brandLogoImg"
             src="/c__Users_perve_AppData_Roaming_Cursor_User_workspaceStorage_7f96d3c00da6498d2c01b6031a03c32f_images_logo-dfda88b4-a45c-422f-9005-9b973b11bca1.png"
-            alt="AstroBharat AI logo"
+            alt="Astro Dr Kunwar Harshit Rajveer logo"
           />
         </div>
 
