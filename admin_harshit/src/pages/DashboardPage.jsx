@@ -4,8 +4,10 @@ import api from '../lib/api';
 import { clearToken } from '../lib/auth';
 import Sidebar from '../components/Sidebar.jsx';
 import RecordsTable from '../components/RecordsTable.jsx';
+import DashboardOverview from '../components/DashboardOverview.jsx';
 
 const CATEGORY_TITLES = {
+  dashboard: 'Business Intelligence Dashboard',
   reports: 'Reports',
   consultations: 'Consultation',
   numerology: 'Numerology',
@@ -16,7 +18,7 @@ const CATEGORY_TITLES = {
 };
 
 export default function DashboardPage() {
-  const [category, setCategory] = useState('reports');
+  const [category, setCategory] = useState('dashboard');
   const [loading, setLoading] = useState(false);
   const [records, setRecords] = useState([]);
   const [error, setError] = useState('');
@@ -68,7 +70,9 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    load(category);
+    if (category !== 'dashboard') {
+      load(category);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
@@ -115,22 +119,40 @@ export default function DashboardPage() {
           <div className="contentHeader">
             <div>
               <div className="contentTitle">{title}</div>
-              <div className="muted">All fields are shown exactly as submitted by users.</div>
+              {category !== 'dashboard' && (
+                <div className="muted">All fields are shown exactly as submitted by users.</div>
+              )}
             </div>
-            <button className="buttonSecondary" type="button" onClick={() => load(category)} disabled={loading}>
-              {loading ? 'Refreshing…' : 'Refresh'}
-            </button>
+            {category !== 'dashboard' && (
+              <button className="buttonSecondary" type="button" onClick={() => load(category)} disabled={loading}>
+                {loading ? 'Refreshing…' : 'Refresh'}
+              </button>
+            )}
           </div>
 
           {error ? (
             <div className={error.toLowerCase().includes('database is not connected') ? 'infoBox' : 'error'}>
               {error}
             </div>
-          ) : null}
-          <RecordsTable records={records} onDelete={handleDelete} onEdit={handleEdit} />
+          ) : (
+            <>
+              {category === 'dashboard' ? (
+                <DashboardOverview />
+              ) : loading ? (
+                <div className="tableBox" style={{ padding: '40px', textAlign: 'center' }}>Loading…</div>
+              ) : records?.length ? (
+                <div className="tableBox">
+                  <RecordsTable records={records} onDelete={handleDelete} onEdit={handleEdit} />
+                </div>
+              ) : (
+                <div className="tableBox" style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
+                  No records found in this category.
+                </div>
+              )}
+            </>
+          )}
         </section>
       </div>
     </div>
   );
 }
-
