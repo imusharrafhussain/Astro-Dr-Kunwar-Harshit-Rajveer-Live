@@ -68,7 +68,14 @@ exports.summary = async (req, res, next) => {
 
     const [reports, consultations, contacts, users] = await Promise.all([
       Report.countDocuments(),
-      Appointment.countDocuments(),
+      Appointment.countDocuments({
+        $and: [
+          { service: { $not: { $regex: 'Numerology', $options: 'i' } } },
+          { service: { $not: { $regex: 'Vedic Birth', $options: 'i' } } },
+          { service: { $not: { $regex: 'Relationship', $options: 'i' } } },
+          { service: { $not: { $regex: 'Career & Finance', $options: 'i' } } }
+        ]
+      }),
       Contact.countDocuments(),
       User.countDocuments()
     ]);
@@ -234,7 +241,17 @@ exports.listRecords = async (req, res, next) => {
       return res.json({ success: true, data: rows });
     }
     if (category === 'consultation' || category === 'consultations') {
-      const rows = await Appointment.find().sort({ createdAt: -1 }).limit(limit).lean();
+      const rows = await Appointment.find({
+        $and: [
+          { service: { $not: { $regex: 'Numerology', $options: 'i' } } },
+          { service: { $not: { $regex: 'Vedic Birth', $options: 'i' } } },
+          { service: { $not: { $regex: 'Relationship', $options: 'i' } } },
+          { service: { $not: { $regex: 'Career & Finance', $options: 'i' } } }
+        ]
+      })
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .lean();
       return res.json({ success: true, data: rows });
     }
     if (category === 'numerology') {
