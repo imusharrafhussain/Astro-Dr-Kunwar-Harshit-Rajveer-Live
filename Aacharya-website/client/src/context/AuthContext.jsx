@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 // Use VITE_API_URL in production (set in Vercel env vars), fallback to /api for local dev proxy
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+let API_BASE = import.meta.env.VITE_API_URL || '/api';
+API_BASE = API_BASE.replace(/\/$/, '');
+if (!API_BASE.endsWith('/api')) {
+    API_BASE += '/api';
+}
 
 export const useAuth = () => useContext(AuthContext);
 

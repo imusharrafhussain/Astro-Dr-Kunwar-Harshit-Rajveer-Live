@@ -63,7 +63,11 @@ const ChatInterface = ({ isWidget = false, onClose }) => {
             }));
 
             // Determine API URL based on environment
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+            let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+            apiUrl = apiUrl.replace(/\/$/, '');
+            if (!apiUrl.endsWith('/api')) {
+                apiUrl += '/api';
+            }
             
             const response = await fetch(`${apiUrl}/chatbot`, {
                 method: 'POST',
