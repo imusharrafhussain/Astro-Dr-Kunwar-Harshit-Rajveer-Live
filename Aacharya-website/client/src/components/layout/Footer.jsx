@@ -57,11 +57,11 @@ export default function Footer() {
                             </li>
                             <li>
                                 <FiMail className="footer-contact-icon" />
-                                <a href="mailto:drkunwarharshitrajveer@gmail.com">drkunwarharshitrajveer@gmail.com</a>
+                                <a href="mailto:drkuwarharshitrajveer1@gmail.com">drkuwarharshitrajveer1@gmail.com</a>
                             </li>
                             <li>
                                 <FiPhone className="footer-contact-icon" />
-                                <a href="tel:+919622609424">+91 9622609424</a>
+                                <a href="tel:+917068883996">+91 7068883996</a>
                             </li>
                         </ul>
                     </div>

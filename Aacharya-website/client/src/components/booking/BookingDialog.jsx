@@ -221,7 +221,7 @@ function DetailsForm({ defaultValues, onSubmit }) {
 
   return (
     <form className="bk-form" onSubmit={handleSubmit}>
-      {field('fullName', 'Full Name', '👤', 'text', 'e.g. Riya Sharma')}
+      {field('fullName', 'Full Name', '👤', 'text', 'e.g. Your Name')}
       <div className="bk-row-2">
         {field('phone', 'Phone Number', '📱', 'text', '10-digit mobile')}
         {field('email', 'Email', '✉️', 'email', 'you@example.com')}
@@ -305,7 +305,7 @@ function DetailsForm({ defaultValues, onSubmit }) {
 }
 
 // ─── Step 2: Slot Picker ───────────────────────────────────────────────
-function SlotPicker({ onConfirm }) {
+function SlotPicker({ details, onConfirm }) {
   const [date, setDate] = useState(null);
   const [slotId, setSlotId] = useState(null);
   const [confirming, setConfirming] = useState(false);
@@ -329,10 +329,37 @@ function SlotPicker({ onConfirm }) {
   const handleConfirm = async () => {
     if (!date || !slotId) return;
     setConfirming(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setConfirming(false);
     const slot = ALL_SLOTS.find(s => s.id === slotId);
-    onConfirm({ date, slotId, slotLabel: slot.label });
+
+    try {
+      const payload = {
+        name: details.fullName,
+        email: details.email,
+        phone: details.phone,
+        address: details.address,
+        service: details.service,
+        subject: details.subject,
+        preferredDate: date.toISOString(),
+        preferredTime: slot.label,
+      };
+
+      const API_BASE = import.meta.env.VITE_API_URL || '/api';
+      const res = await fetch(`${API_BASE}/appointments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to book appointment. Please try again.');
+      }
+      
+      onConfirm({ date, slotId, slotLabel: slot.label });
+    } catch (err) {
+      showToast(err.message || 'Error occurred while booking slot.');
+    } finally {
+      setConfirming(false);
+    }
   };
 
   return (
@@ -545,6 +572,7 @@ export function BookingDialog({ open, onOpenChange, serviceLabel, inline = false
         )}
         {step === 'slot' && (
           <SlotPicker
+            details={details}
             onConfirm={(s) => { setSelection(s); setStep('done'); }}
           />
         )}
