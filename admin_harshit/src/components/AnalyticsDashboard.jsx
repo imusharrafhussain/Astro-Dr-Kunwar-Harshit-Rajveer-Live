@@ -62,7 +62,7 @@ export default function AnalyticsDashboard() {
         <KpiCard title="Total Visitors" value={kpis.visitors} icon={<Users size={24} />} trend="+12%" isPositive={true} />
         <KpiCard title="Form Opens" value={kpis.formOpened} icon={<MousePointerClick size={24} />} trend="+8%" isPositive={true} />
         <KpiCard title="Submissions" value={kpis.submissions} icon={<FileText size={24} />} trend="+15%" isPositive={true} />
-        <KpiCard title="Conversion Rate" value={\`\${kpis.conversionRate}%\`} icon={<CheckCircle size={24} />} trend="+2%" isPositive={true} />
+        <KpiCard title="Conversion Rate" value={`${kpis.conversionRate}%`} icon={<CheckCircle size={24} />} trend="+2%" isPositive={true} />
         <KpiCard title="Drop-offs" value={kpis.dropOffs} icon={<TrendingDown size={24} />} trend="-5%" isPositive={false} />
       </div>
 
@@ -79,7 +79,7 @@ export default function AnalyticsDashboard() {
                 <RechartsTooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#333' }} />
                 <Bar dataKey="count" barSize={30} radius={[0, 4, 4, 0]}>
                   {funnel.map((entry, index) => (
-                    <Cell key={\`cell-\${index}\`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Bar>
               </ComposedChart>
@@ -116,7 +116,7 @@ export default function AnalyticsDashboard() {
               <PieChart>
                 <Pie data={categories} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
                   {categories.map((entry, index) => (
-                    <Cell key={\`cell-\${index}\`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <RechartsTooltip contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#333' }} />
@@ -128,7 +128,7 @@ export default function AnalyticsDashboard() {
                 <RechartsTooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#333' }} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {categories.map((entry, index) => (
-                    <Cell key={\`cell-\${index}\`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Bar>
               </BarChart>
@@ -148,7 +148,7 @@ export default function AnalyticsDashboard() {
                 <RechartsTooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#333' }} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {adminActions.map((entry, index) => (
-                    <Cell key={\`cell-\${index}\`} fill={entry.fill} />
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
                 </Bar>
               </BarChart>
@@ -157,7 +157,7 @@ export default function AnalyticsDashboard() {
         </div>
       </div>
 
-      <style jsx="true">{\`
+      <style jsx="true">{`
         .chart-card {
           background: var(--bgCard);
           border: 1px solid var(--border);
@@ -172,7 +172,7 @@ export default function AnalyticsDashboard() {
           font-weight: 600;
           color: var(--textSecondary);
         }
-      \`}</style>
+      `}</style>
     </div>
   );
 }
