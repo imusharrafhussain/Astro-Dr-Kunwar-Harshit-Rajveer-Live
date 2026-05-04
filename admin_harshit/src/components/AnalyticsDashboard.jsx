@@ -51,7 +51,7 @@ export default function AnalyticsDashboard() {
   const COLORS = ['#d4af37', '#f39c12', '#e74c3c', '#9b59b6', '#3498db', '#2ecc71'];
 
   return (
-    <div className="analytics-dashboard" style={{ padding: '24px', color: 'var(--text)' }}>
+    <div className="analytics-dashboard" style={{ padding: '24px', paddingBottom: '60px', color: 'var(--text)', overflowY: 'auto', height: '100%', maxHeight: 'calc(100vh - 80px)' }}>
       {/* SECTION 1: KPI SUMMARY CARDS */}
       <div style={{
         display: 'grid',
