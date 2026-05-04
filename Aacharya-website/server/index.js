@@ -42,7 +42,7 @@ app.use(cors({
     origin: (origin, cb) => {
         // Allow same-origin, curl, and server-to-server requests
         if (!origin) return cb(null, true);
-        if (allowedOrigins.includes(origin)) return cb(null, true);
+        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) return cb(null, true);
         return cb(new Error('Not allowed by CORS'));
     },
     credentials: true,
