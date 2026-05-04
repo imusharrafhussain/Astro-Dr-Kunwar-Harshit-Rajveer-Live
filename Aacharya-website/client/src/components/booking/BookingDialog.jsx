@@ -333,9 +333,14 @@ function SlotPicker({ details, onConfirm }) {
 
   const isSlotLocked = (slotLabel) => {
     if (!date) return false;
-    // Format date as YYYY-MM-DD
-    const dateStr = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-    return bookedSlots.some(b => b.date === dateStr && b.time === slotLabel);
+    return bookedSlots.some(b => {
+      if (!b.date) return false;
+      const bDate = new Date(b.date);
+      return bDate.getFullYear() === date.getFullYear() &&
+             bDate.getMonth() === date.getMonth() &&
+             bDate.getDate() === date.getDate() &&
+             b.time === slotLabel;
+    });
   };
 
   const handleConfirm = async () => {

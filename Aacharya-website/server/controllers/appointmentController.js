@@ -30,12 +30,11 @@ exports.getBookedSlots = async (req, res, next) => {
             .lean();
         
         const booked = appointments.map(app => {
-            const dateObj = new Date(app.preferredDate);
             return {
-                date: !isNaN(dateObj) ? dateObj.toISOString().split('T')[0] : null,
+                date: app.preferredDate,
                 time: app.preferredTime,
             };
-        }).filter(b => b.date);
+        });
         
         res.json({ success: true, data: booked });
     } catch (err) {
