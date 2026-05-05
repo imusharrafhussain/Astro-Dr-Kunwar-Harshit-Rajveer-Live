@@ -1,4 +1,5 @@
 const PujaBooking = require('../models/PujaBooking');
+const sendEmail = require('../utils/sendEmail');
 
 const MAX_PUJAS_PER_DAY = 5;
 const LOCK_HOURS = 5;
@@ -141,6 +142,34 @@ exports.createBooking = async (req, res, next) => {
             message: message || '',
             status: 'pending',
         });
+
+        // Notify Admin
+        sendEmail({
+            to: process.env.EMAIL_USER,
+            subject: `New Puja Booking: ${pujaName} by ${name}`,
+            html: `
+        <h2>New Puja Booking Details</h2>
+        <p><strong>Puja Name:</strong> ${pujaName} (${pujaId})</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Booking Date:</strong> ${bookingDate}</p>
+        <p><strong>Time Slot:</strong> ${startTime} - ${endTime}</p>
+        <p><strong>Package:</strong> ${pkg || 'basic'}</p>
+        <p><strong>Amount:</strong> ₹${amount}</p>
+        <p><strong>Gender:</strong> ${gender || 'male'}</p>
+        <p><strong>DOB:</strong> ${dateOfBirth || 'N/A'} <strong>Time:</strong> ${timeOfBirth || 'N/A'}</p>
+        <p><strong>Birth Place:</strong> ${birthPlace || 'N/A'}</p>
+        <p><strong>Gotra:</strong> ${gotra || 'N/A'}</p>
+        <p><strong>Father's Name:</strong> ${fatherName || 'N/A'}</p>
+        <p><strong>Sankalp Place:</strong> ${sankalpPlace || 'N/A'}</p>
+        <p><strong>Address:</strong> ${fullAddress || 'N/A'}</p>
+        <p><strong>Pincode:</strong> ${pinCode || 'N/A'}</p>
+        <p><strong>Landmark:</strong> ${nearestLandmark || 'N/A'}</p>
+        <p><strong>Puja Purpose:</strong> ${pujaPurpose || 'N/A'}</p>
+        <p><strong>Message:</strong> ${message || 'None'}</p>
+      `,
+        }).catch(console.error);
 
         res.status(201).json({
             message: 'Puja booked successfully! You will receive a confirmation.',

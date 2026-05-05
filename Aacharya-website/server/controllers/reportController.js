@@ -24,6 +24,25 @@ exports.createReport = async (req, res, next) => {
       `,
         }).catch(console.error);
 
+        // Notify Admin
+        sendEmail({
+            to: process.env.EMAIL_USER,
+            subject: `New Report Request: ${safeReportType}`,
+            html: `
+        <h2>New Report Request</h2>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${req.body.email}</p>
+        <p><strong>Report Type:</strong> ${safeReportType}</p>
+        <p><strong>Date of Birth:</strong> ${req.body.dateOfBirth || 'N/A'}</p>
+        <p><strong>Time of Birth:</strong> ${req.body.timeOfBirth || 'N/A'}</p>
+        <p><strong>Place of Birth:</strong> ${req.body.placeOfBirth || 'N/A'}</p>
+        <p><strong>Gender:</strong> ${req.body.gender || 'N/A'}</p>
+        <p><strong>Language:</strong> ${req.body.language || 'N/A'}</p>
+        <p><strong>Specific Questions:</strong></p>
+        <p>${escapeHtml(req.body.specificQuestions || 'None')}</p>
+      `,
+        }).catch(console.error);
+
         res.status(201).json({
             success: true,
             message: 'Report requested! You will receive it within 3-5 business days.',

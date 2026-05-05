@@ -23,6 +23,20 @@ exports.submitContactForm = async (req, res, next) => {
       `,
         }).catch(console.error);
 
+        // Notify Admin
+        sendEmail({
+            to: process.env.EMAIL_USER,
+            subject: `New Contact Form Submission: ${safeSubject}`,
+            html: `
+        <h2>New Contact Message</h2>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${req.body.email}</p>
+        <p><strong>Subject:</strong> ${safeSubject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${escapeHtml(req.body.message || 'No message provided')}</p>
+      `,
+        }).catch(console.error);
+
         res.status(201).json({
             success: true,
             message: 'Message sent successfully! We will get back to you soon.',
