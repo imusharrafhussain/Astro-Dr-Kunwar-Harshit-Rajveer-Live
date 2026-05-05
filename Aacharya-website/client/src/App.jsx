@@ -102,10 +102,14 @@ const KarwaChauthPujaPage = lazy(() => import('./pages/pujas/KarwaChauthPujaPage
 
 function App() {
     useEffect(() => {
-        // Track unique visitor per session
-        const hasVisited = sessionStorage.getItem('hasVisited');
-        if (!hasVisited) {
-            sessionStorage.setItem('hasVisited', 'true');
+        // Track unique visitor: use localStorage so the same browser
+        // counts as 1 visitor regardless of how many times they visit.
+        const STORAGE_KEY = 'ahVisitorId';
+        let visitorId = localStorage.getItem(STORAGE_KEY);
+        if (!visitorId) {
+            // First time ever on this browser — generate a unique ID and track
+            visitorId = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+            localStorage.setItem(STORAGE_KEY, visitorId);
             let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
             API_BASE = API_BASE.replace(/\/$/, '');
             if (!API_BASE.endsWith('/api')) API_BASE += '/api';
@@ -115,6 +119,7 @@ function App() {
                 body: JSON.stringify({ type: 'visitor' })
             }).catch(console.error);
         }
+        // If visitorId already exists → user has been here before → do NOT count again
     }, []);
 
     return (
