@@ -127,15 +127,15 @@ exports.analytics = async (req, res, next) => {
 
     const totalSubmissions = reports.length + appointments.length + pujas.length;
     
-    // Calculate total visitors and formOpens
-    let totalVisitors = 0;
-    let formOpened = 0;
+    // Add tracked data on top of historical baseline (1 submission = at least 1 visitor/open historically)
+    let totalVisitors = totalSubmissions;
+    let formOpened = totalSubmissions;
+    
     analyticsRecords.forEach(record => {
       totalVisitors += (record.visitors || 0);
       formOpened += (record.formOpened || 0);
     });
 
-    // Removed forced totalVisitors bumping to allow accurate tracking debugging
     const formPartiallyFilled = Math.floor((formOpened + totalSubmissions) / 2);
 
     // Categories Breakdown
@@ -195,8 +195,8 @@ exports.analytics = async (req, res, next) => {
         return itemIstTime.toISOString().split('T')[0] === dateStr;
       }).length;
 
-      let dailyVisitors = statRecord.visitors || subsForDate;
-      if (dailyVisitors < subsForDate) dailyVisitors = subsForDate;
+      // Add tracked visitors to the historical baseline so graph tracks accurately upwards
+      let dailyVisitors = subsForDate + (statRecord.visitors || 0);
 
       timeSeries.push({
         date: dateStr,
