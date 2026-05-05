@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FiAlertCircle, FiCalendar, FiCheck, FiClock, FiLoader, FiMail, FiMapPin, FiMessageSquare, FiPhone, FiUser } from 'react-icons/fi'
+import { notifyAdmin } from '../../utils/notifyAdmin'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
@@ -112,16 +113,80 @@ export default function FestivalPujaLayout({
 
     const pkg = packages.find((p) => p.id === selectedPkg)
     setStatus('loading')
-        setTimeout(() => {
-            setStatus('success')
-            setStatusMsg('Puja booking request received successfully! We will contact you soon.')
-            setBookedInfo({
-                bookingDate: form.date,
-                startTime: form.time,
-                endTime: 'TBD',
-                status: 'Pending Confirmation'
-            })
-        }, 1000)
+
+    try {
+      const payload = {
+        pujaId,
+        pujaName,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        gender: form.gender,
+        dateOfBirth: form.dateOfBirth,
+        timeOfBirth: form.timeOfBirth,
+        gotra: form.gotra,
+        fatherName: form.fatherName,
+        birthPlace: form.birthPlace,
+        pinCode: form.pinCode,
+        pujaPurpose: form.pujaPurpose,
+        fullAddress: form.fullAddress,
+        nearestLandmark: form.nearestLandmark,
+        sankalpPlace: form.sankalpPlace,
+        bookingDate: form.date,
+        startTime: form.time,
+        package: pkg?.id || 'basic',
+        amount: pkg?.price || 0,
+        message: form.message,
+      }
+
+      const res = await fetch(`${API_BASE}/api/puja-bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Booking failed. Please try again.')
+
+      // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
+      notifyAdmin({
+        subject: `New Puja Booking: ${pujaName} by ${form.name}`,
+        fields: {
+          'Puja Name': pujaName,
+          Name: form.name,
+          Email: form.email,
+          Phone: form.phone,
+          Gender: form.gender,
+          'Date of Birth': form.dateOfBirth,
+          'Time of Birth': form.timeOfBirth,
+          'Birth Place': form.birthPlace,
+          Gotra: form.gotra,
+          "Father's Name": form.fatherName,
+          'Booking Date': form.date,
+          'Preferred Time': form.time,
+          Package: pkg?.name || 'N/A',
+          Amount: pkg ? `Rs ${pkg.price?.toLocaleString('en-IN')}` : 'N/A',
+          'Pin Code': form.pinCode,
+          'Puja Purpose': form.pujaPurpose,
+          'Full Address': form.fullAddress,
+          'Nearest Landmark': form.nearestLandmark,
+          'Sankalp Place': form.sankalpPlace,
+          Notes: form.message || 'None',
+        },
+      })
+
+      setStatus('success')
+      setStatusMsg('Puja booking request received successfully! We will contact you soon.')
+      setBookedInfo({
+        bookingDate: data.booking?.bookingDate || form.date,
+        startTime: data.booking?.startTime || form.time,
+        endTime: data.booking?.endTime || 'TBD',
+        status: 'Pending Confirmation',
+      })
+    } catch (err) {
+      setStatus('error')
+      setStatusMsg(err.message || 'Something went wrong. Please try again.')
+    }
   }
 
   return (

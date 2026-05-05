@@ -2,6 +2,7 @@ import { FiMail, FiSend, FiMapPin, FiPhone } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 import API from '../api/axios'
 import useFormValidation from '../hooks/useFormValidation'
+import { notifyAdmin } from '../utils/notifyAdmin'
 import './ContactPage.css'
 
 export default function ContactPage() {
@@ -31,6 +32,16 @@ export default function ContactPage() {
         try {
             await API.post('/contact', values)
             toast.success('Message sent! We will get back to you soon.')
+            // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
+            notifyAdmin({
+                subject: `New Contact Message: ${values.subject}`,
+                fields: {
+                    Name: values.name,
+                    Email: values.email,
+                    Subject: values.subject,
+                    Message: values.message,
+                },
+            })
             resetForm()
         } catch (err) {
             const errorMessage =

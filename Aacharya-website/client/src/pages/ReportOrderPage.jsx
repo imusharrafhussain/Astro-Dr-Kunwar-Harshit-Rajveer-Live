@@ -5,6 +5,7 @@ import API from '../api/axios'
 import useFormValidation from '../hooks/useFormValidation'
 import ReportIcon from '../components/reports/ReportIcon'
 import { REPORTS_CATALOG, getReportById } from '../data/reportsCatalog'
+import { notifyAdmin } from '../utils/notifyAdmin'
 import './ReportOrderPage.css'
 
 const initialForm = {
@@ -78,6 +79,23 @@ export default function ReportOrderPage() {
 
             await API.post('/reports', payload)
             toast.success('Report request submitted! You will receive it within 3-5 business days.')
+            // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
+            notifyAdmin({
+                subject: `New Report Request: ${values.reportType}`,
+                fields: {
+                    Name: values.name,
+                    Email: values.email,
+                    Phone: values.phone || 'N/A',
+                    'Report Type': values.reportType,
+                    'Date of Birth': values.dateOfBirth,
+                    'Time of Birth': values.birthTime,
+                    'Place of Birth': values.birthPlace,
+                    'Partner DOB': values.partnerDOB || 'N/A',
+                    'Partner Birth Time': values.partnerBirthTime || 'N/A',
+                    'Partner Birth Place': values.partnerBirthPlace || 'N/A',
+                    'Additional Info': values.additionalInfo || 'None',
+                },
+            })
             resetForm()
             setValues({ ...initialForm, reportType: urlReport.title })
         } catch (err) {

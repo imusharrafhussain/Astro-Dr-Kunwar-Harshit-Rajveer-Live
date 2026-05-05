@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { notifyAdmin } from '../../utils/notifyAdmin';
 import './BookingDialog.css';
 
 // ─── Booking Schema (inline) ──────────────────────────────────────────
@@ -374,7 +375,22 @@ function SlotPicker({ details, onConfirm }) {
       if (!res.ok) {
         throw new Error('Failed to book appointment. Please try again.');
       }
-      
+
+      // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
+      notifyAdmin({
+        subject: `New Consultation Booking: ${details.fullName}`,
+        fields: {
+          Name: details.fullName,
+          Phone: details.phone,
+          Email: details.email,
+          Address: details.address,
+          Service: details.service,
+          Subject: details.subject || 'N/A',
+          Date: date.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+          'Time Slot': slot.label,
+        },
+      });
+
       onConfirm({ date, slotId, slotLabel: slot.label });
     } catch (err) {
       showToast(err.message || 'Error occurred while booking slot.');
