@@ -30,44 +30,12 @@ export async function notifyAdmin({ subject, fields, hcaptchaResponse, botcheck 
         return;
     }
 
-    // Build a clean HTML table from the fields object
-    const rows = Object.entries(fields)
-        .filter(([, val]) => val !== undefined && val !== null && val !== '')
-        .map(
-            ([key, val]) => `
-            <tr>
-                <td style="padding:8px 12px;font-weight:600;background:#f9f4ec;color:#6b2d0e;white-space:nowrap;border:1px solid #e8d5b0;">
-                    ${key}
-                </td>
-                <td style="padding:8px 12px;border:1px solid #e8d5b0;color:#333;">
-                    ${String(val)}
-                </td>
-            </tr>`
-        )
-        .join('');
-
-    const html = `
-        <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #e8d5b0;border-radius:8px;overflow:hidden;">
-            <div style="background:linear-gradient(135deg,#6b2d0e,#b5692a);padding:20px 24px;">
-                <h2 style="margin:0;color:#ffd700;font-size:20px;">🔔 ${subject}</h2>
-                <p style="margin:4px 0 0;color:#ffe08a;font-size:13px;">Astro Dr Kunwar Harshit Rajveer — Admin Notification</p>
-            </div>
-            <div style="padding:20px 24px;">
-                <table style="width:100%;border-collapse:collapse;font-size:14px;">
-                    <tbody>${rows}</tbody>
-                </table>
-            </div>
-            <div style="background:#f9f4ec;padding:12px 24px;font-size:12px;color:#888;text-align:center;">
-                This notification was automatically generated. Do not reply to this email.
-            </div>
-        </div>`;
-
     try {
         const payload = {
             access_key: WEB3FORMS_ACCESS_KEY,
             subject,
-            html,
             from_name: 'Astro Harshit Website',
+            ...fields // Web3Forms automatically formats these into a clean email table!
         };
         
         // Include hCaptcha verification token if provided
