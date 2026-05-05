@@ -135,11 +135,7 @@ exports.analytics = async (req, res, next) => {
       formOpened += (record.formOpened || 0);
     });
 
-    // Ensure sanity of funnel logic
-    if (totalVisitors < totalSubmissions) totalVisitors = totalSubmissions;
-    if (formOpened < totalSubmissions) formOpened = totalSubmissions;
-    if (totalVisitors < formOpened) totalVisitors = formOpened;
-
+    // Removed forced totalVisitors bumping to allow accurate tracking debugging
     const formPartiallyFilled = Math.floor((formOpened + totalSubmissions) / 2);
 
     // Categories Breakdown
