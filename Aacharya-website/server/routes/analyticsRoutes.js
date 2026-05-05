@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Analytics = require('../models/Analytics');
 
-router.post('/track', async (req, res) => {
+router.post('/ping', async (req, res) => {
   try {
     const { type } = req.body; // 'visitor' or 'formOpen'
     

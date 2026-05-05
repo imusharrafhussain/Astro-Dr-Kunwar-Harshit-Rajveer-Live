@@ -35,7 +35,7 @@ export default function ContactPage() {
         let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
         API_BASE = API_BASE.replace(/\/$/, '');
         if (!API_BASE.endsWith('/api')) API_BASE += '/api';
-        fetch(`${API_BASE}/analytics/track`, {
+        fetch(`${API_BASE}/system/ping`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ type: 'formOpen' })

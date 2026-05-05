@@ -71,7 +71,7 @@ app.use('/api/articles', require('./routes/articleRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/puja-bookings', require('./routes/pujaBookingRoutes'));
 app.use('/api/chatbot', require('./routes/chatbotRoutes'));
-app.use('/api/analytics', require('./routes/analyticsRoutes'));
+app.use('/api/system', require('./routes/analyticsRoutes'));
 
 // ── Health Check ──
 app.get('/api/health', (req, res) => {

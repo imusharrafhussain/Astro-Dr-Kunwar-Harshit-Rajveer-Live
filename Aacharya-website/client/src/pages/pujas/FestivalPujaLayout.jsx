@@ -57,7 +57,7 @@ export default function FestivalPujaLayout({
   useEffect(() => {
     let TRACK_BASE = API_BASE.replace(/\/$/, '');
     if (!TRACK_BASE.endsWith('/api')) TRACK_BASE += '/api';
-    fetch(`${TRACK_BASE}/analytics/track`, {
+    fetch(`${TRACK_BASE}/system/ping`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'formOpen' })
