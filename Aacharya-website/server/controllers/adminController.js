@@ -7,6 +7,7 @@ const Contact = require('../models/Contact');
 const PujaBooking = require('../models/PujaBooking');
 
 const User = require('../models/User');
+const Analytics = require('../models/Analytics');
 const sendEmail = require('../utils/sendEmail');
 const { escapeHtml } = require('../utils/sanitize');
 
@@ -116,22 +117,30 @@ exports.analytics = async (req, res, next) => {
       return res.status(503).json({ success: false, error: 'Database is not connected.' });
     }
 
-    // Since visitors aren't natively tracked in the DB yet, we'll derive a realistic mock
-    // based on actual submission data for the conversion funnel.
-    
     // Aggregations for categories
-    const [reports, appointments, pujas] = await Promise.all([
+    const [reports, appointments, pujas, analyticsRecords] = await Promise.all([
       Report.find().lean(),
       Appointment.find().lean(),
-      PujaBooking.find().lean()
+      PujaBooking.find().lean(),
+      Analytics.find().lean()
     ]);
 
     const totalSubmissions = reports.length + appointments.length + pujas.length;
     
-    // Mock multiplier for visitors based on actual submissions (approx 3.5% conversion rate)
-    const totalVisitors = totalSubmissions > 0 ? Math.floor(totalSubmissions * 28.5) : 1500;
-    const formOpened = Math.floor(totalVisitors * 0.45);
-    const formPartiallyFilled = Math.floor(formOpened * 0.35);
+    // Calculate total visitors and formOpens
+    let totalVisitors = 0;
+    let formOpened = 0;
+    analyticsRecords.forEach(record => {
+      totalVisitors += (record.visitors || 0);
+      formOpened += (record.formOpened || 0);
+    });
+
+    // Ensure sanity of funnel logic
+    if (totalVisitors < totalSubmissions) totalVisitors = totalSubmissions;
+    if (formOpened < totalSubmissions) formOpened = totalSubmissions;
+    if (totalVisitors < formOpened) totalVisitors = formOpened;
+
+    const formPartiallyFilled = Math.floor((formOpened + totalSubmissions) / 2);
 
     // Categories Breakdown
     let numerologyCount = 0;
@@ -178,17 +187,24 @@ exports.analytics = async (req, res, next) => {
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split('T')[0];
+      const istTime = new Date(d.getTime() + (330 * 60000));
+      const dateStr = istTime.toISOString().split('T')[0];
+      
+      const statRecord = analyticsRecords.find(r => r.date === dateStr) || { visitors: 0 };
       
       // Count submissions for this date
       const subsForDate = [...reports, ...appointments, ...pujas].filter(item => {
         const itemDate = new Date(item.createdAt || item.date || Date.now());
-        return itemDate.toISOString().split('T')[0] === dateStr;
+        const itemIstTime = new Date(itemDate.getTime() + (330 * 60000));
+        return itemIstTime.toISOString().split('T')[0] === dateStr;
       }).length;
+
+      let dailyVisitors = statRecord.visitors || subsForDate;
+      if (dailyVisitors < subsForDate) dailyVisitors = subsForDate;
 
       timeSeries.push({
         date: dateStr,
-        visitors: Math.floor(subsForDate * 28.5) || Math.floor(Math.random() * 200 + 50),
+        visitors: dailyVisitors,
         submissions: subsForDate
       });
     }

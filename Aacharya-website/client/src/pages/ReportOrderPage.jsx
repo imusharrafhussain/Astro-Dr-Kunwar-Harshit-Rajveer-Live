@@ -1,11 +1,12 @@
-import { useEffect, useMemo } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState, useRef } from 'react'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import API from '../api/axios'
 import useFormValidation from '../hooks/useFormValidation'
 import ReportIcon from '../components/reports/ReportIcon'
 import { REPORTS_CATALOG, getReportById } from '../data/reportsCatalog'
 import { notifyAdmin } from '../utils/notifyAdmin'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import './ReportOrderPage.css'
 
 const initialForm = {
@@ -20,6 +21,7 @@ const initialForm = {
     partnerBirthTime: '',
     partnerBirthPlace: '',
     additionalInfo: '',
+    botcheck: false,
 }
 
 const validationRules = {
@@ -52,14 +54,34 @@ export default function ReportOrderPage() {
         }
     }, [reportId, urlReport, setValues])
 
+    // Track formOpen for analytics
+    useEffect(() => {
+        let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        API_BASE = API_BASE.replace(/\/$/, '');
+        if (!API_BASE.endsWith('/api')) API_BASE += '/api';
+        fetch(`${API_BASE}/analytics/track`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'formOpen' })
+        }).catch(console.error);
+    }, [])
+
     const selectedReport = useMemo(() => {
         const byForm = REPORTS_CATALOG.find((r) => r.title === values.reportType)
         return byForm || urlReport || null
     }, [values.reportType, urlReport])
 
+    const navigate = useNavigate()
+    const [hcaptchaToken, setHcaptchaToken] = useState(null)
+    const hcaptchaRef = useRef(null)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validate()) return
+        if (!hcaptchaToken) {
+            toast.error('Please complete the captcha verification.')
+            return
+        }
 
         setIsSubmitting(true)
         try {
@@ -78,10 +100,12 @@ export default function ReportOrderPage() {
             }
 
             await API.post('/reports', payload)
-            toast.success('Report request submitted! You will receive it within 3-5 business days.')
+            
             // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
             notifyAdmin({
                 subject: `New Report Request: ${values.reportType}`,
+                botcheck: values.botcheck,
+                hcaptchaResponse: hcaptchaToken,
                 fields: {
                     Name: values.name,
                     Email: values.email,
@@ -98,6 +122,10 @@ export default function ReportOrderPage() {
             })
             resetForm()
             setValues({ ...initialForm, reportType: urlReport.title })
+            if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha()
+            setHcaptchaToken(null)
+            
+            navigate('/thank-you')
         } catch (err) {
             const errorMessage =
                 err?.response?.data?.error ||
@@ -315,7 +343,18 @@ export default function ReportOrderPage() {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-primary report-order-submit" disabled={isSubmitting}>
+                        {/* Web3Forms Honeypot */}
+                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={values.botcheck} onChange={handleChange} />
+
+                        <div className="form-group flex justify-center mt-6 mb-4">
+                            <HCaptcha
+                                sitekey="10000000-ffff-ffff-ffff-000000000001"
+                                onVerify={setHcaptchaToken}
+                                ref={hcaptchaRef}
+                            />
+                        </div>
+
+                        <button type="submit" className="btn btn-primary report-order-submit" disabled={isSubmitting || !hcaptchaToken}>
                             {isSubmitting ? 'Processing...' : 'Buy Now'}
                         </button>
                     </form>

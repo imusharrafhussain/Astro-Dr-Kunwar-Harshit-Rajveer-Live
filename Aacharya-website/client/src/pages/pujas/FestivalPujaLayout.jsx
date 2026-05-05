@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { FiAlertCircle, FiCalendar, FiCheck, FiClock, FiLoader, FiMail, FiMapPin, FiMessageSquare, FiPhone, FiUser } from 'react-icons/fi'
 import { notifyAdmin } from '../../utils/notifyAdmin'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import { useNavigate } from 'react-router-dom'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
@@ -41,11 +43,26 @@ export default function FestivalPujaLayout({
     time: '',
     message: '',
     agreeTerms: false,
+    botcheck: false,
   })
   const [availability, setAvailability] = useState(null)
   const [status, setStatus] = useState('idle')
   const [statusMsg, setStatusMsg] = useState('')
   const [bookedInfo, setBookedInfo] = useState(null)
+  const [hcaptchaToken, setHcaptchaToken] = useState(null)
+  const hcaptchaRef = useRef(null)
+  const navigate = useNavigate()
+
+  // Track formOpen for analytics
+  useEffect(() => {
+    let TRACK_BASE = API_BASE.replace(/\/$/, '');
+    if (!TRACK_BASE.endsWith('/api')) TRACK_BASE += '/api';
+    fetch(`${TRACK_BASE}/analytics/track`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'formOpen' })
+    }).catch(console.error);
+  }, [])
 
   useEffect(() => {
     if (!form.date) {
@@ -110,6 +127,11 @@ export default function FestivalPujaLayout({
       setStatusMsg('Time conflicts with an existing booking.')
       return
     }
+    if (!hcaptchaToken) {
+      setStatus('error')
+      setStatusMsg('Please complete the captcha verification.')
+      return
+    }
 
     const pkg = packages.find((p) => p.id === selectedPkg)
     setStatus('loading')
@@ -151,6 +173,8 @@ export default function FestivalPujaLayout({
       // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
       notifyAdmin({
         subject: `New Puja Booking: ${pujaName} by ${form.name}`,
+        botcheck: form.botcheck,
+        hcaptchaResponse: hcaptchaToken,
         fields: {
           'Puja Name': pujaName,
           Name: form.name,
@@ -183,6 +207,11 @@ export default function FestivalPujaLayout({
         endTime: data.booking?.endTime || 'TBD',
         status: 'Pending Confirmation',
       })
+      
+      if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha()
+      setHcaptchaToken(null)
+
+      navigate('/thank-you')
     } catch (err) {
       setStatus('error')
       setStatusMsg(err.message || 'Something went wrong. Please try again.')
@@ -329,7 +358,19 @@ export default function FestivalPujaLayout({
                 {hint && <p className={`festival-hint ${hint.type}`}>{hint.type === 'error' ? <FiAlertCircle /> : <FiCheck />}{hint.msg}</p>}
                 {status === 'error' && <p className="festival-hint error"><FiAlertCircle />{statusMsg}</p>}
                 <p className="festival-summary">Selected Package: <strong>{packages.find((p) => p.id === selectedPkg)?.name}</strong></p>
-                <button className="festival-btn festival-btn-primary" type="submit" disabled={status === 'loading'}>
+
+                {/* Web3Forms Honeypot */}
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={form.botcheck} onChange={handleChange} />
+
+                <div className="festival-form-grid" style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem', marginBottom: '1rem', width: '100%', gridColumn: '1 / -1' }}>
+                  <HCaptcha
+                    sitekey="10000000-ffff-ffff-ffff-000000000001"
+                    onVerify={setHcaptchaToken}
+                    ref={hcaptchaRef}
+                  />
+                </div>
+
+                <button className="festival-btn festival-btn-primary" type="submit" disabled={status === 'loading' || !hcaptchaToken}>
                   {status === 'loading' ? <><FiLoader className="spin" /> Processing...</> : 'Confirm Booking'}
                 </button>
               </form>

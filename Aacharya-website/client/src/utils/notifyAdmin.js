@@ -18,9 +18,15 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'd6c27f3a-c8c
  * @param {string} options.subject - Email subject line
  * @param {Object} options.fields  - Key/value pairs to render as a table
  */
-export async function notifyAdmin({ subject, fields }) {
+export async function notifyAdmin({ subject, fields, hcaptchaResponse, botcheck }) {
     if (WEB3FORMS_ACCESS_KEY === 'YOUR_WEB3FORMS_KEY_HERE') {
         console.warn('⚠️ notifyAdmin: Web3Forms key not configured. Skipping email.');
+        return;
+    }
+    
+    // Advanced Spam Protection (Honeypot) - If botcheck is filled, silently ignore
+    if (botcheck) {
+        console.warn('notifyAdmin: Botcheck triggered. Silently rejecting.');
         return;
     }
 
@@ -57,16 +63,22 @@ export async function notifyAdmin({ subject, fields }) {
         </div>`;
 
     try {
+        const payload = {
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject,
+            html,
+            from_name: 'Astro Harshit Website',
+        };
+        
+        // Include hCaptcha verification token if provided
+        if (hcaptchaResponse) {
+            payload['h-captcha-response'] = hcaptchaResponse;
+        }
+
         const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({
-                access_key: WEB3FORMS_ACCESS_KEY,
-                subject,
-                html,
-                // Prevent bot submissions showing up as spam
-                from_name: 'Astro Harshit Website',
-            }),
+            body: JSON.stringify(payload),
         });
 
         const data = await res.json();

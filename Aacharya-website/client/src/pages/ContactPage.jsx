@@ -1,8 +1,11 @@
 import { FiMail, FiSend, FiMapPin, FiPhone } from 'react-icons/fi'
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import API from '../api/axios'
 import useFormValidation from '../hooks/useFormValidation'
 import { notifyAdmin } from '../utils/notifyAdmin'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import './ContactPage.css'
 
 export default function ContactPage() {
@@ -15,7 +18,7 @@ export default function ContactPage() {
         validate,
         resetForm,
     } = useFormValidation(
-        { name: '', email: '', subject: '', message: '' },
+        { name: '', email: '', subject: '', message: '', botcheck: false },
         {
             name: { required: true, requiredMsg: 'Please enter your name' },
             email: { required: true, email: true },
@@ -24,17 +27,38 @@ export default function ContactPage() {
         }
     )
 
+    const navigate = useNavigate()
+    const [hcaptchaToken, setHcaptchaToken] = useState(null)
+    const hcaptchaRef = useRef(null)
+
+    useEffect(() => {
+        let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        API_BASE = API_BASE.replace(/\/$/, '');
+        if (!API_BASE.endsWith('/api')) API_BASE += '/api';
+        fetch(`${API_BASE}/analytics/track`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'formOpen' })
+        }).catch(console.error);
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validate()) return
+        if (!hcaptchaToken) {
+            toast.error('Please complete the captcha verification.')
+            return
+        }
 
         setIsSubmitting(true)
         try {
             await API.post('/contact', values)
-            toast.success('Message sent! We will get back to you soon.')
+            
             // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
             notifyAdmin({
                 subject: `New Contact Message: ${values.subject}`,
+                botcheck: values.botcheck,
+                hcaptchaResponse: hcaptchaToken,
                 fields: {
                     Name: values.name,
                     Email: values.email,
@@ -42,7 +66,13 @@ export default function ContactPage() {
                     Message: values.message,
                 },
             })
+            
             resetForm()
+            if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha()
+            setHcaptchaToken(null)
+            
+            // Redirect to Thank You page
+            navigate('/thank-you')
         } catch (err) {
             const errorMessage =
                 err?.response?.data?.error ||
@@ -151,10 +181,21 @@ export default function ContactPage() {
                                 {errors.message && <p className="form-error">{errors.message}</p>}
                             </div>
 
+                            {/* Web3Forms Honeypot */}
+                            <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={values.botcheck} onChange={handleChange} />
+
+                            <div className="form-group flex justify-center mb-4">
+                                <HCaptcha
+                                    sitekey="10000000-ffff-ffff-ffff-000000000001"
+                                    onVerify={setHcaptchaToken}
+                                    ref={hcaptchaRef}
+                                />
+                            </div>
+
                             <button
                                 type="submit"
                                 className="btn btn-primary width-full"
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !hcaptchaToken}
                             >
                                 {isSubmitting ? 'Sending...' : <><FiSend /> Send Message</>}
                             </button>

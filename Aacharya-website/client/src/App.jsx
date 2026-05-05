@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -36,6 +36,7 @@ const LearningPage = lazy(() => import('./pages/LearningPage'))
 const MandirPage = lazy(() => import('./pages/MandirPage'))
 const MartPage = lazy(() => import('./pages/MartPage'))
 const BookPujaPage = lazy(() => import('./pages/BookPujaPage'))
+const ThankYouPage = lazy(() => import('./pages/ThankYouPage'))
 
 // Puja Pages - Planet Pujas
 const SuryaPujaPage = lazy(() => import('./pages/SuryaPujaPage'))
@@ -100,6 +101,22 @@ const SaraswatiPujaPage = lazy(() => import('./pages/pujas/SaraswatiPujaPage'))
 const KarwaChauthPujaPage = lazy(() => import('./pages/pujas/KarwaChauthPujaPage'))
 
 function App() {
+    useEffect(() => {
+        // Track unique visitor per session
+        const hasVisited = sessionStorage.getItem('hasVisited');
+        if (!hasVisited) {
+            sessionStorage.setItem('hasVisited', 'true');
+            let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            API_BASE = API_BASE.replace(/\/$/, '');
+            if (!API_BASE.endsWith('/api')) API_BASE += '/api';
+            fetch(`${API_BASE}/analytics/track`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'visitor' })
+            }).catch(console.error);
+        }
+    }, []);
+
     return (
         <AuthProvider>
             <ScrollToTop />
@@ -193,6 +210,7 @@ function App() {
                         <Route path="/blog" element={<BlogPage />} />
                         <Route path="/blog/:slug" element={<ArticleDetailPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/thank-you" element={<ThankYouPage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="*" element={<NotFoundPage />} />

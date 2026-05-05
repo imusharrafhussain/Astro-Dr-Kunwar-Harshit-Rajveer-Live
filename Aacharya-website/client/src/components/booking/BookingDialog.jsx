@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { notifyAdmin } from '../../utils/notifyAdmin';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import './BookingDialog.css';
 
 // ─── Booking Schema (inline) ──────────────────────────────────────────
@@ -159,6 +160,18 @@ function DetailsForm({ defaultValues, onSubmit }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Track form open for analytics
+  useEffect(() => {
+    let API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    API_BASE = API_BASE.replace(/\/$/, '');
+    if (!API_BASE.endsWith('/api')) API_BASE += '/api';
+    fetch(`${API_BASE}/analytics/track`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'formOpen' })
+    }).catch(console.error);
+  }, []);
+
   const validate = () => {
     const e = {};
     if (!values.fullName.trim() || values.fullName.trim().length < 2)
@@ -295,8 +308,11 @@ function SlotPicker({ details, onConfirm }) {
   const [date, setDate] = useState(null);
   const [slotId, setSlotId] = useState(null);
   const [confirming, setConfirming] = useState(false);
-  const [toast, setToast] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [botcheck, setBotcheck] = useState(false);
+  const [hcaptchaToken, setHcaptchaToken] = useState(null);
+  const hcaptchaRef = useRef(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -346,6 +362,10 @@ function SlotPicker({ details, onConfirm }) {
 
   const handleConfirm = async () => {
     if (!date || !slotId) return;
+    if (!hcaptchaToken) {
+      showToast('Please complete the captcha verification.');
+      return;
+    }
     setConfirming(true);
     const slot = ALL_SLOTS.find(s => s.id === slotId);
 
@@ -379,6 +399,8 @@ function SlotPicker({ details, onConfirm }) {
       // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
       notifyAdmin({
         subject: `New Consultation Booking: ${details.fullName}`,
+        botcheck: botcheck,
+        hcaptchaResponse: hcaptchaToken,
         fields: {
           Name: details.fullName,
           Phone: details.phone,
@@ -391,6 +413,9 @@ function SlotPicker({ details, onConfirm }) {
         },
       });
 
+      if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha();
+      setHcaptchaToken(null);
+      
       onConfirm({ date, slotId, slotLabel: slot.label });
     } catch (err) {
       showToast(err.message || 'Error occurred while booking slot.');
@@ -453,10 +478,21 @@ function SlotPicker({ details, onConfirm }) {
         </div>
       )}
 
+      {/* Web3Forms Honeypot */}
+      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={botcheck} onChange={(e) => setBotcheck(e.target.checked)} />
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem', marginBottom: '1rem' }}>
+        <HCaptcha
+          sitekey="10000000-ffff-ffff-ffff-000000000001"
+          onVerify={setHcaptchaToken}
+          ref={hcaptchaRef}
+        />
+      </div>
+
       <button
         type="button"
         className="bk-btn-maroon"
-        disabled={!date || !slotId || confirming}
+        disabled={!date || !slotId || confirming || !hcaptchaToken}
         onClick={handleConfirm}
       >
         {confirming
@@ -609,7 +645,10 @@ export function BookingDialog({ open, onOpenChange, serviceLabel, inline = false
         {step === 'slot' && (
           <SlotPicker
             details={details}
-            onConfirm={(s) => { setSelection(s); setStep('done'); }}
+            onConfirm={(s) => { 
+              setSelection(s); 
+              window.location.href = '/thank-you'; 
+            }}
           />
         )}
         {step === 'done' && details && selection && (
