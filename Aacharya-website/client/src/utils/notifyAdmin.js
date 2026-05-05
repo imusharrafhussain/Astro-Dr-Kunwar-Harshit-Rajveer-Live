@@ -10,7 +10,7 @@
  *   4. Replace WEB3FORMS_ACCESS_KEY below with your key
  */
 
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_KEY_HERE';
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'd6c27f3a-c8c4-4ca7-8c84-e7975d4d76f3';
 
 /**
  * Sends a formatted email to the admin.
