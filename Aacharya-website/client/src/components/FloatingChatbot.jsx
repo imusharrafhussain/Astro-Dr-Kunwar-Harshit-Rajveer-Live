@@ -3,6 +3,8 @@ import ChatInterface from './ChatInterface';
 import chatbotIdle from '../assets/chatbot_idle.webp';
 import chatbotActive from '../assets/chatbot_active.webp';
 import chatbotBg from '../assets/chatbot_bg.webp';
+import whatsappIcon from '../assets/whatsapp_icon.svg';
+
 
 // Button area height (img 80px + label ~20px + gap ~10px + margin ~10px)
 const BTN_AREA = 120;
@@ -56,7 +58,7 @@ const FloatingChatbot = () => {
                     z-index: 1000;
                     display: flex;
                     flex-direction: column;
-                    align-items: flex-end;
+                    align-items: center;
                     gap: 1rem;
                 }
 
@@ -119,6 +121,31 @@ const FloatingChatbot = () => {
                     display: block;
                 }
 
+                .whatsapp-float-btn {
+                    width: 55px;
+                    height: 55px;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1001;
+                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+                    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+                    padding: 0;
+                }
+                .whatsapp-float-btn:hover {
+                    transform: scale(1.1);
+                    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
+                }
+                .whatsapp-float-btn img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+
                 /* ── Tablet (641px – 1024px) ── */
                 @media (max-width: 1024px) and (min-width: 641px) {
                     .ai-chatbot-root {
@@ -155,7 +182,12 @@ const FloatingChatbot = () => {
                         width: 62px;
                         height: 62px;
                     }
+                    .whatsapp-float-btn {
+                        width: 48px;
+                        height: 48px;
+                    }
                 }
+
 
                 /* ── Very small phones (≤380px) ── */
                 @media (max-width: 380px) {
@@ -231,6 +263,16 @@ const FloatingChatbot = () => {
             `}</style>
 
             <div className="ai-chatbot-root">
+
+                {/* ── WhatsApp Button ── */}
+                <button 
+                    className="whatsapp-float-btn"
+                    onClick={() => window.open('https://wa.me/', '_blank')}
+                    title="Chat on WhatsApp"
+                >
+                    <img src={whatsappIcon} alt="WhatsApp" draggable={false} />
+                </button>
+
 
                 {/* ── Phone Frame ── */}
                 {isOpen && (
