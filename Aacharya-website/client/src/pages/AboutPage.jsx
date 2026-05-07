@@ -16,6 +16,11 @@ import career from '../assets/career.webp'
 import spacevidUrl from '../assets/spacevid.compressed.mp4?url'
 import health from '../assets/health.webp'
 import education from '../assets/education.webp'
+import megaKundliMatching from '../assets/mega_kundli_matching.webp'
+import megaJanamKundli from '../assets/mega_janam_kundli.webp'
+import megaVastuConsultation from '../assets/mega_vastu_consultation.webp'
+import megaPalmistry from '../assets/mega_palmistry.webp'
+import megaFaceReading from '../assets/mega_face_reading.webp'
 import './AboutPage.css'
 
 /* ─── data ─── */
@@ -73,31 +78,31 @@ const servicesPopupItems = [
         to: '/services/kundli-matching',
         title: 'Kundli Matching',
         description: 'Detailed horoscope matching for marriage to ensure harmony and compatibility between partners.',
-        image: 'https://loremflickr.com/800/400/couple,wedding',
+        image: megaKundliMatching,
     },
     {
         to: '/services/janam-kundli',
         title: 'Janam Kundli',
         description: 'Complete birth chart analysis to understand your personality, life path, and future possibilities.',
-        image: 'https://loremflickr.com/800/400/astrology,chart',
+        image: megaJanamKundli,
     },
     {
         to: '/services/vastu-consultation',
         title: 'Vastu Consultation',
         description: 'Optimize your living and workspace with ancient science of architecture for health, wealth, and prosperity.',
-        image: 'https://loremflickr.com/800/400/home,architecture',
+        image: megaVastuConsultation,
     },
     {
         to: '/services/palmistry',
         title: 'Palmistry',
         description: 'Uncover your destiny through the lines of your hands. A unique insight into your character and future.',
-        image: 'https://loremflickr.com/800/400/hand,palm',
+        image: megaPalmistry,
     },
     {
         to: '/services/face-reading',
         title: 'Face Reading',
         description: 'Analyze facial features to determine character, fate, and potential life outcomes.',
-        image: 'https://loremflickr.com/800/400/face,portrait',
+        image: megaFaceReading,
     },
 ]
 
@@ -443,7 +448,7 @@ export default function AboutPage() {
 
                         <div className="ap-intro__cta-row">
                             <Link to="/book" className="ap-btn ap-btn--fire ap-btn--sm">
-                                Book a Reading <FiArrowRight />
+                                Book a Consultation <FiArrowRight />
                             </Link>
                             <Link to="/services" className="ap-btn ap-btn--ghost ap-btn--sm">
                                 Our Services
