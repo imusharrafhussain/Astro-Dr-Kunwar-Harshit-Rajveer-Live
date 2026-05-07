@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+
 
 function normalizeValue(v) {
   if (v == null) return '';
@@ -96,30 +98,48 @@ export default function RecordsTable({ records, onDelete, onEdit }) {
         </table>
       </div>
 
-      {editingRecord && (
-        <div className="modalOverlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 100 }}>
-          <div className="modalContent" style={{ backgroundColor: '#1a181d', padding: '24px', borderRadius: '8px', maxWidth: '500px', width: '100%', maxHeight: '90vh', overflowY: 'auto', border: '1px solid #cfa144' }}>
-            <h3 style={{ marginBottom: '16px', color: '#f2e8d5' }}>Edit Record</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {Object.keys(editFormData).map(key => (
-                <div key={key}>
-                  <label style={{ display: 'block', marginBottom: '4px', color: '#c2b59b', fontSize: '0.875rem' }}>{key}</label>
-                  <input
-                    className="input"
-                    value={typeof editFormData[key] === 'object' ? JSON.stringify(editFormData[key]) : editFormData[key] || ''}
-                    onChange={(e) => setEditFormData({ ...editFormData, [key]: e.target.value })}
-                    style={{ width: '100%' }}
-                  />
-                </div>
-              ))}
+      {editingRecord && createPortal(
+        <div className="modalOverlay" onClick={() => setEditingRecord(null)}>
+          <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            <div className="modalHeader">
+              <h3 className="modalTitle">Edit Response</h3>
+              <button className="buttonGhost" style={{ padding: '4px 12px' }} onClick={() => setEditingRecord(null)}>✕</button>
             </div>
-            <div style={{ display: 'flex', gap: '12px', marginTop: '24px', justifyContent: 'flex-end' }}>
+            
+            <div className="modalBody">
+              <div className="modalGrid">
+                {Object.keys(editFormData).map(key => (
+                  <div key={key} className="modalField">
+                    <label className="modalLabel">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
+                    {typeof editFormData[key] === 'string' && (editFormData[key].length > 50 || key.toLowerCase().includes('message') || key.toLowerCase().includes('comment')) ? (
+                      <textarea
+                        className="input"
+                        rows={3}
+                        value={editFormData[key] || ''}
+                        onChange={(e) => setEditFormData({ ...editFormData, [key]: e.target.value })}
+                        style={{ resize: 'vertical', minHeight: '80px' }}
+                      />
+                    ) : (
+                      <input
+                        className="input"
+                        value={typeof editFormData[key] === 'object' ? JSON.stringify(editFormData[key]) : editFormData[key] || ''}
+                        onChange={(e) => setEditFormData({ ...editFormData, [key]: e.target.value })}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="modalFooter">
               <button className="buttonGhost" onClick={() => setEditingRecord(null)}>Cancel</button>
               <button className="buttonPrimary" onClick={handleSaveEdit}>Save Changes</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
+
     </div>
   );
 }
