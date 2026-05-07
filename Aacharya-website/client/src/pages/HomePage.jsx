@@ -1,9 +1,10 @@
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FiArrowRight, FiShield, FiCheck, FiStar } from 'react-icons/fi'
 import ScaleLetterHeading from '../components/ui/ScaleLetterHeading'
 import CircularGallerySection from '../components/ui/CircularGallerySection'
-import harshitHeroImg from '../assets/harshit_hero.webp'
+
 import authorityFeaturedImg from '../assets/authority_reading_nakshatras.webp'
 import ajaiBhambiImg from '../assets/ajai_bhambi.webp'
 import deepakKapoorImg from '../assets/deepak_kapoor.webp'
@@ -52,8 +53,11 @@ import bestAwardAnchalImg from '../assets/best_award_anchal_munjal.webp'
 import bestAwardHariRawatImg from '../assets/best_award_hari_singh_rawat.webp'
 import bestAwardAtalImg from '../assets/best_award_atal.webp'
 import bestAward2024Img from '../assets/best_award_2024.webp'
+import ha1 from "../assets/h1.jpeg"
 import './HomePage.css'
 import HeroFloatingBadges from '../components/ui/HeroFloatingBadges'
+
+
 
 const LinearCardGallery = lazy(() => import('../components/ui/LinearCardGallery'))
 const BrillianceAwardsShowcase = lazy(() => import('../components/awards/BrillianceAwardsShowcase'))
@@ -61,7 +65,88 @@ const SlideTabs = lazy(() =>
     import('../components/ui/slide-tabs').then((mod) => ({ default: mod.SlideTabs }))
 )
 
-export default function HomePage() {
+// ── Carousel Component ──
+const HeroCarousel = ({ isMobile = false, heroImageIndex, setHeroImageIndex, heroCarouselImages }) => (
+    <div className={`hero-carousel-wrapper fade-in-up ${isMobile ? 'hero-carousel--mobile' : ''}`} style={{
+        animationDelay: '0.5s',
+        position: 'relative',
+        overflow: 'hidden',
+        width: isMobile ? '98%' : '110%',
+        maxWidth: isMobile ? '500px' : '1500px',
+        marginTop: isMobile ? '15px' : '-80px',
+        marginLeft: isMobile ? 'auto' : '-60px',
+        marginRight: isMobile ? 'auto' : '0',
+        left: isMobile ? '3%' : '0',
+        transform: isMobile ? 'translateX(-50%)' : 'none',
+        aspectRatio: '16/9',
+        borderRadius: '19px',
+        boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+        border: '2px solid rgba(255, 196, 0, 1)',
+        backgroundColor: '#fdfbf7',
+        marginBottom: isMobile ? '2rem' : '0'
+    }}>
+        <AnimatePresence mode="popLayout">
+            <motion.img
+                key={heroImageIndex}
+                src={heroCarouselImages[heroImageIndex]}
+                alt={`Hero Visual ${heroImageIndex + 1}`}
+                initial={{ x: "100%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: "-100%", opacity: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1,
+                }}
+                loading={heroImageIndex === 0 ? "eager" : "lazy"}
+                fetchPriority={heroImageIndex === 0 ? "high" : "auto"}
+                decoding="async"
+                draggable={false}
+            />
+        </AnimatePresence>
+
+        {/* Carousel Indicators */}
+        <div style={{
+            position: 'absolute',
+            bottom: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: '12px',
+            zIndex: 10,
+            background: 'rgba(0,0,0,0.3)',
+            padding: '6px 12px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(4px)'
+        }}>
+            {heroCarouselImages.map((_, idx) => (
+                <button
+                    key={`dot-${idx}`}
+                    onClick={() => setHeroImageIndex(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        background: idx === heroImageIndex ? '#f2c94c' : 'rgba(255,255,255,0.5)',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'all 0.3s ease',
+                        transform: idx === heroImageIndex ? 'scale(1.3)' : 'scale(1)'
+                    }}
+                />
+            ))}
+        </div>
+    </div>
+);
+
+const HomePage = () => {
     const podcastChannelUrl = 'https://www.youtube.com/@dr_kunwar_harshit'
 
     const heroMarqueeFaces = [
@@ -217,6 +302,20 @@ export default function HomePage() {
         return () => clearInterval(timer)
     }, [focusFeatures.length])
 
+    const heroCarouselImages = [
+        ha1
+
+    ];
+
+    const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setHeroImageIndex((prev) => (prev + 1) % heroCarouselImages.length);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, [heroCarouselImages.length]);
+
     const visibleFocusFeatures = Array.from({ length: 2 }, (_, i) =>
         focusFeatures[(focusStartIndex + i) % focusFeatures.length]
     )
@@ -359,17 +458,13 @@ export default function HomePage() {
                                 { text: 'Cosmic Path', className: 'text-gradient' },
                             ]}
                         />
-                        {/* Mobile-only astrologer image — sits between title and focus/message */}
-                        <div className="hero-mobile-visual fade-in-up" style={{ animationDelay: '0.12s', position: 'relative' }} aria-hidden="true">
-                            <HeroFloatingBadges />
-                            <img
-                                src={harshitHeroImg}
-                                alt="Dr. Kunwar Harshit Rajveer"
-                                className="hero-mobile-image"
-                                loading="eager"
-                                fetchPriority="high"
-                                decoding="async"
-                                draggable={false}
+                        {/* Mobile-only carousel — sits between title and focus/message */}
+                        <div className="hero-mobile-visual" aria-hidden="true">
+                            <HeroCarousel
+                                isMobile={true}
+                                heroImageIndex={heroImageIndex}
+                                setHeroImageIndex={setHeroImageIndex}
+                                heroCarouselImages={heroCarouselImages}
                             />
                         </div>
                         <div className="hero-focus-block fade-in-up" style={{ animationDelay: '0.15s' }}>
@@ -427,17 +522,11 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div className="hero-right-visual fade-in-up" style={{ animationDelay: '0.5s' }}>
-                        <img
-                            src={harshitHeroImg}
-                            alt="Harshit Rajveer"
-                            className="hero-right-image"
-                            loading="eager"
-                            fetchPriority="high"
-                            decoding="async"
-                            draggable={false}
-                        />
-                    </div>
+                    <HeroCarousel
+                        heroImageIndex={heroImageIndex}
+                        setHeroImageIndex={setHeroImageIndex}
+                        heroCarouselImages={heroCarouselImages}
+                    />
                 </div>
             </section>
 
@@ -562,11 +651,10 @@ export default function HomePage() {
                                 {featuredMoments.map((moment, index) => (
                                     <article
                                         key={moment.id}
-                                        className={`featured-story-row ${
-                                            moment.id === 'policy-forums'
-                                                ? 'featured-story-row--image-right'
-                                                : (index % 2 === 1 ? 'reverse' : '')
-                                        } ${moment.id === 'personalized-outcomes' ? 'featured-story-row--podcast' : ''}`}
+                                        className={`featured-story-row ${moment.id === 'policy-forums'
+                                            ? 'featured-story-row--image-right'
+                                            : (index % 2 === 1 ? 'reverse' : '')
+                                            } ${moment.id === 'personalized-outcomes' ? 'featured-story-row--podcast' : ''}`}
                                     >
                                         <div className="featured-story-media-card">
                                             <img
@@ -769,13 +857,13 @@ export default function HomePage() {
             {/* ── 5. Popular Astrology Services ── */}
             <section className="exclusivity-section">
                 <div className="container">
-                    <ScaleLetterHeading 
-                        as="h2" 
-                        className="section-title" 
+                    <ScaleLetterHeading
+                        as="h2"
+                        className="section-title"
                         parts={[
                             { text: 'Explore ', className: 'text-explore-brown' },
                             { text: 'Podcast', className: 'text-podcast-red' }
-                        ]} 
+                        ]}
                     />
                     <div className="services-marquee-wrapper">
                         {/* Row 1 — scrolling track */}
@@ -851,3 +939,5 @@ export default function HomePage() {
         </div>
     )
 }
+
+export default HomePage;

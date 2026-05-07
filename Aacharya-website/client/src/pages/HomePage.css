@@ -85,7 +85,7 @@
 
 .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: 4rem;
     align-items: center;
 }
@@ -110,12 +110,14 @@
     margin-bottom: 2rem;
 }
 
-.hero-right-visual {
+.hero-carousel-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: flex-end; /* stick image to bottom of hero section */
-    width: 100%;
-    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    .hero-carousel--mobile {
+        display: none;
+    }
 }
 
 .hero-message {
@@ -2739,8 +2741,8 @@
         mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 60%, rgba(0,0,0,0) 100%);
     }
 
-    /* Hide the original right-column image on mobile (mobile-visual above takes its place) */
-    .hero-right-visual {
+    /* Hide the original right-column carousel on mobile (mobile-visual above takes its place) */
+    .hero-carousel-wrapper:not(.hero-carousel--mobile) {
         display: none;
     }
 
