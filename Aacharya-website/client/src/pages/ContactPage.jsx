@@ -53,7 +53,7 @@ export default function ContactPage() {
         setIsSubmitting(true)
         try {
             await API.post('/contact', values)
-            
+
             // Notify admin via Web3Forms (browser-side, independent of backend SMTP)
             notifyAdmin({
                 subject: `New Contact Message: ${values.subject}`,
@@ -66,11 +66,11 @@ export default function ContactPage() {
                     Message: values.message,
                 },
             })
-            
+
             resetForm()
             if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha()
             setHcaptchaToken(null)
-            
+
             // Redirect to Thank You page
             navigate('/thank-you')
         } catch (err) {
@@ -105,7 +105,7 @@ export default function ContactPage() {
                             <div className="info-icon"><FiMail /></div>
                             <div>
                                 <h4>Email Us</h4>
-                                <a href="mailto:hello@astrobharat.ai">hello@astrobharat.ai</a>
+                                <a href="mailto:drkunwarharshitrajveer1@gmail.com">drkunwarharshitrajveer1@gmail.com</a>
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@ export default function ContactPage() {
                             <div className="info-icon"><FiPhone /></div>
                             <div>
                                 <h4>Call Us</h4>
-                                <a href="tel:+919876543210">+91 98765 43210</a>
+                                <a href="tel:+917068883996">+91 7068883996</a>
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@ export default function ContactPage() {
                             <div className="info-icon"><FiMapPin /></div>
                             <div>
                                 <h4>Location</h4>
-                                <p>New Delhi, India</p>
+                                <p>1/344, near Kathauta Chauraha Road,<br /> Vinamra Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010</p>
                             </div>
                         </div>
                     </div>
