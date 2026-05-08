@@ -12,15 +12,15 @@ const BTN_AREA = 120;
 const getPhoneHeight = () => {
     const isMobile = window.innerWidth <= 640;
     const isTablet = window.innerWidth <= 1024 && window.innerWidth > 640;
-    
+
     // Calculate offsets based on responsive positions
     // Desktop: bottom (48) + button (120) + gap (16) + frame border (10)
     // Tablet: bottom (24) + button (120) + gap (16) + frame border (10)
     // Mobile: bottom (12) + button (100) + gap (8) + frame border (10)
-    
+
     let offset = 48 + 120 + 16 + 10;
     let maxHeight = 520;
-    
+
     if (isMobile) {
         offset = 90 + 100 + 8 + 10;  // 90px = bottom navbar height + safe area
         maxHeight = 420;
@@ -28,7 +28,7 @@ const getPhoneHeight = () => {
         offset = 24 + 120 + 16 + 10;
         maxHeight = 480;
     }
-    
+
     return Math.min(maxHeight, window.innerHeight - offset);
 };
 
@@ -265,9 +265,9 @@ const FloatingChatbot = () => {
             <div className="ai-chatbot-root">
 
                 {/* ── WhatsApp Button ── */}
-                <button 
+                <button
                     className="whatsapp-float-btn"
-                    onClick={() => window.open('https://wa.me/', '_blank')}
+                    onClick={() => window.open("https://wa.me/917068883996?text=Book%20Appointment")}
                     title="Chat on WhatsApp"
                 >
                     <img src={whatsappIcon} alt="WhatsApp" draggable={false} />
