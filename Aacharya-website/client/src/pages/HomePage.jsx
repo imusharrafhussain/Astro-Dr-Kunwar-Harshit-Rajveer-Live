@@ -54,6 +54,8 @@ import bestAwardHariRawatImg from '../assets/best_award_hari_singh_rawat.webp'
 import bestAwardAtalImg from '../assets/best_award_atal.webp'
 import bestAward2024Img from '../assets/best_award_2024.webp'
 import ha1 from "../assets/h1.jpeg"
+import ha2 from "../assets/ha2.jpeg"
+import ha3 from "../assets/ha3.jpeg"
 import './HomePage.css'
 import HeroFloatingBadges from '../components/ui/HeroFloatingBadges'
 
@@ -302,10 +304,7 @@ const HomePage = () => {
         return () => clearInterval(timer)
     }, [focusFeatures.length])
 
-    const heroCarouselImages = [
-        ha1
-
-    ];
+    const heroCarouselImages = [ha1, ha2, ha3];
 
     const [heroImageIndex, setHeroImageIndex] = useState(0);
 
@@ -316,9 +315,10 @@ const HomePage = () => {
         return () => clearInterval(timer);
     }, [heroCarouselImages.length]);
 
-    const visibleFocusFeatures = Array.from({ length: 2 }, (_, i) =>
-        focusFeatures[(focusStartIndex + i) % focusFeatures.length]
-    )
+    const visibleFocusFeatures = [
+        focusFeatures[focusStartIndex % focusFeatures.length],
+        focusFeatures[(focusStartIndex + 1) % focusFeatures.length]
+    ];
 
     const mediaTabData = [
         {

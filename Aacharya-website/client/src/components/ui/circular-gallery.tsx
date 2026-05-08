@@ -132,7 +132,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
 
             return (
               <div
-                key={item.photo.url} 
+                key={`${item.photo.url}-${i}`} 
                 role="group"
                 aria-label={item.common}
                 className="absolute w-[150px] h-[270px]"
