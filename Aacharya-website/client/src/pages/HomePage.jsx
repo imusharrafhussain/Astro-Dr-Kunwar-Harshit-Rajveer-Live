@@ -58,6 +58,7 @@ import ha2 from "../assets/ha2.jpeg"
 import ha3 from "../assets/ha3.jpeg"
 import './HomePage.css'
 import HeroFloatingBadges from '../components/ui/HeroFloatingBadges'
+import FlipCardWidget from '../components/ui/FlipCardWidget'
 
 
 
@@ -442,6 +443,7 @@ const HomePage = () => {
 
     return (
         <div className="home-page">
+            <FlipCardWidget />
             {/* ── 1. Hero Section ── */}
             <section className="hero-section">
                 <div className="hero-container hero-container--full">

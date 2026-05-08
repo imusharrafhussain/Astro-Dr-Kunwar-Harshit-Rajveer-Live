@@ -44,7 +44,7 @@ export default function ReportsPage() {
     }, [activeReport])
 
     return (
-        <div className="reports-page">
+        <div className="reports-page page-wrapper">
             <section
                 className="section rp-hero"
                 style={{

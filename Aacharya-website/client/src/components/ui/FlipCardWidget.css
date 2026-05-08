@@ -1,0 +1,90 @@
+/* FlipCardWidget.css */
+.flip-card-widget {
+    position: fixed;
+    right: 20px;
+    top: 120px; /* Below the top navbar */
+    width: 220px;
+    height: 100px;
+    z-index: 999;
+    perspective: 1000px;
+    pointer-events: none; /* Let container be invisible to pointer */
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(253, 246, 230, 0.95));
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    pointer-events: auto; /* Re-enable pointer on the card */
+    overflow: hidden;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s;
+}
+
+.flip-card-inner:hover {
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+}
+
+.flip-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #1a0f0a;
+    padding: 10px 15px;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+}
+
+.flip-card-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.flip-card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flip-card-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #9b7420;
+    font-family: 'Playfair Display', serif;
+}
+
+.flip-card-text p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+    .flip-card-widget {
+        right: 15px;
+        top: 110px; /* Below mobile header */
+        width: 180px;
+        height: 80px;
+    }
+    
+    .flip-card-icon {
+        font-size: 1.5rem;
+    }
+    
+    .flip-card-text h4 {
+        font-size: 0.85rem;
+    }
+    
+    .flip-card-text p {
+        font-size: 0.7rem;
+    }
+}

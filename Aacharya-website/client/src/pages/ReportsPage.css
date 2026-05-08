@@ -10,7 +10,6 @@
 }
 
 .reports-page {
-    margin-top: 116px;
     background: linear-gradient(180deg, var(--rp-cream) 0%, #fffdf9 36%, var(--rp-cream-soft) 100%);
     color: var(--rp-text);
     padding-bottom: clamp(3rem, 7vw, 5rem);
@@ -89,7 +88,7 @@
 
 /* Hero */
 .rp-hero {
-    min-height: calc(100vh - 116px);
+    min-height: calc(100vh - var(--header-height));
     padding: clamp(2rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3.25rem);
     display: flex;
     align-items: center;
@@ -845,6 +844,9 @@
     .rp-grid,
     .rp-features {
         grid-template-columns: 1fr;
+    }
+    .reports-page .container {
+        padding: 20px;
     }
     .rp-float-card {
         min-width: 0;

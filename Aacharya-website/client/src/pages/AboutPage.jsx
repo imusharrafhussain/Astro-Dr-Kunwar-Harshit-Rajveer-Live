@@ -198,7 +198,7 @@ export default function AboutPage() {
     }, [isServicesModalOpen])
 
     return (
-        <div className="about-page">
+        <div className="about-page page-wrapper">
 
             {/* ════════════════════ HERO ════════════════════ */}
             <section
