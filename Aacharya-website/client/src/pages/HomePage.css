@@ -214,9 +214,9 @@
 
 .hero-proof-face {
     flex: 0 0 auto;
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
+    width: 128px;
+    height: 72px;
+    border-radius: 8px;
     object-fit: cover;
     border: 2px solid #fff;
     box-shadow: 0 4px 14px rgba(93, 25, 22, 0.22);
@@ -3203,17 +3203,17 @@
 
     /* 2. ── MARQUEE FACE IMAGES: fix distortion — enforce exact square + crop ── */
     .hero-proof-face {
-        width: 70px !important;
-        height: 70px !important;
-        flex: 0 0 70px !important;
-        border-radius: 50% !important;
+        width: 112px !important;
+        height: 63px !important;
+        flex: 0 0 112px !important;
+        border-radius: 6px !important;
         object-fit: cover !important;
         object-position: center top !important;
-        aspect-ratio: 1 / 1 !important;
+        aspect-ratio: 16 / 9 !important;
         display: block;
         flex-shrink: 0;
-        min-width: 70px;
-        min-height: 70px;
+        min-width: 112px;
+        min-height: 63px;
     }
 
     .hero-proof-marquee-set {
@@ -3231,11 +3231,11 @@
 
     /* Force each face to hold its size — never compress */
     .hero-proof-marquee-set .hero-proof-face {
-        flex: 0 0 70px !important;
-        width: 70px !important;
-        height: 70px !important;
-        min-width: 70px;
-        min-height: 70px;
+        flex: 0 0 112px !important;
+        width: 112px !important;
+        height: 63px !important;
+        min-width: 112px;
+        min-height: 63px;
     }
 
     /* 3. ── ZODIAC CIRCULAR GALLERY ── */
@@ -3308,11 +3308,12 @@
     }
 
     .hero-proof-face {
-        width: 58px !important;
-        height: 58px !important;
-        flex: 0 0 58px !important;
-        min-width: 58px;
-        min-height: 58px;
+        width: 96px !important;
+        height: 54px !important;
+        flex: 0 0 96px !important;
+        min-width: 96px;
+        min-height: 54px;
+        border-radius: 4px !important;
     }
 
     .media-awards-section ul li {

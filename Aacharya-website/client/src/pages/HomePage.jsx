@@ -59,6 +59,18 @@ import ha3 from "../assets/ha3.jpeg"
 import './HomePage.css'
 import HeroFloatingBadges from '../components/ui/HeroFloatingBadges'
 import FlipCardWidget from '../components/ui/FlipCardWidget'
+import m1 from "../assets/1 (1).jpg"
+import m2 from "../assets/1 (2).jpg"
+import m3 from "../assets/1 (3).jpg"
+import m4 from "../assets/1 (4).jpg"
+import m5 from "../assets/1 (5).jpg"
+import m6 from "../assets/1 (6).jpg"
+import m7 from "../assets/1 (7).jpg"
+import m8 from "../assets/1 (8).jpg"
+import m9 from "../assets/1 (9).jpg"
+import m10 from "../assets/1 (10).jpg"
+import m11 from "../assets/1 (11).jpg"
+import m12 from "../assets/1 (12).jpg"
 
 
 
@@ -153,16 +165,18 @@ const HomePage = () => {
     const podcastChannelUrl = 'https://www.youtube.com/@dr_kunwar_harshit'
 
     const heroMarqueeFaces = [
-        { src: marqueeEshaDeol, alt: 'Esha Deol' },
-        { src: marqueeMannara, alt: 'Mannara Chopra' },
-        { src: marqueeManojTiwari, alt: 'Manoj Tiwari' },
-        { src: marqueeAkhilendraMishra, alt: 'Akhilendra Mishra' },
-        { src: marqueeRajeevVerma, alt: 'Rajeev Verma' },
-        { src: marqueeGuest, alt: 'Guest' },
-        { src: marqueeTusharKapoor, alt: 'Tushar Kapoor' },
-        { src: marqueeDaisyShah, alt: 'Daisy Shah' },
-        { src: marqueeBhagyashree, alt: 'Bhagyashree' },
-        { src: marqueeAnchalMunjal, alt: 'Anchal Munjal' },
+        { src: m1, alt: 'Esha Deol' },
+        { src: m2, alt: 'Mannara Chopra' },
+        { src: m3, alt: 'Manoj Tiwari' },
+        { src: m4, alt: 'Akhilendra Mishra' },
+        { src: m5, alt: 'Rajeev Verma' },
+        { src: m6, alt: 'Guest' },
+        { src: m7, alt: 'Tushar Kapoor' },
+        { src: m8, alt: 'Daisy Shah' },
+        { src: m9, alt: 'Bhagyashree' },
+        { src: m10, alt: 'Anchal Munjal' },
+        { src: m11, alt: 'Anchal Munjal' },
+        { src: m12, alt: 'Anchal Munjal' }
     ]
 
     const servicesRow1 = [
@@ -513,7 +527,7 @@ const HomePage = () => {
                         </div>
                         <div className="hero-actions fade-in-up" style={{ animationDelay: '0.3s' }}>
                             <Link to="/book" className="btn btn-primary">
-                                Get Your Reading <FiArrowRight />
+                                Get Your Consultation<FiArrowRight />
                             </Link>
                             <Link to="/reports" className="btn btn-secondary">
                                 View Sample Report
