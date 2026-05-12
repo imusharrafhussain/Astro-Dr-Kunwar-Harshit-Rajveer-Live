@@ -25,7 +25,7 @@ export default defineConfig({
             // Prevent MIME-type sniffing
             'X-Content-Type-Options': 'nosniff',
             // Only allow images to be loaded from same origin (prevents hotlinking)
-            'Content-Security-Policy': "default-src 'self'; img-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;",
+            'Content-Security-Policy': "default-src 'self'; connect-src 'self' http://localhost:5000 http://localhost:5174 ws://localhost:5174 https://dr-kunwar-harshit-rajveer.onrender.com; img-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;",
             // Prevent embedding in iframes (clickjacking)
             'X-Frame-Options': 'SAMEORIGIN',
             // Control referrer info to prevent asset URL leaking
