@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Article = require('../models/Article');
 
 // @desc    List articles (with pagination + category filter)
@@ -9,9 +10,9 @@ exports.getAllArticles = async (req, res, next) => {
         const limit = parseInt(req.query.limit) || 9;
         const skip = (page - 1) * limit;
 
-        const filter = { published: true };
+        const filter = {};
         if (req.query.category && req.query.category !== 'All') {
-            filter.category = req.query.category;
+            filter['category.name'] = req.query.category;
         }
 
         const [articles, total] = await Promise.all([
@@ -41,8 +42,12 @@ exports.getAllArticles = async (req, res, next) => {
 // @access  Public
 exports.getArticleBySlug = async (req, res, next) => {
     try {
+        const query = mongoose.Types.ObjectId.isValid(req.params.slug) 
+            ? { _id: req.params.slug } 
+            : { slug: req.params.slug };
+            
         const article = await Article.findOneAndUpdate(
-            { slug: req.params.slug, published: true },
+            query,
             { $inc: { views: 1 } },
             { new: true }
         );
