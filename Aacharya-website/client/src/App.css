@@ -121,6 +121,11 @@ a {
   flex-direction: column;
 }
 
+main {
+  min-height: 80vh;
+  flex: 1;
+}
+
 .container {
   width: 100%;
   max-width: var(--container-width);

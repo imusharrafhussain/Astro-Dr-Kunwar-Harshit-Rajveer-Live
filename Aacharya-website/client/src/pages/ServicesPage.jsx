@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { FiArrowRight, FiSearch, FiClock, FiTag, FiCheckCircle, FiStar, FiCalendar, FiChevronDown } from 'react-icons/fi'
+import Skeleton, { SkeletonText } from '../components/ui/loaders/Skeleton'
+import PageSkeleton from '../components/ui/loaders/PageSkeleton'
 import './ServicesPage.css'
 
 // Image Imports
@@ -173,6 +175,7 @@ const FloatingSymbols = () => {
 
 export default function ServicesPage() {
     const [activeCategory, setActiveCategory] = useState('all')
+
     const [searchQuery, setSearchQuery] = useState('')
     const [scrolled, setScrolled] = useState(false)
     const [hoveredCard, setHoveredCard] = useState(null)

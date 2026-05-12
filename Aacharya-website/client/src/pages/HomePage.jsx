@@ -71,6 +71,9 @@ import m9 from "../assets/1 (9).jpg"
 import m10 from "../assets/1 (10).jpg"
 import m11 from "../assets/1 (11).jpg"
 import m12 from "../assets/1 (12).jpg"
+import PageLoader from '../components/ui/loaders/PageLoader'
+import PageSkeleton from '../components/ui/loaders/PageSkeleton'
+import Skeleton from '../components/ui/loaders/Skeleton'
 
 
 
@@ -318,6 +321,8 @@ const HomePage = () => {
 
         return () => clearInterval(timer)
     }, [focusFeatures.length])
+
+    const [activeCategory, setActiveCategory] = useState('all')
 
     const heroCarouselImages = [ha1, ha2, ha3];
 
@@ -646,7 +651,7 @@ const HomePage = () => {
                                 <h3 className="authority-gallery-heading">
                                     Explore our astrology services
                                 </h3>
-                                <Suspense fallback={null}>
+                                <Suspense fallback={<Skeleton height="400px" borderRadius="15px" />}>
                                     <LinearCardGallery items={authorityLinearGalleryItems} />
                                 </Suspense>
                             </div>
@@ -716,7 +721,7 @@ const HomePage = () => {
                 <div className="container">
                     <ScaleLetterHeading as="h2" className="section-title" text="Legacy of Excellence" />
                     <div>
-                        <Suspense fallback={null}>
+                        <Suspense fallback={<Skeleton height="60px" borderRadius="30px" />}>
                             <SlideTabs
                                 tabs={mediaTabData.map((t) => t.label)}
                                 selectedIndex={Math.max(0, mediaTabData.findIndex((t) => t.id === activeMediaTab))}
@@ -732,7 +737,7 @@ const HomePage = () => {
 
             {/* ── 4b. Tab Content Panel (full-width) ── */}
             {activeTab?.id === 'awards-summit' ? (
-                <Suspense fallback={null}>
+                <Suspense fallback={<PageSkeleton />}>
                     <BrillianceAwardsShowcase />
                 </Suspense>
             ) : activeTab?.id === 'national-tv' ? (

@@ -1,0 +1,100 @@
+.page-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  width: 100%;
+  background: transparent;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.astrology-loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-sun {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #ffcc33, #ff8800);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 204, 51, 0.8);
+  z-index: 5;
+}
+
+.inner-ring, .outer-ring {
+  position: absolute;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-radius: 50%;
+}
+
+.inner-ring {
+  width: 60px;
+  height: 60px;
+  border-top-color: #D4AF37;
+  animation: rotate 3s linear infinite;
+}
+
+.outer-ring {
+  width: 100px;
+  height: 100px;
+  border-bottom-color: #8b0000;
+  animation: rotate 6s linear reverse infinite;
+}
+
+.zodiac-dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotate 12s linear infinite;
+}
+
+.zodiac-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #D4AF37;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translateY(-55px);
+  box-shadow: 0 0 10px #D4AF37;
+}
+
+.loader-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  color: #5D1916;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Dark mode support if applicable */
+@media (prefers-color-scheme: dark) {
+  .loader-text {
+    color: #f1f1f1;
+  }
+}
