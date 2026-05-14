@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { FiInstagram, FiYoutube, FiTwitter, FiLinkedin, FiMapPin, FiMail, FiPhone } from 'react-icons/fi'
+import { FiInstagram, FiYoutube, FiLinkedin, FiMapPin, FiMail, FiPhone } from 'react-icons/fi'
+import { FaXTwitter } from 'react-icons/fa6'
 import './Footer.css'
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
                         <div className="footer-socials">
                             <a href="https://www.instagram.com/astrobharatai" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FiInstagram /></a>
                             <a href="https://www.youtube.com/@AstroBharatAI" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FiYoutube /></a>
-                            <a href="#" aria-label="Twitter"><FiTwitter /></a>
+                            <a href="#" aria-label="X (formerly Twitter)"><FaXTwitter /></a>
                             <a href="#" aria-label="LinkedIn"><FiLinkedin /></a>
                         </div>
                     </div>

@@ -75,6 +75,19 @@
     font-size: 0.95rem;
 }
 
+.captcha-group {
+    margin-bottom: 2rem;
+}
+
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border-subtle);
+}
+
 /* Mobile Responsive */
 @media (max-width: 900px) {
     .contact-grid {

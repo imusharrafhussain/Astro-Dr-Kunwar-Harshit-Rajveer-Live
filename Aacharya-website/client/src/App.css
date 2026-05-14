@@ -154,6 +154,26 @@ main {
   align-items: center;
 }
 
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.width-full {
+  width: 100%;
+}
+
 .grid-cols-2 {
   display: grid;
   grid-template-columns: 1fr;
