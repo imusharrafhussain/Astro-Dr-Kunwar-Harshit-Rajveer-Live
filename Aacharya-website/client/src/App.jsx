@@ -204,11 +204,6 @@ function App() {
                             <Route path="/book" element={<BookingPage />} />
                             <Route path="/reports" element={<ReportsPage />} />
                             <Route path="/reports/order/:reportId" element={<ReportOrderPage />} />
-<<<<<<< HEAD
-                            <Route path="/blog" element={<BlogPage />} />
-                            <Route path="/blog/:slug" element={<ArticleDetailPage />} />
-=======
->>>>>>> 9d0693b (new changes)
                             <Route path="/contact" element={<ContactPage />} />
                             <Route path="/thank-you" element={<ThankYouPage />} />
                             <Route path="/login" element={<LoginPage />} />
