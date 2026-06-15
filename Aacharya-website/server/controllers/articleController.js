@@ -12,6 +12,7 @@ exports.getAllArticles = async (req, res, next) => {
 
         const filter = {};
         if (req.query.category && req.query.category !== 'All') {
+            filter['category.name'] = req.query.category;
             // Match category name or slug (e.g. "Vedic Astrology" -> /vedic.astrology/i)
             const searchRegex = new RegExp(req.query.category.replace(/\s+/g, '[- ]?'), 'i');
             filter['category.name'] = { $regex: searchRegex };

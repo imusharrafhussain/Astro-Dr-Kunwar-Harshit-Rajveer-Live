@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight, Clock, X, Share2, Bookmark, Copy, Check } from 'lucide-react';
 import { FaWhatsapp, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import API from '../api/axios';
 import { toast } from 'react-hot-toast';
 import './BlogPage.css';
@@ -286,6 +287,13 @@ const BlogPage = () => {
                                                 >
                                                     <div className="icon-circle"><FaInstagram /></div>
                                                     <span>Instagram</span>
+                                                </button>
+                                                <button 
+                                                    className="share-target x-twitter"
+                                                    onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(selectedBlog.title)}&url=${encodeURIComponent(shareUrl)}`, '_blank')}
+                                                >
+                                                    <div className="icon-circle"><FaXTwitter /></div>
+                                                    <span>X</span>
                                                 </button>
                                             </div>
 

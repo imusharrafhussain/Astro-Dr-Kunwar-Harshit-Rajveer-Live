@@ -13,14 +13,14 @@ app.use(helmet({
     contentSecurityPolicy: {
         useDefaults: false,
         directives: {
-            defaultSrc:    ["'self'"],
-            scriptSrc:     ["'self'", "'unsafe-inline'"],
-            styleSrc:      ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-            fontSrc:       ["'self'", 'https://fonts.gstatic.com'],
-            imgSrc:        ["'self'", 'data:', 'blob:', 'https:'],
-            connectSrc:    ["'self'"],
-            frameSrc:      ["'none'"],
-            objectSrc:     ["'none'"],
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+            fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+            imgSrc: ["'self'", 'data:', 'blob:', 'https:'],
+            connectSrc: ["'self'"],
+            frameSrc: ["'none'"],
+            objectSrc: ["'none'"],
             upgradeInsecureRequests: [],
         },
     },
@@ -34,7 +34,7 @@ app.use(helmet({
     referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 }));
 const allowedOrigins = [
-    process.env.CLIENT_URL || 'http://localhost:5173',
+    process.env.CLIENT_URL || 'http://localhost:5174',
     process.env.ADMIN_URL || 'http://localhost:5174',
 ].filter(Boolean);
 

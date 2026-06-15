@@ -184,12 +184,15 @@ export default function ContactPage() {
                             {/* Web3Forms Honeypot */}
                             <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={values.botcheck} onChange={handleChange} />
 
-                            <div className="form-group flex justify-center mb-4">
-                                <HCaptcha
-                                    sitekey="10000000-ffff-ffff-ffff-000000000001"
-                                    onVerify={setHcaptchaToken}
-                                    ref={hcaptchaRef}
-                                />
+                            <div className="form-group captcha-group">
+                                <label>Verification</label>
+                                <div className="captcha-container">
+                                    <HCaptcha
+                                        sitekey="10000000-ffff-ffff-ffff-000000000001"
+                                        onVerify={setHcaptchaToken}
+                                        ref={hcaptchaRef}
+                                    />
+                                </div>
                             </div>
 
                             <button
