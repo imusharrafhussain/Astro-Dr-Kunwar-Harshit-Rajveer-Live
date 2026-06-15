@@ -343,7 +343,6 @@ export default function Navbar() {
                         <NavLink to="/panchang" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>Daily Panchang</NavLink>
                         <NavLink to="/numerology" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>Numerology</NavLink>
                         <NavLink to="/reports" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>Reports</NavLink>
-                        <NavLink to="/blog" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>Blog</NavLink>
                     </nav>
 
                     {/* Right Side Actions */}
@@ -557,7 +556,6 @@ export default function Navbar() {
                         <NavLink to="/panchang" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Daily Panchang</NavLink>
                         <NavLink to="/numerology" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Numerology</NavLink>
                         <NavLink to="/reports" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Reports</NavLink>
-                        <NavLink to="/blog" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>Blog</NavLink>
                         <NavLink to="/about" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}>About Us</NavLink>
                         <NavLink to="/learning" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiBookOpen /> Digital Learning</NavLink>
                         <NavLink to="/mandir" className={({ isActive }) => `hamburger-link${isActive ? ' active' : ''}`} onClick={() => setIsOpen(false)}><FiArchive /> Digital Mandir</NavLink>

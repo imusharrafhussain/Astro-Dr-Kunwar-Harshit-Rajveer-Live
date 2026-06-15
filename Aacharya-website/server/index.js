@@ -67,7 +67,6 @@ app.use('/api/services', require('./routes/serviceRoutes'));
 app.use('/api/guna-milan', require('./routes/gunaMilanRoutes'));
 app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
-app.use('/api/articles', require('./routes/articleRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/puja-bookings', require('./routes/pujaBookingRoutes'));
 app.use('/api/chatbot', require('./routes/chatbotRoutes'));
