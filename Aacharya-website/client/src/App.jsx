@@ -23,8 +23,6 @@ const FaceReadingPage = lazy(() => import('./pages/FaceReadingPage'))
 const BookingPage = lazy(() => import('./pages/BookingPage'))
 const ReportsPage = lazy(() => import('./pages/ReportsPage'))
 const ReportOrderPage = lazy(() => import('./pages/ReportOrderPage'))
-const BlogPage = lazy(() => import('./pages/BlogPage'))
-const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
@@ -206,8 +204,11 @@ function App() {
                             <Route path="/book" element={<BookingPage />} />
                             <Route path="/reports" element={<ReportsPage />} />
                             <Route path="/reports/order/:reportId" element={<ReportOrderPage />} />
+<<<<<<< HEAD
                             <Route path="/blog" element={<BlogPage />} />
                             <Route path="/blog/:slug" element={<ArticleDetailPage />} />
+=======
+>>>>>>> 9d0693b (new changes)
                             <Route path="/contact" element={<ContactPage />} />
                             <Route path="/thank-you" element={<ThankYouPage />} />
                             <Route path="/login" element={<LoginPage />} />
