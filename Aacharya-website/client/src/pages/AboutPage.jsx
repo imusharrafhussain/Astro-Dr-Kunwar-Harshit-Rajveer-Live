@@ -180,7 +180,7 @@ export default function AboutPage() {
         const v = journeyVideoRef.current
         if (!v) return
         const p = v.play()
-        if (p !== undefined && typeof p.catch === 'function') p.catch(() => {})
+        if (p !== undefined && typeof p.catch === 'function') p.catch(() => { })
     }, [journeySection.isVisible])
 
     useEffect(() => {
@@ -432,10 +432,10 @@ export default function AboutPage() {
                         </h2>
 
                         <p className="ap-prose">
-                        I, Dr. Kunwar Harshit Rajveer, walk a path illuminated by the universe itself. I attune myself to the silent language of the stars, decoding cosmic energies to guide souls toward alignment with their true purpose. My journey is not merely about providing answers, but about awakening the deeper truths that reside within every being—helping them rediscover their connection with the cosmos and their own inner light.
+                            I, Dr. Kunwar Harshit Rajveer, walk a path illuminated by the universe itself. I attune myself to the silent language of the stars, decoding cosmic energies to guide souls toward alignment with their true purpose. My journey is not merely about providing answers, but about awakening the deeper truths that reside within every being—helping them rediscover their connection with the cosmos and their own inner light.
                         </p>
                         <p className="ap-prose">
-                        I believe that every soul carries a unique cosmic blueprint, and through awareness and understanding, one can unlock their true potential. My journey is dedicated to illuminating that path—where destiny meets consciousness, and where inner clarity leads to outer transformation.
+                            I believe that every soul carries a unique cosmic blueprint, and through awareness and understanding, one can unlock their true potential. My journey is dedicated to illuminating that path—where destiny meets consciousness, and where inner clarity leads to outer transformation.
                         </p>
 
                         <blockquote className="ap-blockquote">
@@ -531,7 +531,7 @@ export default function AboutPage() {
                     <div className="ap-section-header">
                         <span className="ap-eyebrow">✦ Our Story</span>
                         <h2 id="ap-journey-h2" className="ap-section-title">
-                        Benefits<span className="ap-gold-gradient-text"></span>
+                            Benefits<span className="ap-gold-gradient-text"></span>
                         </h2>
                         <p className="ap-section-sub">
                             Milestones along the path of learning and service.

@@ -12,9 +12,9 @@
     padding-bottom: 0;
     /* Shared vertical rhythm + feather height for section blends */
     --ap-feather: clamp(52px, 9vw, 96px);
-    --ap-section-y: clamp(4.5rem, 10vw, 9rem);
+    --ap-section-y: clamp(3rem, 6vw, 5.5rem);
     /* Extra air between stats strip and Who We Are (content inset, not section overlap) */
-    --ap-stats-intro-gap: clamp(3rem, 7vw, 5rem);
+    --ap-stats-intro-gap: clamp(1.5rem, 3vw, 2.5rem);
     /* Align all section content to the same horizontal gutter */
     --ap-gutter: clamp(1rem, 4vw, 2.25rem);
     overflow-x: clip;
@@ -35,8 +35,8 @@
     padding-left: var(--ap-gutter);
     padding-right: var(--ap-gutter);
     box-sizing: border-box;
-    margin-bottom: 40px;
-    margin-top: 50px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1125,6 +1125,7 @@
 .ap-portrait {
     position: relative;
     aspect-ratio: 3 / 4;
+    width: 100%;
     max-width: 330px;
     margin: 0 auto;
     border-radius: 28px;
@@ -1596,6 +1597,7 @@
     font-family: var(--font-heading);
     color: #5D1916;
     font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+    padding-right: 42px; /* Leave space for the close button on mobile */
 }
 
 .ap-services-modal__sub {
@@ -1728,7 +1730,7 @@
 
 .ap-exp-card {
     position: relative;
-    padding: 3rem 1.9rem 2.2rem;
+    padding: 2.25rem 1.5rem 1.75rem;
     background: #fff;
     border-radius: 24px;
     box-shadow: 0 0 2px rgba(93, 25, 22, 0.08), 0 6px 24px rgba(93, 25, 22, 0.05);
@@ -2288,7 +2290,7 @@
 .ap-cta {
     position: relative;
     /* Extend the consultation block lower so it owns the bottom area */
-    padding: clamp(4.75rem, 10vw, 7.5rem) 0 clamp(5.5rem, 11vw, 8rem);
+    padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(3.5rem, 7vw, 5rem);
     margin-top: 0;
     margin-bottom: 0;
     /* Soft top blend from journey (no sharp cut from dark to maroon) */
@@ -2372,6 +2374,10 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(8px);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .ap-cta__copy {
@@ -2627,12 +2633,17 @@
     }
 
     .ap-value-cards {
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.85rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
     }
 
     .ap-value-card {
-        flex: 1 1 200px;
+        flex: none;
     }
 
     .ap-intro__copy {
@@ -2654,6 +2665,10 @@
 
     .ap-hero__copy {
         align-items: center;
+    }
+
+    .ap-hero__leadline {
+        justify-content: center;
     }
 
     .ap-hero__tagline {
@@ -2694,8 +2709,54 @@
         text-align: center;
     }
 
+    .ap-cta__copy {
+        flex: none;
+    }
+
     .ap-cta__actions {
         justify-content: center;
+    }
+
+    /* Move timeline responsive overrides to 860px to prevent narrow tablet columns */
+    .ap-timeline {
+        padding: 1.25rem 1rem 1.25rem 1.1rem;
+        border-radius: 24px;
+    }
+
+    .ap-timeline__spine {
+        left: 20px;
+        transform: none;
+    }
+
+    .ap-tl-row--l,
+    .ap-tl-row--r {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 0 0 54px;
+        align-items: stretch;
+    }
+
+    .ap-tl-row__dot {
+        position: absolute;
+        left: 20px;
+        top: 1.6rem;
+        transform: translate(-50%, -50%);
+    }
+
+    .ap-tl-card {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .ap-tl-copy {
+        max-width: 100%;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.85); /* Solid high contrast fallback for readability */
+    }
+
+    .ap-tl-card__frame {
+        aspect-ratio: 16 / 9;
     }
 }
 
@@ -2738,49 +2799,9 @@
         border-radius: 24px;
     }
 
-    .ap-timeline {
-        padding: 1.25rem 1rem 1.25rem 1.1rem;
-        border-radius: 24px;
-    }
-
     .ap-cta__inner {
         padding: 1.6rem;
         border-radius: 24px;
-    }
-
-    .ap-timeline__spine {
-        left: 20px;
-        transform: none;
-    }
-
-    .ap-tl-row--l,
-    .ap-tl-row--r {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0 0 0 54px;
-        align-items: stretch;
-    }
-
-    .ap-tl-row__dot {
-        position: absolute;
-        left: 20px;
-        top: 1.6rem;
-        transform: translate(-50%, -50%);
-    }
-
-    .ap-tl-card {
-        margin: 0;
-        max-width: 100%;
-    }
-
-    .ap-tl-copy {
-        max-width: 100%;
-        margin: 0;
-    }
-
-    .ap-tl-card__frame {
-        aspect-ratio: 16 / 9;
     }
 
     .ap-exp-learnmore__btn {
@@ -2788,12 +2809,70 @@
         height: 64px;
     }
 
-    .ap-value-cards {
-        flex-direction: column;
-    }
-
     .ap-services-modal__grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Collage Grid for Mobile Portrait to prevent tiny overlapping elements */
+    .ap-hero__mosaic {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        height: auto;
+        margin-top: 2rem;
+    }
+
+    .ap-mc {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stack stats to 1 column on small phones */
+    .ap-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Stack CTA buttons vertically for better tap target compatibility */
+    .ap-hero__actions,
+    .ap-cta__actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .ap-hero__actions .ap-btn,
+    .ap-cta__actions .ap-btn {
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Save viewport space on cards */
+    .ap-exp-card {
+        padding: 2rem 1.25rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Stack core value cards vertically and center them to sit snuggly with portrait */
+    .ap-value-cards {
+        grid-template-columns: 1fr;
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
