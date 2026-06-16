@@ -5,7 +5,7 @@ export default function Sidebar({ active, onSelect }) {
     { key: 'consultations', label: 'Consultation' },
     { key: 'numerology', label: 'Numerology' },
     { key: 'book-puja', label: 'Book Puja' },
-    { key: 'horoscope', label: 'Horoscope' },
+    { key: 'horoscope', label: 'Horoscope Consultation' },
     { key: 'contacts', label: 'Contacts' },
     { key: 'users', label: 'Users' },
   ];
