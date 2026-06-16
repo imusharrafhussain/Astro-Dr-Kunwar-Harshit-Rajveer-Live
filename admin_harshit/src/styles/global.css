@@ -278,7 +278,9 @@ body {
 .content {
   padding: 16px;
   min-height: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .contentHeader {
@@ -302,6 +304,7 @@ body {
   -webkit-backdrop-filter: blur(16px);
   overflow: hidden;
   min-height: 0;
+  flex: 1 1 0;         /* fill the .tableBox flex container */
   display: grid;
   grid-template-rows: auto 1fr;
   position: relative;
@@ -339,9 +342,41 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* ── tableBox: fills remaining content height so the table can scroll ── */
+.tableBox {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .tableWrap {
   overflow: auto;
   min-height: 0;
+  /* Custom scrollbar – vertical */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.45) rgba(255, 255, 255, 0.05);
+}
+
+/* Webkit scrollbar (Chrome / Edge / Safari) */
+.tableWrap::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.tableWrap::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+.tableWrap::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.45);
+  border-radius: 4px;
+}
+.tableWrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.75);
+}
+.tableWrap::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .table {
@@ -381,6 +416,8 @@ body {
 @media (max-width: 880px) {
   .main {
     grid-template-columns: 1fr;
+    /* Stack sidebar above content; let each area scroll independently */
+    grid-template-rows: auto 1fr;
   }
   .sidebar {
     border-right: none;
@@ -391,10 +428,37 @@ body {
     overflow-x: auto;
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
+    /* Scrollbar for horizontal sidebar nav */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
+  }
+  .nav::-webkit-scrollbar {
+    height: 4px;
+  }
+  .nav::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.4);
+    border-radius: 4px;
   }
   .navItem {
     white-space: nowrap;
     flex-shrink: 0;
+  }
+  .content {
+    /* On mobile, content section fills viewport height minus topbar+sidebar */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tableBox {
+    /* Let tableBox size to content on small screens instead of capping height */
+    flex: unset;
+    overflow: visible;
+  }
+  .tableWrap {
+    /* Full horizontal scroll on narrow screens */
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 60vh;
   }
 }
 
