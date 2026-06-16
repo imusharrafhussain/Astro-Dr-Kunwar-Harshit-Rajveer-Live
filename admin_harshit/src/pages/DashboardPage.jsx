@@ -12,7 +12,7 @@ const CATEGORY_TITLES = {
   consultations: 'Consultation',
   numerology: 'Numerology',
   'book-puja': 'Book Puja',
-  horoscope: 'Horoscope',
+  horoscope: 'Horoscope Consultation',
   contacts: 'Contacts',
   users: 'Registered Users',
 };
