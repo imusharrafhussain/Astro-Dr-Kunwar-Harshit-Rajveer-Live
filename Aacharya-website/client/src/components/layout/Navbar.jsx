@@ -459,7 +459,7 @@ export default function Navbar() {
                 </nav>
             </div>
             {/* ── Compact Hamburger Dropdown — Mobile / Tablet only ── */}
-            <div ref={hamburgerMenuRef} className={`hamburger-menu${isOpen ? ' open' : ''}`}>
+            <div ref={hamburgerMenuRef} className={`hamburger-menu${isOpen ? ' open' : ''}${hamburgerView === 'puja' ? ' puja-view' : (hamburgerView === 'services' || hamburgerView === 'horoscope') ? ' grid-view' : ''}`}>
 
                 {hamburgerView === 'puja' ? (
                     /* ── Miniature Puja mega panel in mobile hamburger ── */
