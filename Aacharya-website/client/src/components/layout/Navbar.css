@@ -726,8 +726,9 @@
     .hamburger-menu {
         left: 0 !important;
         right: 0 !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: unset !important;
         border-radius: 0 0 16px 16px !important;
     }
 
@@ -1190,10 +1191,10 @@
     .pu-dropdown-override {
         position: fixed !important;
         left: 8px !important;
-        right: 8px !important;
+        right: 12px !important;
         top: 70px !important;
         min-width: unset;
-        max-width: calc(100vw - 16px);
+        max-width: calc(100vw - 20px);
     }
 
     .puja-mega-dropdown {
@@ -1239,7 +1240,8 @@
     .pu-dropdown-override {
         top: 60px !important;
         left: 4px !important;
-        right: 4px !important;
+        right: 12px !important;
+        max-width: calc(100vw - 16px) !important;
     }
 
     .puja-mega-grid-items {
@@ -1258,6 +1260,19 @@
     .puja-mega-item-icon { font-size: 1.4rem; margin-bottom: 0.1rem; }
     .puja-mega-item-details h4 { font-size: 0.72rem; margin-bottom: 0.1rem; line-height: 1.2; }
     .puja-mega-item-details p { font-size: 0.6rem; line-height: 1.15; }
+
+    .hamburger-link,
+    .hamburger-sublink {
+        white-space: normal !important;
+    }
+    .hamburger-mega-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        width: 100% !important;
+    }
+    .hamburger-mega-card {
+        width: 100% !important;
+        min-width: unset !important;
+    }
 }
 
 @media (max-width: 480px) {
