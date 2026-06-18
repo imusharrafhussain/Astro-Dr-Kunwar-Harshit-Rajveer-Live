@@ -8,7 +8,7 @@ const flipContents = [
         title: "Daily Horoscope",
         desc: "Check what the stars say about your day.",
         tip: "Lucky Color: Gold",
-        link: "/horoscope",
+        link: "/horoscope/daily",
         icon: "✨",
         bg: "#f2c94c",
         variant: "ring"

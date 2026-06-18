@@ -170,11 +170,10 @@ svg {
   }
 
   .media-tab-mosaic--clean {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
     grid-template-areas:
-      "top"
-      "bottom"
-      "portrait" !important;
+      "top portrait"
+      "bottom portrait" !important;
   }
 
   .media-tab-content--bharat {

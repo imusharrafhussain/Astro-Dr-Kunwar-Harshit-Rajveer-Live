@@ -532,7 +532,7 @@ const HomePage = () => {
                         </div>
                         <div className="hero-actions fade-in-up" style={{ animationDelay: '0.3s' }}>
                             <Link to="/book" className="btn btn-primary">
-                                Get Your Consultation<FiArrowRight />
+                                Get Your Paid Consultation<FiArrowRight />
                             </Link>
                             <Link to="/reports" className="btn btn-secondary">
                                 View Sample Report

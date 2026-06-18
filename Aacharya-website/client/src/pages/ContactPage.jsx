@@ -1,4 +1,4 @@
-import { FiMail, FiSend, FiMapPin, FiPhone } from 'react-icons/fi'
+import { FiMail, FiSend, FiPhone } from 'react-icons/fi'
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
@@ -114,14 +114,6 @@ export default function ContactPage() {
                             <div>
                                 <h4>Call Us</h4>
                                 <a href="tel:+917068883996">+91 7068883996</a>
-                            </div>
-                        </div>
-
-                        <div className="info-item">
-                            <div className="info-icon"><FiMapPin /></div>
-                            <div>
-                                <h4>Location</h4>
-                                <p>1/344, near Kathauta Chauraha Road,<br /> Vinamra Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010</p>
                             </div>
                         </div>
                     </div>

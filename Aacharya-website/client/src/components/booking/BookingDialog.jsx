@@ -220,6 +220,11 @@ function DetailsForm({ defaultValues, onSubmit }) {
 
   return (
     <form className="bk-form" onSubmit={handleSubmit}>
+      <div className="bk-shimmer-tag-container">
+        <span className="bk-shimmer-tag">
+          <span className="bk-shimmer-sparkle">✨</span> Paid Consultation <span className="bk-shimmer-sparkle">✨</span>
+        </span>
+      </div>
       {field('fullName', 'Full Name', '👤', 'text', 'e.g. Your Name')}
       <div className="bk-row-2">
         {field('phone', 'Phone Number', '📱', 'text', '10-digit mobile')}
@@ -239,7 +244,7 @@ function DetailsForm({ defaultValues, onSubmit }) {
         />
         {errors.address && <p className="bk-error">{errors.address}</p>}
       </div>
-      
+
       {SPECIAL_SERVICES.includes(values.service) ? (
         <div className="bk-field">
           <label className="bk-label" htmlFor="service-fixed">
@@ -258,7 +263,7 @@ function DetailsForm({ defaultValues, onSubmit }) {
           <label className="bk-label" htmlFor="service">
             <span className="bk-label-icon">🕉️</span> Select Service
           </label>
-          <div 
+          <div
             className={`bk-custom-select ${errors.service ? 'error' : ''} ${isDropdownOpen ? 'open' : ''}`}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
@@ -266,18 +271,18 @@ function DetailsForm({ defaultValues, onSubmit }) {
               {values.service || <span className="bk-placeholder">Choose a service...</span>}
             </div>
             <span className="bk-custom-select-arrow">▼</span>
-            
+
             {isDropdownOpen && (
               <div className="bk-custom-select-dropdown">
-                <div 
+                <div
                   className={`bk-custom-select-option ${!values.service ? 'selected' : ''}`}
                   onClick={() => setValues(v => ({ ...v, service: '' }))}
                 >
                   Choose a service...
                 </div>
                 {SERVICE_OPTIONS.map(s => (
-                  <div 
-                    key={s} 
+                  <div
+                    key={s}
                     className={`bk-custom-select-option ${values.service === s ? 'selected' : ''}`}
                     onClick={() => setValues(v => ({ ...v, service: s }))}
                   >
@@ -321,7 +326,7 @@ function SlotPicker({ details, onConfirm }) {
         let API_BASE = import.meta.env.VITE_API_URL || 'https://dr-kunwar-harshit-rajveer.onrender.com/api';
         API_BASE = API_BASE.replace(/\/$/, '');
         if (!API_BASE.endsWith('/api')) API_BASE += '/api';
-        
+
         const res = await fetch(`${API_BASE}/appointments/booked`);
         const data = await res.json();
         if (data.success && isMounted) {
@@ -354,9 +359,9 @@ function SlotPicker({ details, onConfirm }) {
       if (!b.date) return false;
       const bDate = new Date(b.date);
       return bDate.getFullYear() === date.getFullYear() &&
-             bDate.getMonth() === date.getMonth() &&
-             bDate.getDate() === date.getDate() &&
-             b.time === slotLabel;
+        bDate.getMonth() === date.getMonth() &&
+        bDate.getDate() === date.getDate() &&
+        b.time === slotLabel;
     });
   };
 
@@ -415,7 +420,7 @@ function SlotPicker({ details, onConfirm }) {
 
       if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha();
       setHcaptchaToken(null);
-      
+
       onConfirm({ date, slotId, slotLabel: slot.label });
     } catch (err) {
       showToast(err.message || 'Error occurred while booking slot.');
@@ -645,9 +650,9 @@ export function BookingDialog({ open, onOpenChange, serviceLabel, inline = false
         {step === 'slot' && (
           <SlotPicker
             details={details}
-            onConfirm={(s) => { 
-              setSelection(s); 
-              window.location.href = '/thank-you'; 
+            onConfirm={(s) => {
+              setSelection(s);
+              window.location.href = '/thank-you';
             }}
           />
         )}

@@ -602,28 +602,20 @@ const NumerologyPage = () => {
                         Ready to Discover Your Numbers?
                     </h2>
                     <p className="np-cta-sub">
-                        Log in and book a live, personalised Numerology session with our expert Vedic Astrologer. Get your complete chart decoded — instantly.
+                        Book a live, personalised Numerology session with our expert Vedic Astrologer. Get your complete chart decoded — instantly.
                     </p>
 
-                    <div className="np-fee-box">
-                        <div className="np-fee-label">Consultation Fee</div>
-                        <div className="np-fee-amount">₹ 299</div>
-                        <div className="np-fee-note">One-on-One · Live Session · Specialist Astrologer</div>
-                    </div>
-
-                    <div className="np-cta-actions">
-                        <button
-                            className="btn btn-primary np-cta-btn"
-                            onClick={() => navigate('/login')}
+                    <div className="np-cta-actions" style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}>
+                        <motion.button
+                            className="np-interactive-consult-btn"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => navigate('/book')}
                         >
-                            🔐 Login &amp; Consult a Specialist
-                        </button>
-                        <span className="np-cta-footer-text">
-                            New here?{' '}
-                            <span className="np-cta-link" onClick={() => navigate('/signup')}>
-                                Create a free account
-                            </span>{' '}in seconds.
-                        </span>
+                            <span className="np-btn-sparkle">✨</span>
+                            Get Paid Consultation <br />
+                            <span className="np-btn-sparkle">✨</span>
+                        </motion.button>
                     </div>
                 </div>
             </section>
