@@ -85,79 +85,40 @@ const SlideTabs = lazy(() =>
 
 // ── Carousel Component ──
 const HeroCarousel = ({ isMobile = false, heroImageIndex, setHeroImageIndex, heroCarouselImages }) => (
-    <div className={`hero-carousel-wrapper fade-in-up ${isMobile ? 'hero-carousel--mobile' : ''}`} style={{
-        animationDelay: '0.5s',
-        position: 'relative',
-        overflow: 'hidden',
-        width: isMobile ? '98%' : '110%',
-        maxWidth: isMobile ? '500px' : '1500px',
-        marginTop: isMobile ? '15px' : '-80px',
-        marginLeft: isMobile ? 'auto' : '-60px',
-        marginRight: isMobile ? 'auto' : '0',
-        left: isMobile ? '3%' : '0',
-        transform: isMobile ? 'translateX(-50%)' : 'none',
-        aspectRatio: '16/9',
-        borderRadius: '19px',
-        boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
-        border: '2px solid rgba(255, 196, 0, 1)',
-        backgroundColor: '#fdfbf7',
-        marginBottom: isMobile ? '2rem' : '0'
-    }}>
-        <AnimatePresence mode="popLayout">
-            <motion.img
-                key={heroImageIndex}
-                src={heroCarouselImages[heroImageIndex]}
-                alt={`Hero Visual ${heroImageIndex + 1}`}
-                initial={{ x: "100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "-100%", opacity: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    zIndex: 1,
-                }}
-                loading={heroImageIndex === 0 ? "eager" : "lazy"}
-                fetchPriority={heroImageIndex === 0 ? "high" : "auto"}
-                decoding="async"
-                draggable={false}
-            />
-        </AnimatePresence>
+    <div className={`hero-carousel-container fade-in-up ${isMobile ? 'hero-carousel-container--mobile' : 'hero-carousel-container--desktop'}`}>
+        <div className="hero-carousel-frame">
+            <AnimatePresence mode="popLayout">
+                <motion.img
+                    key={heroImageIndex}
+                    src={heroCarouselImages[heroImageIndex]}
+                    alt={`Hero Visual ${heroImageIndex + 1}`}
+                    initial={{ x: "100%", opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: "-100%", opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="hero-carousel-img"
+                    loading={heroImageIndex === 0 ? "eager" : "lazy"}
+                    fetchPriority={heroImageIndex === 0 ? "high" : "auto"}
+                    decoding="async"
+                    draggable={false}
+                />
+            </AnimatePresence>
+            
+            {/* Elegant corner ornaments */}
+            <div className="hero-carousel-corner hero-carousel-corner--tl" />
+            <div className="hero-carousel-corner hero-carousel-corner--tr" />
+            <div className="hero-carousel-corner hero-carousel-corner--bl" />
+            <div className="hero-carousel-corner hero-carousel-corner--br" />
+        </div>
 
         {/* Carousel Indicators */}
-        <div style={{
-            position: 'absolute',
-            bottom: '5%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            gap: '12px',
-            zIndex: 10,
-            background: 'rgba(0,0,0,0.3)',
-            padding: '6px 12px',
-            borderRadius: '20px',
-            backdropFilter: 'blur(4px)'
-        }}>
+        <div className="hero-carousel-indicators">
             {heroCarouselImages.map((_, idx) => (
                 <button
                     key={`dot-${idx}`}
                     onClick={() => setHeroImageIndex(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
-                    style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: idx === heroImageIndex ? '#f2c94c' : 'rgba(255,255,255,0.5)',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: 0,
-                        transition: 'all 0.3s ease',
-                        transform: idx === heroImageIndex ? 'scale(1.3)' : 'scale(1)'
-                    }}
+                    className={`hero-carousel-dot ${idx === heroImageIndex ? 'hero-carousel-dot--active' : ''}`}
                 />
             ))}
         </div>
@@ -465,6 +426,27 @@ const HomePage = () => {
             <FlipCardWidget />
             {/* ── 1. Hero Section ── */}
             <section className="hero-section">
+                {/* Rotating Zodiac Wheel background */}
+                <div className="hero-zodiac-bg">
+                    <svg viewBox="0 0 200 200" className="hero-zodiac-svg">
+                        <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" strokeWidth="0.3" strokeOpacity="0.08" />
+                        <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" strokeWidth="0.4" strokeOpacity="0.12" />
+                        <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" strokeWidth="0.3" strokeOpacity="0.08" />
+                        {[...Array(12)].map((_, i) => {
+                            const angle = (i * 30 * Math.PI) / 180;
+                            const x1 = 100 + 55 * Math.cos(angle);
+                            const y1 = 100 + 55 * Math.sin(angle);
+                            const x2 = 100 + 95 * Math.cos(angle);
+                            const y2 = 100 + 95 * Math.sin(angle);
+                            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="0.3" strokeOpacity="0.08" />;
+                        })}
+                        {/* Twinkling star indicators */}
+                        <circle cx="45" cy="55" r="1.2" fill="currentColor" opacity="0.4" className="star-blink-1" />
+                        <circle cx="155" cy="65" r="1.0" fill="currentColor" opacity="0.6" className="star-blink-2" />
+                        <circle cx="75" cy="145" r="1.5" fill="currentColor" opacity="0.3" className="star-blink-3" />
+                        <circle cx="125" cy="35" r="0.8" fill="currentColor" opacity="0.5" className="star-blink-1" />
+                    </svg>
+                </div>
                 <div className="hero-container hero-container--full">
                     <div className="hero-content">
                         <div className="hero-badge fade-in-up">
@@ -491,8 +473,9 @@ const HomePage = () => {
                         <div className="hero-focus-block fade-in-up" style={{ animationDelay: '0.15s' }}>
                             <span className="hero-focus-label">Focus:</span>
                             <div className="hero-focus-line" aria-label="Key focus areas">
-                                {visibleFocusFeatures.map((feature) => (
+                                {visibleFocusFeatures.map((feature, i) => (
                                     <span key={`${focusStartIndex}-${feature}`} className="hero-focus-item">
+                                        {i > 0 && <span className="hero-focus-bullet"> • </span>}
                                         {feature}
                                     </span>
                                 ))}

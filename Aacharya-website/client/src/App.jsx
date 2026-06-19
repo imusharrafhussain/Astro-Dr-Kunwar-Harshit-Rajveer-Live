@@ -36,6 +36,7 @@ const MandirPage = lazy(() => import('./pages/MandirPage'))
 const MartPage = lazy(() => import('./pages/MartPage'))
 const BookPujaPage = lazy(() => import('./pages/BookPujaPage'))
 const ThankYouPage = lazy(() => import('./pages/ThankYouPage'))
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 
 // Puja Pages - Planet Pujas
 const SuryaPujaPage = lazy(() => import('./pages/SuryaPujaPage'))
@@ -206,6 +207,7 @@ function App() {
                             <Route path="/reports/order/:reportId" element={<ReportOrderPage />} />
                             <Route path="/contact" element={<ContactPage />} />
                             <Route path="/thank-you" element={<ThankYouPage />} />
+                            <Route path="/privacy" element={<PrivacyPage />} />
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/signup" element={<SignupPage />} />
                             <Route path="*" element={<NotFoundPage />} />
