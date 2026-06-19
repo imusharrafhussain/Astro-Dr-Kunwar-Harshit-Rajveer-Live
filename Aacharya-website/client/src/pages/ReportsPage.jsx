@@ -186,26 +186,26 @@ export default function ReportsPage() {
                     <div className="rp-section-head rp-carousel-head">
                         <h2>Famous Reports</h2>
                     </div>
-                    <div className="rp-carousel">
-                        <div className="rp-carousel__track">
-                            {[...reportsGrid, ...reportsGrid].map((item, i) => (
-                                <article key={`${item.id}-${i}`} className="rp-carousel-card">
-                                    <div className="rp-carousel-card__media">
-                                        <img src={item.image} alt={item.title} className="rp-carousel-card__img" />
-                                        <span className="rp-carousel-card__badge">
-                                            <ReportIcon iconKey={item.iconKey} />
-                                        </span>
-                                    </div>
-                                    <h4>{item.title}</h4>
-                                    <div className="rp-carousel-card__foot">
-                                        <span className="rp-price">{item.price}</span>
-                                        <Link to={`/reports/order/${item.id}`} className="rp-small-btn">
-                                            Buy Now
-                                        </Link>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
+                </div>
+                <div className="rp-carousel">
+                    <div className="rp-carousel__track">
+                        {[...reportsGrid, ...reportsGrid].map((item, i) => (
+                            <article key={`${item.id}-${i}`} className="rp-carousel-card">
+                                <div className="rp-carousel-card__media">
+                                    <img src={item.image} alt={item.title} className="rp-carousel-card__img" />
+                                    <span className="rp-carousel-card__badge">
+                                        <ReportIcon iconKey={item.iconKey} />
+                                    </span>
+                                </div>
+                                <h4>{item.title}</h4>
+                                <div className="rp-carousel-card__foot">
+                                    <span className="rp-price">{item.price}</span>
+                                    <Link to={`/reports/order/${item.id}`} className="rp-small-btn">
+                                        Buy Now
+                                    </Link>
+                                </div>
+                            </article>
+                        ))}
                     </div>
                 </div>
             </section>

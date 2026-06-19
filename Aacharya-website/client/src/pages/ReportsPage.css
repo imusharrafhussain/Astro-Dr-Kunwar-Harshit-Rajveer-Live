@@ -198,16 +198,19 @@
     animation: rpHeroCardFloatA 6.8s ease-in-out infinite;
     z-index: 3;
 }
+
 .rp-float-card:nth-child(2) {
     transform: rotate(1.2deg);
     animation: rpHeroCardFloatB 7.4s ease-in-out infinite;
     margin-left: -10px;
 }
+
 .rp-float-card:nth-child(3) {
     transform: rotate(-0.9deg);
     animation: rpHeroCardFloatC 7.1s ease-in-out infinite;
     margin-top: -12px;
 }
+
 .rp-float-card:nth-child(4) {
     transform: rotate(3deg);
     animation: rpHeroCardFloatD 6.5s ease-in-out infinite;
@@ -341,7 +344,7 @@
     overflow: hidden;
     margin-bottom: 0.85rem;
     background: transparent;
-    height: clamp(220px, 28vw, 320px);
+    aspect-ratio: 4 / 5;
 }
 
 .rp-report-card__img {
@@ -584,7 +587,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 80px;
+    width: 220px;
     z-index: 3;
     pointer-events: none;
 }
@@ -610,7 +613,7 @@
 }
 
 .rp-carousel-card {
-    width: 240px;
+    width: 300px;
     flex: 0 0 auto;
     border-radius: 20px;
     padding: 0.58rem 0.58rem 0.72rem;
@@ -638,13 +641,13 @@
     overflow: hidden;
     margin-bottom: 0.62rem;
     background: transparent;
-    height: auto;
+    aspect-ratio: 4 / 5;
 }
 
 .rp-carousel-card__img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transition: none;
 }
@@ -761,7 +764,7 @@
     z-index: 1;
 }
 
-.rp-cta__inner > * {
+.rp-cta__inner>* {
     position: relative;
     z-index: 2;
 }
@@ -774,38 +777,83 @@
 }
 
 @keyframes rpCarouselMove {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-50%, 0, 0); }
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
 }
 
 @keyframes rpModalBackdropIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes rpModalPanelIn {
-    from { opacity: 0; transform: translateY(12px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes rpHeroCardFloatA {
-    0%, 100% { transform: translateY(0) rotate(-3.4deg); }
-    50% { transform: translateY(-9px) rotate(-2.2deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-3.4deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(-2.2deg);
+    }
 }
 
 @keyframes rpHeroCardFloatB {
-    0%, 100% { transform: translateY(0) rotate(1.2deg); }
-    50% { transform: translateY(-10px) rotate(2.1deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(1.2deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(2.1deg);
+    }
 }
 
 @keyframes rpHeroCardFloatC {
-    0%, 100% { transform: translateY(0) rotate(-0.9deg); }
-    50% { transform: translateY(-11px) rotate(0.4deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-0.9deg);
+    }
+
+    50% {
+        transform: translateY(-11px) rotate(0.4deg);
+    }
 }
 
 @keyframes rpHeroCardFloatD {
-    0%, 100% { transform: translateY(0) rotate(3deg); }
-    50% { transform: translateY(-8px) rotate(1.6deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(3deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(1.6deg);
+    }
 }
 
 @media (max-width: 1100px) {
@@ -815,22 +863,37 @@
             auto min(56vh, 420px),
             cover;
     }
+
     .rp-hero__inner {
         grid-template-columns: 1fr;
     }
+
     .rp-hero__left {
         transform: none;
     }
+
     .rp-hero__right {
         min-height: 300px;
         margin: 0 auto;
         max-width: 410px;
     }
+
     .rp-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
     .rp-features {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Carousel tablet responsiveness */
+    .rp-carousel-card {
+        width: 250px;
+    }
+
+    .rp-carousel::before,
+    .rp-carousel::after {
+        width: 120px;
     }
 }
 
@@ -841,25 +904,42 @@
             auto min(48vh, 330px),
             cover;
     }
+
     .rp-grid,
     .rp-features {
         grid-template-columns: 1fr;
     }
+
     .reports-page .container {
         padding: 20px;
     }
+
     .rp-float-card {
         min-width: 0;
         padding: 0.88rem 0.8rem 0.78rem;
     }
+
+    /* Carousel mobile responsiveness */
+    .rp-carousel-card {
+        width: 200px;
+        padding: 0.45rem 0.45rem 0.6rem;
+    }
+
+    .rp-carousel-card h4 {
+        font-size: 0.8rem;
+        min-height: 1.8rem;
+    }
+
     .rp-carousel::before,
     .rp-carousel::after {
-        width: 44px;
+        width: 40px;
     }
+
     .rp-report-modal__panel {
         border-radius: 18px;
         padding: 0.85rem 0.85rem 0.95rem;
     }
+
     .rp-report-modal__foot {
         flex-direction: column;
         align-items: stretch;
@@ -867,9 +947,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .rp-report-modal__backdrop,
     .rp-report-modal__panel {
         animation: none;
     }
 }
-
