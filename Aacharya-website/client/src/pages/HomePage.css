@@ -148,26 +148,32 @@
     display: flex;
     position: relative;
     z-index: 2;
+    align-self: center; /* Prevent grid vertical stretch, maintaining aspect ratio */
 }
 
 .hero-carousel-container--desktop {
-    width: 110%;
+    width: 100%; /* Default width for standard grid flow */
     max-width: 1500px;
-    margin-top: -80px;
-    margin-left: -60px;
-    margin-right: 0;
+    margin: 0;
     aspect-ratio: 16 / 9;
     border-radius: 19px;
     background-color: #fdfbf7;
 }
 
+/* Pull carousel into the gap on large desktop screens for a premium overlap look */
+@media (min-width: 1200px) {
+    .hero-carousel-container--desktop {
+        width: 108%;
+        margin-left: -40px;
+    }
+}
+
 .hero-carousel-container--mobile {
-    width: 98%;
+    width: 100%;
     max-width: 500px;
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    left: 3%;
     aspect-ratio: 16 / 9;
     border-radius: 19px;
     background-color: #fdfbf7;
@@ -2871,6 +2877,13 @@
         gap: 1.5rem;
     }
 
+    .hero-carousel-container--desktop {
+        width: 100% !important;
+        max-width: 680px;
+        margin: 2.5rem auto 0 !important;
+        align-self: center;
+    }
+
     .hero-solid-title {
         font-size: clamp(2rem, 4.2vw, 3.1rem);
     }
@@ -2947,8 +2960,8 @@
     }
 
     /* Hide the original right-column carousel on mobile (mobile-visual above takes its place) */
-    .hero-carousel-wrapper:not(.hero-carousel--mobile) {
-        display: none;
+    .hero-carousel-container--desktop {
+        display: none !important;
     }
 
     /* Hero on mobile: stacked */
