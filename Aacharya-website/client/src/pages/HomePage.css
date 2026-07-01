@@ -3403,9 +3403,9 @@
 @media (max-width: 767px) {
 
     .hero-mobile-visual {
-        justify-content: flex-start !important;
-        margin-left: -0.85rem !important; /* Counteract container padding */
-        width: calc(100% + 0.85rem) !important;
+        justify-content: center !important;
+        margin-left: 0 !important;
+        width: 100% !important;
     }
 
     /* 1. ── ASTROLOGER HERO IMAGE: full-width on mobile, aligned to left ── */
